@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class AbilityBase : MonoBehaviour
 {
+    public GameObject particlesPrefab;
+    public InputUid activateInputUid;
+    //public 
 
-    public virtual void Init(Transform transform)
+    public virtual void Init(InputsLibrary inputsLibrary)
     {
-        spawnPoint = transform;
+        activateInput = (InputTap)inputsLibrary.GetInput(activateInputUid);
+        activateInput.OnUse.AddListener(Activate);
     }
 
     public virtual void Terminate()
     {
-
-    }
-
-    public virtual void Attack()
-    {
+        activateInput.OnUse.RemoveListener(Activate);
     }
 
     #region private
 
-    protected Transform spawnPoint; 
+    InputTap activateInput;
+
+    protected virtual void Activate()
+    {
+    }
 
     #endregion
 }

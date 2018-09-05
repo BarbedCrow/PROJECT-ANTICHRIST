@@ -2,24 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Timer))]
-public class AbilityFireStream : AbilityBase
+[RequireComponent(typeof(DamagerBase))]
+public class AbilityFireStream : AbilityAttack
 {
-    public GameObject explosionParticlesPrefab;
-
-    public override void Attack()
+    
+    public void StopSfx(GameObject explosion)
     {
-        if (explosionParticlesPrefab)
-        {
-            var explosion = (GameObject)Instantiate(explosionParticlesPrefab, spawnPoint.position, spawnPoint.rotation);
-            Terminate(explosion);
+        var partSys = explosion.GetComponentInChildren<ParticleSystem>();
+        var time = partSys.main.duration + partSys.main.startLifetimeMultiplier;
+        Destroy(explosion, time);
+    }
 
+
+    #region private
+
+    protected AbilityDamageDealer dmgDlr;
+
+    protected override void Activate()
+    {
+        base.Activate();
+        if (particlesPrefab)
+        {
+            var fireFX = (GameObject)Instantiate(particlesPrefab, transform.position, transform.rotation);
+            dmgDlr = fireFX.GetComponent<AbilityDamageDealer>();
+            dmgDlr.Init(propDamager, damage);
+            fireFX.transform.SetParent(transform);
+
+            StopSfx(fireFX);
         }
     }
 
-    public void Terminate(GameObject explosion)
-    {
-        Destroy(explosion, explosion.GetComponentInChildren<ParticleSystem>().main.startLifetimeMultiplier);
-    }
-
+    #endregion
 }

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CollisionDetector))]
+[RequireComponent(typeof(Timer))]
+[RequireComponent(typeof(DamagableBase))]
 public class ProjectileBase : MonoBehaviour {
 
     public float speed;
@@ -14,6 +17,7 @@ public class ProjectileBase : MonoBehaviour {
         timer.StartWork();
         timer.OnTimersFinished.AddListener(Terminate);
 
+        this.damage = damage;
         velocity = transform.forward;
         this.propDamager = propDamager;
         collisionDetector = GetComponent<CollisionDetector>();

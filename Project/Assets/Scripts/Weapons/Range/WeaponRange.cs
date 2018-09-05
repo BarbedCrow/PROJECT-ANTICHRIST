@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(DamagerBase))]
 [RequireComponent(typeof(Timer))]
 [RequireComponent(typeof(Timer))]
 public class WeaponRange : WeaponBase
@@ -70,7 +69,7 @@ public class WeaponRange : WeaponBase
     public void Reload()
     {
         isReloading = true;
-        Debug.Log("I reloading");
+        Debug.Log("I am reloading");
         reloadTimer.StartWork();
         reloadTimer.OnTimersFinished.AddListener(HandleOnReloaded);
     }

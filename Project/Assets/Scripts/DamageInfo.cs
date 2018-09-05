@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class DamageInfo
 {
-
     public DamagableBase damagable;
     public DamagerBase damager;
     public float damage;
+    public DamageType damageType;
+}
+
+[System.Serializable]
+public enum DamageType
+{
+    PHYSICAL,
+    FIRE
 }

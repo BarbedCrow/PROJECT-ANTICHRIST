@@ -5,18 +5,25 @@ using UnityEngine.Events;
 
 public class EventOnDie : UnityEvent<DamageInfo>
 {
+    
 }
 
 public class DamagableBase : MonoBehaviour
 {
+    public TextMesh text;
 
     public EventOnDie OnDie = new EventOnDie();
-
+    
     public float health;
 
     public void Init()
     {
         currentHp = health;
+
+        if (text)
+        {
+            text.text = currentHp.ToString();
+        }
     }	
 
     public void Terminate()
@@ -26,12 +33,19 @@ public class DamagableBase : MonoBehaviour
 
     public void GetDamage(DamageInfo info)
     {
-        Debug.Log("Do damage" + info.damage + "to " + transform.gameObject);
+        Debug.Log("Do damage " + info.damage + " to " + transform.gameObject);
         currentHp -= info.damage;
+
+        if (text)
+        {
+            text.text = currentHp.ToString();
+        }
+
         if (currentHp <= 0)
         {
             Die(info);
         }
+
     }
 
     #region private

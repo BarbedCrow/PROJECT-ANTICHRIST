@@ -2,26 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(DamagerBase))]
-public class WeaponBase : MonoBehaviour
+public class AbilityAttack : AbilityBase
 {
-    public string uid;
-    public float damage;
 
-    public virtual void Init()
+    public float damage;
+    public DamageType damagetType;
+
+    public override void Init(InputsLibrary inputsLibrary)
     {
+        base.Init(inputsLibrary);
+
         propDamager = GetComponent<DamagerBase>();
         propDamager.Init();
-    }
-
-    public virtual void Terminate()
-    {
-        Destroy(gameObject);
     }
 
     #region private
 
     protected DamagerBase propDamager;
+
+    protected override void Activate()
+    {
+        base.Activate();
+
+
+    }
 
     #endregion
 }

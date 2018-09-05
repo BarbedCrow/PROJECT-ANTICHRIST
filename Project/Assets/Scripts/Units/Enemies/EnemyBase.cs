@@ -6,7 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(AiMovement))]
 public class EnemyBase : UnitBase 
 {
-
     public void CachePlayer(Player player)
     {
 
@@ -28,6 +27,12 @@ public class EnemyBase : UnitBase
         propPlayerDetector.OnMiss.AddListener(HandleOnPlayerMiss);
         propPlayerDetector.OnSeen.AddListener(HandleOnPlayerSeen);
         propPlayerDetector.Init();
+
+    }
+
+    public void Die()
+    {
+        
     }
 
     protected override void TerminateComponents()
