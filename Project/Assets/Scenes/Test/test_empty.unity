@@ -314,6 +314,68 @@ MonoBehaviour:
   - spawnPoint: {fileID: 733720105}
     enemy: {fileID: 114102461354786140, guid: 360e9b20756bfdf44b119cb0bf844782, type: 2}
     rotation: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &764875483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 764875486}
+  - component: {fileID: 764875485}
+  - component: {fileID: 764875484}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &764875484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 764875483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &764875485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 764875483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 5
+--- !u!4 &764875486
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 764875483}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1270000917
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,12 +388,6 @@ GameObject:
   - component: {fileID: 1270000919}
   - component: {fileID: 1270000918}
   - component: {fileID: 1270000928}
-  - component: {fileID: 1270000927}
-  - component: {fileID: 1270000926}
-  - component: {fileID: 1270000925}
-  - component: {fileID: 1270000924}
-  - component: {fileID: 1270000923}
-  - component: {fileID: 1270000930}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -407,68 +463,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1270000923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1270000917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7958cafcf5edf704383892412dd104d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  swapWeaponInputUid: 0
---- !u!114 &1270000924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1270000917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b38105cc6810daa4cb4a1597e01fcf03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackInputUid: 0
-  swapInputUids: 
-  weaponDescs: []
---- !u!114 &1270000925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1270000917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf61f83155b35f948b5cbfc9557d5b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackInputUid: 0
-  weapon: {fileID: 0}
---- !u!114 &1270000926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1270000917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f62c2fbdb782d044e9c9adaf28e7d8b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1270000927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1270000917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c2003bf08480144aa8275c81d831ec4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
 --- !u!114 &1270000928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,24 +477,6 @@ MonoBehaviour:
   walkSpeed: 5
   runSpeed: 6.5
   rotationSpeed: 5
---- !u!114 &1270000930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1270000917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f74aa801c5422794ba6a830b7aa2b26a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnUse:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  uid: 0
-  keys: []
 --- !u!1 &1500478508
 GameObject:
   m_ObjectHideFlags: 0

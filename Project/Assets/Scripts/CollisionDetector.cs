@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class EventOnCollideWith : UnityEvent<Collision>
 {
+
 }
 
 public class CollisionDetector : MonoBehaviour

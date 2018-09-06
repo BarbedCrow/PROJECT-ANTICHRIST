@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(DamagerBase))]
 [RequireComponent(typeof(Timer))]
 [RequireComponent(typeof(Timer))]
 public class WeaponRange : WeaponBase

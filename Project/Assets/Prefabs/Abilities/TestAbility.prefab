@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4604305800545350}
   - component: {fileID: 114133346385797206}
+  - component: {fileID: 114371438969532778}
   m_Layer: 0
   m_Name: TestAbility
   m_TagString: Untagged
@@ -51,6 +52,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f4cfae34fa14bf46a09a74d2369d3ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 4975869709213542, guid: 3c59017d67b41234eb6a8a9fb7e9a65c, type: 2}
-  explosionParticlesPrefab: {fileID: 1625343463261674, guid: 73de94f6b64cf0349be019af5ada007f,
+  particlesPrefab: {fileID: 1928906552713146, guid: 9faf5d0b0ae9dcc45918475bdfe5e0c1,
     type: 2}
+--- !u!114 &114371438969532778
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1739298528027832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f62c2fbdb782d044e9c9adaf28e7d8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

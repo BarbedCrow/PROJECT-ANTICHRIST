@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AbilityBase : MonoBehaviour
 {
+    public GameObject particlesPrefab;
 
     public virtual void Init(Transform transform)
     {
@@ -12,7 +13,6 @@ public class AbilityBase : MonoBehaviour
 
     public virtual void Terminate()
     {
-
     }
 
     public virtual void Attack()
@@ -20,8 +20,8 @@ public class AbilityBase : MonoBehaviour
     }
 
     #region private
-
-    protected Transform spawnPoint; 
+    
+    protected Transform spawnPoint;
 
     #endregion
 }

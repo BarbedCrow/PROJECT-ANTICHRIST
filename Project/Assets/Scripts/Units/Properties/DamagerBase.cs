@@ -20,6 +20,6 @@ public class DamagerBase : MonoBehaviour
     }
 
     #region private
-
+    
     #endregion
 }

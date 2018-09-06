@@ -20,7 +20,7 @@ public class UnitBase : MonoBehaviour
 
     #region private
 
-    DamagableBase propDamagable;
+    protected DamagableBase propDamagable;
     DamagerBase propDamager;
 
     GameObject geom;

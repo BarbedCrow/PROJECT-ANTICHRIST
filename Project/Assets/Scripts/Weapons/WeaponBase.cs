@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(DamagerBase))]
 public class WeaponBase : MonoBehaviour
 {
     public string uid;

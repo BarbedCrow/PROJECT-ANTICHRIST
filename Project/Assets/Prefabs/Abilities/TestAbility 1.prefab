@@ -20,6 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4604305800545350}
   - component: {fileID: 114411840316901542}
+  - component: {fileID: 114156545055116532}
+  - component: {fileID: 114193962222349530}
   m_Layer: 0
   m_Name: TestAbility 1
   m_TagString: Untagged
@@ -40,6 +42,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114156545055116532
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1739298528027832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f902a109b9ea2044f9cbf9ce28019699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114193962222349530
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1739298528027832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f62c2fbdb782d044e9c9adaf28e7d8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114411840316901542
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51,3 +75,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb7ed80a5e7a5c4dbc9b014a8d8e5d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
