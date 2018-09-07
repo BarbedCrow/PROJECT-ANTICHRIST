@@ -13,12 +13,9 @@ public class Player : UnitBase
 
     public void Init(InputsLibrary inputsLibrary)
     {
-        base.Init();
-
         this.inputsLibrary = inputsLibrary;
-        propWeaponUserMelee.CacheInputsLibrary(inputsLibrary);
-        propWeaponUserRange.CacheInputsLibrary(inputsLibrary);
-        propAbilitiesUser.CacheInputsLibrary(inputsLibrary);
+
+        base.Init();
 
         //propWeaponUserMelee.Enable();
         propWeaponUserRange.Enable();
@@ -53,12 +50,15 @@ public class Player : UnitBase
         base.InitComponents();
 
         propWeaponUserMelee = GetComponent<WeaponUserMelee>();
+        propWeaponUserMelee.CacheInputsLibrary(inputsLibrary);
         propWeaponUserMelee.Init();
 
         propWeaponUserRange = GetComponent<WeaponUserRange>();
+        propWeaponUserRange.CacheInputsLibrary(inputsLibrary);
         propWeaponUserRange.Init();
 
         propAbilitiesUser = GetComponent<AbilitiesUser>();
+        propAbilitiesUser.CacheInputsLibrary(inputsLibrary);
         propAbilitiesUser.Init();
 
         propMovement = GetComponent<MovementController>();

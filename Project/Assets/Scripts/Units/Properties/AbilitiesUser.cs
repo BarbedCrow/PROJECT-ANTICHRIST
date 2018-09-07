@@ -4,45 +4,26 @@ using UnityEngine;
 
 public class AbilitiesUser : MonoBehaviour
 {
-    public AbilityDesc abilityDesc;
-    public List<InputUid> attackInputUid;
-    public Transform spawnPoint;
+    public List<AbilityDesc> abilityDescs;
 
     public virtual void Init()
     {
-        if (abilityDesc.abilityFirst == null && abilityDesc.abilitySecond == null)
+        foreach (AbilityDesc desc in abilityDescs)
         {
-            Debug.Log("No abilities in Abilities user");
-            return;
-        }
-        if (abilityDesc.abilityFirst != null)
-        {
-            if (abilityDesc.abilitySecond == null)
-            {
-                Debug.Log("No second ability in Abilities user");
-                abilityDesc.abilityFirst.Init(spawnPoint);
-                return;
-            }
-            else
-            {
-                Debug.Log("All ability in Abilities user");
-                abilityDesc.abilityFirst.Init(spawnPoint);
-                abilityDesc.abilitySecond.Init(spawnPoint);
-                return;
-            }
-        }
-        else
-        {
-            Debug.Log("No first ability in Abilities user");
-            abilityDesc.abilitySecond.Init(spawnPoint);
-            return;
+            var ability = Instantiate(desc.ability, desc.spawnPoint.position, desc.spawnPoint.rotation);
+            ability.transform.SetParent(transform);
+            var abilityLogic = ability.GetComponent<AbilityBase>();
+            abilityLogic.Init(inputsLibrary);
+            abilities.Add(abilityLogic);
         }
     }
 
     public virtual void Terminate()
     {
-        abilityDesc.abilityFirst.Terminate();
-        abilityDesc.abilitySecond.Terminate();
+        foreach(AbilityBase ability in abilities)
+        {
+            ability.Terminate();
+        }
     }
 
     public virtual void Enable()
@@ -65,36 +46,13 @@ public class AbilitiesUser : MonoBehaviour
     public void CacheInputsLibrary(InputsLibrary inputsLibrary)
     {
         this.inputsLibrary = inputsLibrary;
-
-        var input1 = (InputTap)inputsLibrary.GetInput(attackInputUid[0]);
-        var input2 = (InputTap)inputsLibrary.GetInput(attackInputUid[1]);
-
-        input1.OnUse.AddListener(() => RequestAttack(ID_FIRST_ABILITY));
-        input2.OnUse.AddListener(() => RequestAttack(ID_SECOND_ABILITY));
     }
 
     #region private
 
-    const int ID_FIRST_ABILITY = 1;
-    const int ID_SECOND_ABILITY = 2;
-
+    protected List<AbilityBase> abilities = new List<AbilityBase>();
     protected InputsLibrary inputsLibrary;
     bool isEnabled = false;
-
-    protected virtual void RequestAttack(int id)
-    {   
-        if (id == ID_FIRST_ABILITY)
-        {
-            if(abilityDesc.abilityFirst != null)
-                abilityDesc.abilityFirst.Attack();
-        }
-        else
-        {
-            if (abilityDesc.abilitySecond != null)
-                abilityDesc.abilitySecond.Attack();
-        }
-        
-    }
 
     #endregion
 }
@@ -102,8 +60,6 @@ public class AbilitiesUser : MonoBehaviour
 [System.Serializable]
 public class AbilityDesc
 {
-    
-    public AbilityBase abilityFirst;
-    public AbilityBase abilitySecond;
-
+    public AbilityBase ability;
+    public Transform spawnPoint;
 }

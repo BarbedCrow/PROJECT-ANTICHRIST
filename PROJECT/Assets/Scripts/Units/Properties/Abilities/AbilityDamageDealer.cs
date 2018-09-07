@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilityDamageDiller : MonoBehaviour
+public class AbilityDamageDealer : MonoBehaviour
 {
-    public float damage;
 
-    public virtual void Init(DamagerBase propDamager)
+    public virtual void Init(DamagerBase propDamager, float damage)
     {
-        partSys = GetComponent<ParticleSystem>();
+        this.damage = damage;
         this.propDamager = propDamager;
+        partSys = GetComponent<ParticleSystem>();
     }
 
     public void Terminate()
@@ -18,20 +18,19 @@ public class AbilityDamageDiller : MonoBehaviour
     }
 
     #region private
-    protected ParticleSystem partSys;
+
+    float damage;
+    ParticleSystem partSys;
     DamagerBase propDamager;
 
     void OnParticleCollision(GameObject other)
     {
-        if (other.tag == "Damagable")
-        {
             Debug.Log(other.ToString());
             var propDamagable = other.gameObject.GetComponent<DamagableBase>();
             if (propDamagable != null)
             {
                 DoDamage(propDamagable);
             }
-        }
     }
 
     void DoDamage(DamagableBase propDamagable)

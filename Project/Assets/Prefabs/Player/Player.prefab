@@ -210,6 +210,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 92f83e09a579478458b61cd951da62d8, type: 2}
   m_StaticBatchInfo:
@@ -244,6 +245,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 54617c44dd604124ea586f3081569b2e, type: 2}
   m_StaticBatchInfo:
@@ -347,13 +349,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dcb7314f6a0c3b449c77734da360a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityDesc:
-    abilityFirst: {fileID: 114133346385797206, guid: 799e9ed5be588a94fa4b61c8130ba4d3,
+  abilityDescs:
+  - ability: {fileID: 114133346385797206, guid: 799e9ed5be588a94fa4b61c8130ba4d3,
       type: 2}
-    abilitySecond: {fileID: 114411840316901542, guid: bb0840f67e56c3e46be8e95ba95bcb4d,
-      type: 2}
-  attackInputUid: 0600000007000000
-  spawnPoint: {fileID: 4975869709213542}
+    spawnPoint: {fileID: 4975869709213542}
 --- !u!114 &114886277207438918
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -379,6 +378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c2003bf08480144aa8275c81d831ec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: {fileID: 0}
   health: 0
 --- !u!114 &114983515635069540
 MonoBehaviour:

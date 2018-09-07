@@ -54,6 +54,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particlesPrefab: {fileID: 1928906552713146, guid: 9faf5d0b0ae9dcc45918475bdfe5e0c1,
     type: 2}
+  activateInputUid: 6
+  damage: 2
+  damagetType: 1
 --- !u!114 &114371438969532778
 MonoBehaviour:
   m_ObjectHideFlags: 1
