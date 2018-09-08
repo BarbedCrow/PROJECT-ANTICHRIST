@@ -3,32 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(AreaSpawnController))]
+[RequireComponent(typeof(BoxCollider))]
 
 public class GameArea : MonoBehaviour
 {
-    public AreaSpawnController areaSpawnController;
     public SpawnManager spawnManager;
+
+    public void Start()
+    {
+        areaSpawnController = GetComponent<AreaSpawnController>();
+        collider = GetComponent<BoxCollider>();
+    }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("Player"))
         {
             spawnManager.SpawnUnits(areaSpawnController);
-        }
-        //Destroy(gameObject);
+            collider.isTrigger = false;
+        }    
     }
-}
 
-[System.Serializable]
-public class EnemyDesc
-{
-    public EnemyBase enemyType;
-    public int count;
-}
+    #region private
 
-[System.Serializable]
-public class AreaSpawnController
-{
-    public List<EnemyDesc> enemyDescs;
-    public List<Transform> spawnPoints;
+    AreaSpawnController areaSpawnController;
+    Collider collider;
+
+    #endregion
 }
