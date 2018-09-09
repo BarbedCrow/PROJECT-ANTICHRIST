@@ -10,7 +10,6 @@ public class EventOnCollideWith : UnityEvent<Collision>
 
 public class CollisionDetector : MonoBehaviour
 {
-
     public EventOnCollideWith OnCollideWith = new EventOnCollideWith();
 
     void OnCollisionEnter(Collision collision)
