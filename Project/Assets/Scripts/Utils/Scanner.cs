@@ -62,7 +62,6 @@ public class Scanner : MonoBehaviour
         var dist = Vector3.Distance(transform.position, transformToLook.position);
         if(dist > maxDistance)
         {
-            Debug.Log("OnMiss");
             isVisible = false;
             OnMiss.Invoke();
             return;
@@ -73,7 +72,6 @@ public class Scanner : MonoBehaviour
         var angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
         if (angle > maxHorAngle / 2)
         {
-            Debug.Log("OnMiss");
             isVisible = false;
             OnMiss.Invoke();
             return;
@@ -84,7 +82,6 @@ public class Scanner : MonoBehaviour
             return;
         }
 
-        Debug.Log("OnSeen");
         isVisible = true;
         OnSeen.Invoke(transformToLook);
     }

@@ -69,7 +69,7 @@ public class WeaponRange : WeaponBase
     public void Reload()
     {
         isReloading = true;
-        Debug.Log("I reloading");
+        Debug.Log("I am reloading");
         reloadTimer.StartWork();
         reloadTimer.OnTimersFinished.AddListener(HandleOnReloaded);
     }
