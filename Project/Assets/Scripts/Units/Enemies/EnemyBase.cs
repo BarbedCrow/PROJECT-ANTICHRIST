@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(AiPlayerDetector))]
 [RequireComponent(typeof(AiMovement))]
 public class EnemyBase : UnitBase 
 {
+    [HideInInspector]
+    public UnityEvent OnEnemyDeath = new UnityEvent();
+    public int cost;
+
     public void CachePlayer(Player player)
     {
 
@@ -23,6 +28,8 @@ public class EnemyBase : UnitBase
         propMovement = GetComponent<AiMovement>();
         propMovement.Init();
 
+        propDamagable.OnDie.AddListener(Die);
+
         propPlayerDetector = GetComponent<AiPlayerDetector>();
         propPlayerDetector.OnMiss.AddListener(HandleOnPlayerMiss);
         propPlayerDetector.OnSeen.AddListener(HandleOnPlayerSeen);
@@ -30,9 +37,15 @@ public class EnemyBase : UnitBase
 
     }
 
-    public void Die()
+    public void Die(DamageInfo info)
     {
-        
+        OnEnemyDeath.Invoke();
+        //gameObject.SetActive(false);
+    }
+
+    public int ReturnCost()
+    {
+        return cost;
     }
 
     protected override void TerminateComponents()
