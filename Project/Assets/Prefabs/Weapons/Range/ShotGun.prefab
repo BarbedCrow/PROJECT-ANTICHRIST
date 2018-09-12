@@ -169,8 +169,8 @@ MonoBehaviour:
     projectileSpawnPoint: {fileID: 4902536162970522}
     projectilePrefab: {fileID: 1894509351135182, guid: b7c561d0c92e93f449f63f3c5cc76f58,
       type: 2}
-  angleShots: 20
-  BulletsOnOneShot: 10
+  angleShots: 30
+  BulletsOnOneShot: 30
 --- !u!114 &114265547028838438
 MonoBehaviour:
   m_ObjectHideFlags: 1

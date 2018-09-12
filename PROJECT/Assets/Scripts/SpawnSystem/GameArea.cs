@@ -8,39 +8,27 @@ using UnityEngine.Events;
 
 public class GameArea : MonoBehaviour
 {
-    [HideInInspector]
-    public UnityEvent PlayerEntered = new UnityEvent();
-
     public SpawnManager spawnManager;
 
-    public void Init(SpawnManager spawnManager)
+    public void Start()
     {
         areaSpawnController = GetComponent<AreaSpawnController>();
-        areaSpawnController.Init(this, spawnManager);
-
-        myCollider = GetComponent<BoxCollider>();
+        collider = GetComponent<BoxCollider>();
     }
-
-    public void Terminate()
-    {
-        Destroy(gameObject);
-    }
-    
-    #region private
-
-    AreaSpawnController areaSpawnController;
-    Collider myCollider;
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Equals(GlobalConstants.TAG_PLAYER))
+        if (other.tag.Equals("Player"))
         {
-            
-            myCollider.isTrigger = false;
-            myCollider.enabled = false;
-            PlayerEntered.Invoke();
-        }
+            spawnManager.SpawnUnits(areaSpawnController);
+            collider.isTrigger = false;
+        }    
     }
+
+    #region private
+
+    AreaSpawnController areaSpawnController;
+    Collider collider;
 
     #endregion
 }
