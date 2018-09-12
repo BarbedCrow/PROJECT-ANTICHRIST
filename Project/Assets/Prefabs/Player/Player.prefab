@@ -366,6 +366,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityDescs:
+  - ability: {fileID: 114133346385797206, guid: 799e9ed5be588a94fa4b61c8130ba4d3,
+      type: 2}
+    spawnPoint: {fileID: 4975869709213542}
   - ability: {fileID: 114133346385797206, guid: 007826a8c8624cf4d894722f07da0ee1,
       type: 2}
     spawnPoint: {fileID: 4975869709213542}
