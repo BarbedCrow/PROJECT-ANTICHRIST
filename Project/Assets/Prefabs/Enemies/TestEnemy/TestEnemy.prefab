@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 102542668989873546}
-  health: 300
+  health: 3000
 --- !u!114 &114102461354786140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -403,12 +403,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 893e9ea3efa9e124fafaba7e6531aeaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnEnemyDeath:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  cost: 1
 --- !u!114 &114370812271043578
 MonoBehaviour:
   m_ObjectHideFlags: 1
