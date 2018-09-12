@@ -8,7 +8,7 @@ using UnityEngine.Events;
 
 public class GameArea : MonoBehaviour
 {
-
+    [HideInInspector]
     public UnityEvent PlayerEntered = new UnityEvent();
 
     public SpawnManager spawnManager;
@@ -37,6 +37,7 @@ public class GameArea : MonoBehaviour
         {
             
             myCollider.isTrigger = false;
+            myCollider.enabled = false;
             PlayerEntered.Invoke();
         }
     }
