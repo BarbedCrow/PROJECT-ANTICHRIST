@@ -301,6 +301,7 @@ GameObject:
   - component: {fileID: 733720102}
   - component: {fileID: 733720106}
   - component: {fileID: 733720107}
+  - component: {fileID: 733720108}
   m_Layer: 0
   m_Name: GameMain
   m_TagString: Untagged
@@ -397,6 +398,22 @@ MonoBehaviour:
   - spawnPoint: {fileID: 733720105}
     enemy: {fileID: 114102461354786140, guid: 360e9b20756bfdf44b119cb0bf844782, type: 2}
     rotation: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &733720108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 733720101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c1002cdf28f8744977ec51a82775e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  descs:
+  - gameObject: {fileID: 1888000578819430, guid: 360e9b20756bfdf44b119cb0bf844782,
+      type: 2}
+    initialCount: 1
+  maxCapacity: 10
 --- !u!1 &764875483
 GameObject:
   m_ObjectHideFlags: 0
