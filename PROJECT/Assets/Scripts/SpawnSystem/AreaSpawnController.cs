@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/*public class EventOnCollideWith : UnityEvent<Collision>
+{
+
+}*/
 
 public class AreaSpawnController : MonoBehaviour
 {
@@ -12,84 +16,79 @@ public class AreaSpawnController : MonoBehaviour
     public List<EnemyDesc> enemyDescs;
     public List<Transform> spawnPoints;
     public int maxSpawnCurrency;
-    public int currentSpawnCurrency;
 
     public void Init(GameArea gameArea, SpawnManager spawnManager)
     {
         currentSpawnCurrency = maxSpawnCurrency;
         this.gameArea = gameArea;
         this.spawnManager = spawnManager;
-        gameArea.PlayerEntered.AddListener(SpawnEnemies);
-        OnAllEnemiesDeath.AddListener(AllDead);
+        int countOfEnemies = 0;
+        gameArea.PlayerEntered.AddListener(TrySpawnEnemies);
     }
 
     public void Terminate()
     {
-        gameArea.PlayerEntered.RemoveListener(SpawnEnemies);
+        gameArea.PlayerEntered.RemoveListener(TrySpawnEnemies);
     }
 
     #region private
 
-    //int currentSpawnCurrency;
+    int countOfEnemies;
+    int currentSpawnCurrency;
     GameArea gameArea;
     SpawnManager spawnManager;
 
-    void AllDead()
+    void SpawnEnemies(List<EnemyBase> SetOfEnemies, List<Transform> SpawnPoints)
     {
-        OnAllEnemiesDeath.RemoveAllListeners();
-        Debug.Log("GGWP");
+        for (int idx = 0; idx < SetOfEnemies.Count; idx++)
+        {
+            var prefab = spawnManager.SpawnUnit(SetOfEnemies[idx], SpawnPoints[idx % SpawnPoints.Count].transform);
+            prefab.OnDeath.AddListener(() => EnemyDeath(prefab));
+            countOfEnemies++;
+        }
     }
 
-    void SpawnEnemies()
+    void TrySpawnEnemies()
     {
-        List<EnemyBase> bestSet = new List<EnemyBase>();
-        List<EnemyBase> allEnemies = new List<EnemyBase>();
+        List<EnemyBase> bestSet = GetBestSetOfEnemy();
 
-        int currentEnemies = 0;
-        foreach(EnemyDesc desc in enemyDescs)
+        if (bestSet.Count != 0)
         {
-            for(int i = 0; i < desc.count; i++)
-            {
-                var enemy = desc.enemyType;
-                enemy.cost = desc.cost;
-                allEnemies.Add(enemy);
-            }
-            currentEnemies += desc.count;
+            SpawnEnemies(bestSet, spawnPoints);
         }
+    }
+    
+    List<EnemyBase> GetBestSetOfEnemy()
+    {
+        List<EnemyBase> enemies = new List<EnemyBase>();
 
-        if (currentEnemies == 0)
+        foreach (EnemyDesc desc in enemyDescs)
         {
-            OnAllEnemiesDeath.Invoke();
-        }
-
-        Pack pack = new Pack();
-        bestSet = pack.ReturnBestSet(allEnemies, currentSpawnCurrency);
-
-        int j = 0;
-        foreach(EnemyBase enemy in bestSet)
-        {
-            var prefab = spawnManager.SpawnUnit(enemy, spawnPoints[j]);
-            j++;
-            
-            prefab.OnEnemyDeath.AddListener(() => EnemyDeath(prefab));
-            currentSpawnCurrency -= enemy.cost;
-
-            foreach (EnemyDesc desc in enemyDescs)
+            var countOfEnemy = desc.count;
+            for (int idx = 0; idx < countOfEnemy; idx ++)
             {
-                if(desc.enemyType == enemy)
-                {
-                    desc.count--;
-                }
+                if (desc.enemyType.GetReturnCost() > currentSpawnCurrency)
+                    return enemies;
+                enemies.Add(desc.enemyType);
+                currentSpawnCurrency -= desc.enemyType.GetReturnCost();
+                desc.count--;
             }
         }
+
+        return enemies;
     }
 
     void EnemyDeath(EnemyBase enemy)
     {
-        enemy.OnEnemyDeath.RemoveAllListeners();
-        currentSpawnCurrency += enemy.ReturnCost();
-        enemy.gameObject.SetActive(false);
-        SpawnEnemies();
+        currentSpawnCurrency += enemy.GetReturnCost();
+        countOfEnemies--;
+
+        if (countOfEnemies == 0)
+        {
+            OnAllEnemiesDeath.Invoke();
+            return;
+        }
+        TrySpawnEnemies();
     }
 
     #endregion
@@ -100,72 +99,4 @@ public class EnemyDesc
 {
     public EnemyBase enemyType;
     public int count;
-    public int cost;
-}
-
-class Pack
-{
-    List<EnemyBase> bestSet = new List<EnemyBase>();
-    private int maxCost;
-    private int bestAmount;
-
-    public List<EnemyBase> ReturnBestSet(List<EnemyBase> enemies, int maxCost)
-    {
-        this.maxCost = maxCost;
-        MakeAllSets(enemies);
-        return bestSet;
-    }
-
-    private int CalcCost(List<EnemyBase> items)
-    {
-        int sumCost = 0;
-
-        foreach (EnemyBase i in items)
-        {
-            sumCost += i.cost;
-        }
-
-        return sumCost;
-    }
-
-    private int CalcAmount(List<EnemyBase> items)
-    {
-        return items.Count;
-    }
-
-    private void CheckSet(List<EnemyBase> items)
-    {
-        if (bestSet == null)
-        {
-            if (CalcCost(items) <= maxCost)
-            {
-                bestSet = items;
-                bestAmount = CalcAmount(items);
-            }
-        }
-        else
-        {
-            if (CalcCost(items) <= maxCost && CalcAmount(items) > bestAmount)
-            {
-                bestSet = items;
-                bestAmount = CalcAmount(items);
-            }
-        }
-
-    }
-
-    private void MakeAllSets(List<EnemyBase> items)
-    {
-        if (items.Count > 0)
-            CheckSet(items);
-
-        for (int i = 0; i < items.Count; i++)
-        {
-            List<EnemyBase> newSet = new List<EnemyBase>(items);
-
-            newSet.RemoveAt(i);
-
-            MakeAllSets(newSet);
-        }
-    }
 }

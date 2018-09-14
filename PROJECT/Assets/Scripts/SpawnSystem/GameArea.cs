@@ -18,6 +18,8 @@ public class GameArea : MonoBehaviour
         areaSpawnController = GetComponent<AreaSpawnController>();
         areaSpawnController.Init(this, spawnManager);
 
+        areaSpawnController.OnAllEnemiesDeath.AddListener(AllDead);
+
         myCollider = GetComponent<BoxCollider>();
     }
 
@@ -30,6 +32,11 @@ public class GameArea : MonoBehaviour
 
     AreaSpawnController areaSpawnController;
     Collider myCollider;
+
+    void AllDead()
+    {
+        Debug.Log("GGWP");
+    }
 
     void OnTriggerEnter(Collider other)
     {

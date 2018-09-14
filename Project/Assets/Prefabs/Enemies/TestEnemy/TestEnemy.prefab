@@ -345,7 +345,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!65 &65301605741657916
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -403,12 +403,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 893e9ea3efa9e124fafaba7e6531aeaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnEnemyDeath:
+  OnDeath:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  cost: 1
+  returnCost: 1
 --- !u!114 &114370812271043578
 MonoBehaviour:
   m_ObjectHideFlags: 1

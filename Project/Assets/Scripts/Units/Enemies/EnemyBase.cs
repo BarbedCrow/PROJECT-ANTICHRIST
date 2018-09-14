@@ -8,8 +8,8 @@ using UnityEngine.Events;
 public class EnemyBase : UnitBase 
 {
     [HideInInspector]
-    public UnityEvent OnEnemyDeath = new UnityEvent();
-    public int cost;
+    public UnityEvent OnDeath = new UnityEvent();
+    public int returnCost;
 
     public void CachePlayer(Player player)
     {
@@ -17,7 +17,7 @@ public class EnemyBase : UnitBase
     }
 
     #region private
-
+    
     AiMovement propMovement;
     AiPlayerDetector propPlayerDetector;
     
@@ -39,13 +39,14 @@ public class EnemyBase : UnitBase
 
     public void Die(DamageInfo info)
     {
-        OnEnemyDeath.Invoke();
-        //gameObject.SetActive(false);
+        OnDeath.Invoke();
+        gameObject.SetActive(false);
+        OnDeath.RemoveAllListeners();
     }
 
-    public int ReturnCost()
+    public int GetReturnCost()
     {
-        return cost;
+        return returnCost;
     }
 
     protected override void TerminateComponents()
