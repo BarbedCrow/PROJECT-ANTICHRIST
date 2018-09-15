@@ -61,7 +61,7 @@ public class AreaSpawnController : MonoBehaviour
             var countOfEnemy = desc.count;
             for (int idx = 0; idx < countOfEnemy; idx ++)
             {
-                if (desc.enemyType.GetReturnCost() > currentSpawnCurrency)
+                if (desc.cost > currentSpawnCurrency)
                     return enemies;
                 enemies.Add(desc.enemyType);
                 currentSpawnCurrency -= desc.cost;
