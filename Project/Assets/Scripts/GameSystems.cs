@@ -2,24 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PoolBase))]
 public class GameSystems : MonoBehaviour
 {
+    
     public void Init()
     {
-        testPool = GetComponent<PoolBase>();
-        testPool.Init();
-        var gO = testPool.Take("Damagable");
-        testPool.Release(gO);
+        pool = GetComponent<PoolBase>();
+        pool.Init();
+
+        spawnManager = GetComponent<SpawnManager>();
+        spawnManager.Init(pool);
     }
 
     public void Terminate()
     {
+        spawnManager.Terminate();
+        pool.Terminate();
 
+        Destroy(gameObject);
+    }
+
+    public PoolBase GetPool()
+    {
+        return pool;
+    }
+
+    public SpawnManager GetSpawnManager()
+    {
+        return spawnManager;
     }
 
     #region private
 
-    PoolBase testPool;
+    SpawnManager spawnManager;
+    PoolBase pool;
 
     #endregion
 }

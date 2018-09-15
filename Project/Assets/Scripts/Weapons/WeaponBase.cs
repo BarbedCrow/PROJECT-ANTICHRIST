@@ -8,6 +8,7 @@ public class WeaponBase : MonoBehaviour
     public string uid;
     public float damage;
 
+
     public virtual void Init()
     {
         propDamager = GetComponent<DamagerBase>();

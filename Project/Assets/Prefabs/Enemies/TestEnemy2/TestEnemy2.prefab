@@ -98,8 +98,8 @@ GameObject:
   - component: {fileID: 222824114233034810}
   - component: {fileID: 54354099961993484}
   m_Layer: 0
-  m_Name: TestEnemy
-  m_TagString: Enemy
+  m_Name: TestEnemy2
+  m_TagString: Enemy2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -263,7 +263,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 745761e221c42a24499e71c3281d0f84, type: 2}
+  - {fileID: 2100000, guid: f17ecaab00f3b974bbe6bec2900f9e73, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -345,7 +345,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!65 &65301605741657916
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -408,7 +408,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  returnCost: 1
+  returnCost: 2
 --- !u!114 &114370812271043578
 MonoBehaviour:
   m_ObjectHideFlags: 1

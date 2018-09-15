@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemySpawnSystem))]
+[RequireComponent(typeof(SpawnManager))]
 [RequireComponent(typeof(GameSystems))]
 [RequireComponent(typeof(GlobalEventManager))]
 [RequireComponent(typeof(InputsLibrary))]
@@ -10,13 +10,13 @@ public class GameMain : MonoBehaviour
 {
 
     public PlayerSpawnInfo playerSpawnInfo;
+    public List<GameArea> gameAreas;
 
     #region private
 
     GameSystems gameSystems;
     GlobalEventManager eventManager;
     InputsLibrary inputsLibrary;
-    EnemySpawnSystem enemySpawnSystem;
 
     Player player;
 
@@ -39,18 +39,24 @@ public class GameMain : MonoBehaviour
         inputsLibrary.Init();
 
         player = Instantiate(playerSpawnInfo.player, playerSpawnInfo.spawnPoint.position, playerSpawnInfo.rotation) as Player;
-        player.Init(inputsLibrary);
-
-        enemySpawnSystem = GetComponent<EnemySpawnSystem>();
-        enemySpawnSystem.Init(player);
+        player.Init(inputsLibrary, gameSystems.GetPool());
 
         eventManager = GetComponent<GlobalEventManager>();
         eventManager.OnGameReady.Invoke();
+
+        foreach(GameArea gameArea in gameAreas)
+        {
+            gameArea.Init(gameSystems.GetSpawnManager());
+        }
     }
 
     void Terminate()
     {
-        enemySpawnSystem.Terminate();
+        foreach (GameArea gameArea in gameAreas)
+        {
+            gameArea.Terminate();
+        }
+
         player.Terminate();
         inputsLibrary.Terminate();
         gameSystems.Terminate();

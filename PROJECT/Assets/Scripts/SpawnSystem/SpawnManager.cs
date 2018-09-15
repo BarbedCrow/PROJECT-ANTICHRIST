@@ -5,29 +5,30 @@ using UnityEngine.Events;
 
 public class SpawnManager : MonoBehaviour
 {
-    public void SpawnUnits(AreaSpawnController areaSpawnController)
+    public void Init(PoolBase pool)
     {
-        foreach (EnemyDesc enemyDesc in areaSpawnController.enemyDescs)
-        {
-            for (int i = 0; i < enemyDesc.count; i++)
-            {
-                Spawn(enemyDesc.enemyType, areaSpawnController.spawnPoints[i]);
-            }
-        }
+        this.pool = pool;
+    }
+
+    public void Terminate()
+    {
+
+    }
+
+    public EnemyBase SpawnUnit(EnemyBase enemy, Transform transform)
+    {
+        var spawnObj = pool.Take(enemy.tag);
+        spawnObj.transform.SetPositionAndRotation(transform.position, transform.rotation);
+
+        EnemyBase spawnObjComponents = spawnObj.GetComponent<EnemyBase>() as EnemyBase;
+        spawnObjComponents.Init(pool);
+
+        return spawnObjComponents;
     }
 
     #region private
 
-    void Spawn(EnemyBase enemy, Transform transform)
-    {
-        var spawnObj = Instantiate(enemy, transform);
-        spawnObj.Init();
-    }
-
-    void Terminate()
-    {
-        Destroy(gameObject);
-    }
+    PoolBase pool;
 
     #endregion
 

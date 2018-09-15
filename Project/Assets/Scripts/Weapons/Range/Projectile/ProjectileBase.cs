@@ -8,15 +8,16 @@ using UnityEngine;
 public class ProjectileBase : MonoBehaviour {
 
     public float speed;
-    public float lifetime = 5;
+    public float lifetime = 3;
 
-    public virtual void Init(DamagerBase propDamager, float damage)
+    public virtual void Init(DamagerBase propDamager, float damage, PoolBase pool)
     {
+        this.pool = pool;
         timer = GetComponent<Timer>();
         timer.Init(lifetime);
         timer.StartWork();
-        timer.OnTimersFinished.AddListener(Terminate);
-
+        timer.OnTimersFinished.AddListener(() => pool.Release(gameObject));
+        
         this.damage = damage;
         velocity = transform.forward;
         this.propDamager = propDamager;
@@ -37,6 +38,7 @@ public class ProjectileBase : MonoBehaviour {
 
     const string COROUTINE_MOVE = "Move";
 
+    PoolBase pool;
     Timer timer;
     float damage;
     Vector3 velocity;
@@ -61,7 +63,7 @@ public class ProjectileBase : MonoBehaviour {
             DoDamage(collision, propDamagable);
         }
 
-        Terminate();
+        pool.Release(gameObject);
     }
 
     void DoDamage(Collision collision, DamagableBase propDamagable)

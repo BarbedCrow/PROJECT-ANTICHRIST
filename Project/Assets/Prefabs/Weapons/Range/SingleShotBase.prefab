@@ -165,7 +165,6 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   maxBullets: 10
-  pointOfSpawnShot: {x: 0, y: 0, z: 0}
   projectileSpawnInfo:
     projectileSpawnPoint: {fileID: 4451340003283714}
     projectilePrefab: {fileID: 1894509351135182, guid: b7c561d0c92e93f449f63f3c5cc76f58,
