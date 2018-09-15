@@ -17,7 +17,6 @@ public class GameMain : MonoBehaviour
     GameSystems gameSystems;
     GlobalEventManager eventManager;
     InputsLibrary inputsLibrary;
-    SpawnManager spawnManager;
 
     Player player;
 
@@ -39,18 +38,15 @@ public class GameMain : MonoBehaviour
         inputsLibrary = GetComponent<InputsLibrary>();
         inputsLibrary.Init();
 
-        spawnManager = GetComponent<SpawnManager>();
-        spawnManager.Init();
-
         player = Instantiate(playerSpawnInfo.player, playerSpawnInfo.spawnPoint.position, playerSpawnInfo.rotation) as Player;
-        player.Init(inputsLibrary);
+        player.Init(inputsLibrary, gameSystems.GetPool());
 
         eventManager = GetComponent<GlobalEventManager>();
         eventManager.OnGameReady.Invoke();
 
         foreach(GameArea gameArea in gameAreas)
         {
-            gameArea.Init(spawnManager);
+            gameArea.Init(gameSystems.GetSpawnManager());
         }
     }
 
@@ -61,7 +57,6 @@ public class GameMain : MonoBehaviour
             gameArea.Terminate();
         }
 
-        spawnManager.Terminate();
         player.Terminate();
         inputsLibrary.Terminate();
         gameSystems.Terminate();

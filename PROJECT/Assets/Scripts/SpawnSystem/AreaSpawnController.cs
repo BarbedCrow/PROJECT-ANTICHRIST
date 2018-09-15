@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-/*public class EventOnCollideWith : UnityEvent<Collision>
-{
-
-}*/
-
 public class AreaSpawnController : MonoBehaviour
 {
     [HideInInspector]
@@ -22,7 +17,6 @@ public class AreaSpawnController : MonoBehaviour
         currentSpawnCurrency = maxSpawnCurrency;
         this.gameArea = gameArea;
         this.spawnManager = spawnManager;
-        int countOfEnemies = 0;
         gameArea.PlayerEntered.AddListener(TrySpawnEnemies);
     }
 
@@ -33,7 +27,7 @@ public class AreaSpawnController : MonoBehaviour
 
     #region private
 
-    int countOfEnemies;
+    int countOfEnemies = 0;
     int currentSpawnCurrency;
     GameArea gameArea;
     SpawnManager spawnManager;
@@ -70,7 +64,7 @@ public class AreaSpawnController : MonoBehaviour
                 if (desc.enemyType.GetReturnCost() > currentSpawnCurrency)
                     return enemies;
                 enemies.Add(desc.enemyType);
-                currentSpawnCurrency -= desc.enemyType.GetReturnCost();
+                currentSpawnCurrency -= desc.cost;
                 desc.count--;
             }
         }
@@ -82,13 +76,12 @@ public class AreaSpawnController : MonoBehaviour
     {
         currentSpawnCurrency += enemy.GetReturnCost();
         countOfEnemies--;
-
+        TrySpawnEnemies();
         if (countOfEnemies == 0)
         {
             OnAllEnemiesDeath.Invoke();
             return;
         }
-        TrySpawnEnemies();
     }
 
     #endregion
@@ -99,4 +92,5 @@ public class EnemyDesc
 {
     public EnemyBase enemyType;
     public int count;
+    public int cost;
 }

@@ -8,16 +8,18 @@ public class WeaponUserRange : WeaponUserBase
     public List<InputUid> swapInputUids;
     public List<WeaponSpawnDesc> weaponDescs;
 
-    public override void Init()
+    public void Init(PoolBase pool)
     {
         base.Init();
+        
+        this.pool = pool;
 
         foreach (WeaponSpawnDesc desc in weaponDescs)
         {
             var weapon = Instantiate(desc.prefab, desc.transform.position, desc.transform.rotation);
             var weaponLogic = weapon.GetComponent<WeaponRange>();
             weapon.transform.SetParent(desc.transform);
-            weaponLogic.Init();
+            weaponLogic.Init(pool);
             weapons.Add(weaponLogic);
         }
 
@@ -61,6 +63,7 @@ public class WeaponUserRange : WeaponUserBase
     List<WeaponRange> weapons = new List<WeaponRange>();
     WeaponRange currentWeapon;
     int currentWeaponIdx;
+    PoolBase pool;
 
     List<InputTap> swapToSlotInputs = new List<InputTap>();
 

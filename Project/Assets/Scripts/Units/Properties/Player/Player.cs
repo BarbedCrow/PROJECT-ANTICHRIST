@@ -8,12 +8,12 @@ using UnityEngine;
 [RequireComponent(typeof(MovementController))]
 public class Player : UnitBase
 {
-
     public InputUid swapWeaponInputUid;
 
-    public void Init(InputsLibrary inputsLibrary)
+    public void Init(InputsLibrary inputsLibrary, PoolBase pool)
     {
         this.inputsLibrary = inputsLibrary;
+        this.pool = pool;
 
         base.Init();
 
@@ -36,9 +36,10 @@ public class Player : UnitBase
 
     const string PLAYER_CAMERA = "PlayerCamera";
 
+    PoolBase pool;
     AbilitiesUser propAbilitiesUser;
     WeaponUserBase propWeaponUserMelee;
-    WeaponUserBase propWeaponUserRange;
+    WeaponUserRange propWeaponUserRange;
     MovementController propMovement;
     CameraController propCamera;
 
@@ -55,7 +56,7 @@ public class Player : UnitBase
 
         propWeaponUserRange = GetComponent<WeaponUserRange>();
         propWeaponUserRange.CacheInputsLibrary(inputsLibrary);
-        propWeaponUserRange.Init();
+        propWeaponUserRange.Init(pool);
 
         propAbilitiesUser = GetComponent<AbilitiesUser>();
         propAbilitiesUser.CacheInputsLibrary(inputsLibrary);

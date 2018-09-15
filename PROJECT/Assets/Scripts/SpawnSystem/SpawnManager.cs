@@ -5,10 +5,9 @@ using UnityEngine.Events;
 
 public class SpawnManager : MonoBehaviour
 {
-
-    public void Init()
+    public void Init(PoolBase pool)
     {
-
+        this.pool = pool;
     }
 
     public void Terminate()
@@ -18,14 +17,18 @@ public class SpawnManager : MonoBehaviour
 
     public EnemyBase SpawnUnit(EnemyBase enemy, Transform transform)
     {
-        var spawnObj = Instantiate(enemy, transform.position, transform.rotation);
-        spawnObj.Init();
-        return spawnObj;
+        var spawnObj = pool.Take(enemy.tag);
+        spawnObj.transform.SetPositionAndRotation(transform.position, transform.rotation);
+
+        EnemyBase spawnObjComponents = spawnObj.GetComponent<EnemyBase>() as EnemyBase;
+        spawnObjComponents.Init(pool);
+
+        return spawnObjComponents;
     }
 
     #region private
 
-    //GameArea gameArea;
+    PoolBase pool;
 
     #endregion
 

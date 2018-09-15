@@ -7,9 +7,9 @@ public class WeaponShotGun : WeaponRange
     public float angleShots;
     public int BulletsOnOneShot;
 
-    public override void Init()
+    public override void Init(PoolBase pool)
     {
-        base.Init();
+        base.Init(pool);
 
         bulletDmg = damage / BulletsOnOneShot;
     }
@@ -21,32 +21,28 @@ public class WeaponShotGun : WeaponRange
         Debug.Log(countOfBullets);
         var transformBullet = projectileSpawnInfo.projectileSpawnPoint;
 
-        anglesForShots.Clear();
-        var angleInterval = (BulletsOnOneShot % 2 == 1) ? angleShots / (BulletsOnOneShot - 1) : angleShots / BulletsOnOneShot;
+        bool bulletsIsOdd = BulletsOnOneShot % 2 == 1;
 
-        if (BulletsOnOneShot % 2 == 1)
-        {
+        anglesForShots.Clear();
+        var angleInterval = (bulletsIsOdd) ? angleShots / (BulletsOnOneShot - 1) : angleShots / BulletsOnOneShot;
+        var multiplier = (bulletsIsOdd) ? ALL_SECTOR : HALF_SECTOR;
+
+        if (bulletsIsOdd)
             anglesForShots.Add(transformBullet.rotation);
-            for (int i = 0; i < BulletsOnOneShot / 2; i++)
-            {
-                anglesForShots.Add(transformBullet.rotation * Quaternion.Euler(0, (i + 1) * angleInterval, 0));
-                anglesForShots.Add(transformBullet.rotation * Quaternion.Euler(0, (i + 1) * -angleInterval, 0));
-            }
-        }
-        else
+
+        for (int i = 0; i < BulletsOnOneShot / 2; i++)
         {
-            for (int i = 0; i < BulletsOnOneShot / 2; i++)
-            {
-                anglesForShots.Add(transformBullet.rotation * Quaternion.Euler(0, (i + 0.5f) * angleInterval, 0));
-                anglesForShots.Add(transformBullet.rotation * Quaternion.Euler(0, (i + 0.5f) * -angleInterval, 0));
-            }
+            anglesForShots.Add(transformBullet.rotation * Quaternion.Euler(0, (i + multiplier) * angleInterval, 0));
+            anglesForShots.Add(transformBullet.rotation * Quaternion.Euler(0, (i + multiplier) * -angleInterval, 0));
         }
 
         for (int i = 0; i < BulletsOnOneShot; i++)
         {
-            var projectile = Instantiate(projectileSpawnInfo.projectilePrefab, projectileSpawnInfo.projectileSpawnPoint.position, anglesForShots[i]);
+            var projectile = pool.Take("Bullet");
+            projectile.transform.SetPositionAndRotation(projectileSpawnInfo.projectileSpawnPoint.position, anglesForShots[i]);
+
             var projectileLogic = projectile.GetComponent<ProjectileBase>();
-            projectileLogic.Init(propDamager, bulletDmg);
+            projectileLogic.Init(propDamager, bulletDmg, pool);
         }
     }
 
@@ -54,6 +50,9 @@ public class WeaponShotGun : WeaponRange
 
     List<Quaternion> anglesForShots = new List<Quaternion>();
     float bulletDmg;
+
+    const float ALL_SECTOR = 1;
+    const float HALF_SECTOR = 0.5f;
 
     #endregion
 }

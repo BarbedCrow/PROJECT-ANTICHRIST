@@ -44,10 +44,11 @@ public class WeaponRange : WeaponBase
         isShooting = false;
     }
 
-    public override void Init()
+    public virtual void Init(PoolBase pool)
     {
         base.Init();
 
+        this.pool = pool;
         countOfBullets = maxBullets;
 
         var timers = GetComponents<Timer>();
@@ -93,6 +94,7 @@ public class WeaponRange : WeaponBase
 
     protected const int NO_BULLETS = 0;
 
+    protected PoolBase pool;
     protected bool isShooting = false;
     protected bool isReloading = false;
 
@@ -106,9 +108,11 @@ public class WeaponRange : WeaponBase
         countOfBullets -= 1;
         Debug.Log(countOfBullets);
 
-        var projectile = Instantiate(projectileSpawnInfo.projectilePrefab, projectileSpawnInfo.projectileSpawnPoint.position, projectileSpawnInfo.projectileSpawnPoint.rotation);
+        var projectile = pool.Take("Bullet");
+        projectile.transform.SetPositionAndRotation(projectileSpawnInfo.projectileSpawnPoint.position, projectileSpawnInfo.projectileSpawnPoint.rotation);
+
         var projectileLogic = projectile.GetComponent<ProjectileBase>();
-        projectileLogic.Init(propDamager, damage);
+        projectileLogic.Init(propDamager, damage, pool);
     }
 
     protected virtual void HandleOnReloaded()

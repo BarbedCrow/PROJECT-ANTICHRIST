@@ -7,6 +7,7 @@ public class PoolBase : MonoBehaviour
 
     public PoolObjectDesc[] descs;
     public int maxCapacity;
+    public GameObject poolFolder;
 
     public void Init()
     {
@@ -14,11 +15,14 @@ public class PoolBase : MonoBehaviour
         {
             List<GameObject> objects = new List<GameObject>();
             availableObjects.Add(desc.gameObject.tag, objects);
-
+            GameObject folder = new GameObject(desc.gameObject.tag);
+            folder.transform.SetParent(poolFolder.transform);
+            
             for (int i = 0; i < desc.initialCount; i += 1)
             {
                 GameObject gO = Instantiate(desc.gameObject, transform.position, transform.rotation);
                 gO.SetActive(false);
+                gO.transform.SetParent(folder.transform);
 
                 objects.Add(gO);
                 currentCapacity += 1;
@@ -33,14 +37,14 @@ public class PoolBase : MonoBehaviour
 
     public GameObject Take(string key)
     {
-        GameObject objectToTake = new GameObject();
+        GameObject objectToTake = null;
         List<GameObject> objects;
         if (!availableObjects.TryGetValue(key, out objects))
         {
             objects = new List<GameObject>();
         }
 
-        if (objects.Capacity > 0)
+        if (objects.Count > 0)
         {
             objectToTake = objects[0];
             objectToTake.SetActive(true);

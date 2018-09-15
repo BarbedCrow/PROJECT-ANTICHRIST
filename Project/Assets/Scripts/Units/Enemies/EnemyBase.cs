@@ -11,20 +11,27 @@ public class EnemyBase : UnitBase
     public UnityEvent OnDeath = new UnityEvent();
     public int returnCost;
 
+    public void Init(PoolBase pool)
+    {
+        base.Init();
+        this.pool = pool;
+    }
+
     public void CachePlayer(Player player)
     {
 
     }
 
     #region private
-    
+
+    PoolBase pool;
     AiMovement propMovement;
     AiPlayerDetector propPlayerDetector;
-    
+
     protected override void InitComponents()
     {
         base.InitComponents();
-
+        
         propMovement = GetComponent<AiMovement>();
         propMovement.Init();
 
@@ -39,8 +46,8 @@ public class EnemyBase : UnitBase
 
     public void Die(DamageInfo info)
     {
+        pool.Release(gameObject);
         OnDeath.Invoke();
-        gameObject.SetActive(false);
         OnDeath.RemoveAllListeners();
     }
 
