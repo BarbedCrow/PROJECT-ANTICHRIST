@@ -107,8 +107,8 @@ public class WeaponRange : WeaponBase
         pauseShotsTimer.StartWork();
         countOfBullets -= 1;
         Debug.Log(countOfBullets);
-
-        var projectile = pool.Take("Bullet");
+        
+        var projectile = pool.Take(Tags.BULLET);
         projectile.transform.SetPositionAndRotation(projectileSpawnInfo.projectileSpawnPoint.position, projectileSpawnInfo.projectileSpawnPoint.rotation);
 
         var projectileLogic = projectile.GetComponent<ProjectileBase>();

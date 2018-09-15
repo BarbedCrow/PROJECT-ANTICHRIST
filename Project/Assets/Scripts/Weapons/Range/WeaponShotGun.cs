@@ -38,7 +38,7 @@ public class WeaponShotGun : WeaponRange
 
         for (int i = 0; i < BulletsOnOneShot; i++)
         {
-            var projectile = pool.Take("Bullet");
+            var projectile = pool.Take(Tags.BULLET);
             projectile.transform.SetPositionAndRotation(projectileSpawnInfo.projectileSpawnPoint.position, anglesForShots[i]);
 
             var projectileLogic = projectile.GetComponent<ProjectileBase>();
