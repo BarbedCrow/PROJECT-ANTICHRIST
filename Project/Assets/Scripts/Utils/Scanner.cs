@@ -10,7 +10,6 @@ public class Scanner : MonoBehaviour
     public string tagToLook;
     
     public float maxHorAngle;
-    //public float vertAngle;
     public float maxDistance;
 
     [HideInInspector]
@@ -28,6 +27,13 @@ public class Scanner : MonoBehaviour
     public void Terminate()
     {
         StopWork();
+    }
+
+    public void SetPreset(ScannerPreset preset)
+    {
+        Debug.Log("Set preset " + preset.type);
+        maxHorAngle = preset.maxHorAngle;
+        maxDistance = preset.maxDistance;
     }
 
     public void StartWork()
@@ -60,7 +66,7 @@ public class Scanner : MonoBehaviour
     void ScanInternal()
     {
         var dist = Vector3.Distance(transform.position, transformToLook.position);
-        if(dist > maxDistance)
+        if((dist > maxDistance) && isVisible)
         {
             isVisible = false;
             OnMiss.Invoke();
@@ -70,7 +76,7 @@ public class Scanner : MonoBehaviour
         var targetDir = (transformToLook.position - transform.position).normalized;
         var dot = Vector3.Dot(targetDir, transform.forward);
         var angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
-        if (angle > maxHorAngle / 2)
+        if ((angle > maxHorAngle / 2) && isVisible)
         {
             isVisible = false;
             OnMiss.Invoke();

@@ -18,7 +18,7 @@ public class WeaponShotGun : WeaponRange
     {
         pauseShotsTimer.StartWork();
         countOfBullets -= 1;
-        Debug.Log(countOfBullets);
+        Debug.Log("Bullets: " + countOfBullets);
         var transformBullet = projectileSpawnInfo.projectileSpawnPoint;
 
         bool bulletsIsOdd = BulletsOnOneShot % 2 == 1;
