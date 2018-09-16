@@ -73,7 +73,7 @@ public class Scanner : MonoBehaviour
             return;
         }
 
-        var targetDir = (transformToLook.position - transform.position).normalized;
+        var targetDir = (transformToLook.position - (transform.position + transform.forward)).normalized;
         var dot = Vector3.Dot(targetDir, transform.forward);
         var angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
         if ((angle > maxHorAngle / 2) && isVisible)

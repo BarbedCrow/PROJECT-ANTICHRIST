@@ -12,7 +12,6 @@ public class WeaponUserMelee : WeaponUserBase
         base.Init();
         if (weapon == null)
         {
-            Debug.Log("No Weapon in melee user");
             return;
         }
             weapon.Init();

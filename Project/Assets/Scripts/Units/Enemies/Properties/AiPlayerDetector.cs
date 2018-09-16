@@ -19,10 +19,10 @@ public class AiPlayerDetector : MonoBehaviour
     {
         scanner = GetComponent<Scanner>();
         scanner.SetPreset(GetPresetByType(ScannerPresetType.BEFORE_DETECTION));
-        scanner.Init();
 
         scanner.OnSeen.AddListener(HandleOnSeen);
         scanner.OnMiss.AddListener(HandleOnMiss);
+        scanner.Init();
     }
 
     public void Terminate()
