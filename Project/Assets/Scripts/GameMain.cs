@@ -39,7 +39,7 @@ public class GameMain : MonoBehaviour
         inputsLibrary.Init();
 
         player = Instantiate(playerSpawnInfo.player, playerSpawnInfo.spawnPoint.position, playerSpawnInfo.rotation) as Player;
-        player.Init(inputsLibrary, gameSystems.GetPool());
+        player.Init(inputsLibrary, gameSystems.GetPoolProjectiles());
 
         eventManager = GetComponent<GlobalEventManager>();
         eventManager.OnGameReady.Invoke();

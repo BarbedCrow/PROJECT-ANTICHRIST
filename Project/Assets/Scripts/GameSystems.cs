@@ -3,29 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PoolBase))]
+[RequireComponent(typeof(PoolBase))]
 public class GameSystems : MonoBehaviour
 {
     
     public void Init()
     {
-        pool = GetComponent<PoolBase>();
-        pool.Init();
+        var pools = GetComponents<PoolBase>();
+
+        foreach (PoolBase pool in pools)
+        {
+            if (pool.uid == "PoolEnemies")
+            {
+                poolEnemies = pool;
+                poolEnemies.Init();
+            }
+
+            if (pool.uid == "PoolProjectiles")
+            {
+                poolProjectiles = pool;
+                poolProjectiles.Init();
+            }
+        }
 
         spawnManager = GetComponent<SpawnManager>();
-        spawnManager.Init(pool);
+        spawnManager.Init(poolEnemies);
     }
 
     public void Terminate()
     {
         spawnManager.Terminate();
-        pool.Terminate();
+        poolEnemies.Terminate();
+        poolProjectiles.Terminate();
 
         Destroy(gameObject);
     }
 
-    public PoolBase GetPool()
+    public PoolBase GetPoolProjectiles()
     {
-        return pool;
+        return poolProjectiles;
+    }
+
+    public PoolBase GetPoolEnemies()
+    {
+        return poolEnemies;
     }
 
     public SpawnManager GetSpawnManager()
@@ -36,7 +57,8 @@ public class GameSystems : MonoBehaviour
     #region private
 
     SpawnManager spawnManager;
-    PoolBase pool;
+    PoolBase poolProjectiles;
+    PoolBase poolEnemies;
 
     #endregion
 }
