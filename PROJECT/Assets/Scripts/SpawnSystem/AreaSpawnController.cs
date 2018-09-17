@@ -9,7 +9,7 @@ public class AreaSpawnController : MonoBehaviour
     public UnityEvent OnAllEnemiesDeath = new UnityEvent();
 
     public List<EnemyDesc> enemyDescs;
-    public List<Transform> spawnPoints;
+    public List<SpawnPoint> spawnPoints;
     public int maxSpawnCurrency;
 
     public void Init(GameArea gameArea, SpawnManager spawnManager)
@@ -18,6 +18,17 @@ public class AreaSpawnController : MonoBehaviour
         this.gameArea = gameArea;
         this.spawnManager = spawnManager;
         gameArea.PlayerEntered.AddListener(TrySpawnEnemies);
+
+        foreach(SpawnPoint point in spawnPoints)
+        {
+            point.Init();
+            point.OnOpenSpawn.AddListener(TrySpawnEnemies);
+        }
+
+        foreach(EnemyDesc enemies in enemyDescs)
+        {
+            countOfEnemies += enemies.count;
+        }
     }
 
     public void Terminate()
@@ -32,32 +43,47 @@ public class AreaSpawnController : MonoBehaviour
     GameArea gameArea;
     SpawnManager spawnManager;
 
-    void SpawnEnemies(List<EnemyBase> SetOfEnemies, List<Transform> SpawnPoints)
+    void SpawnEnemies(EnemyBase enemy, Transform SpawnPoint)
     {
-        for (int idx = 0; idx < SetOfEnemies.Count; idx++)
-        {
-            var prefab = spawnManager.SpawnUnit(SetOfEnemies[idx], SpawnPoints[idx % SpawnPoints.Count].transform);
-            prefab.OnDeath.AddListener(() => EnemyDeath(prefab));
-            countOfEnemies++;
-        }
+        var prefab = spawnManager.SpawnUnit(enemy, SpawnPoint);
+        prefab.OnDeath.AddListener(() => EnemyDeath(prefab));
     }
 
     void TrySpawnEnemies()
     {
-        List<EnemyBase> bestSet = GetBestSetOfEnemy();
+        List<SpawnPoint> points = TryTakeSpawnPoints();
+        List<EnemyBase> enemies = GetBestSetOfEnemy(points.Count);
 
-        if (bestSet.Count != 0)
+        if (enemies.Count != 0)
         {
-            SpawnEnemies(bestSet, spawnPoints);
+            for(int idx = 0; idx < enemies.Count; idx++)
+            {
+                SpawnEnemies(enemies[idx], points[idx].transform);
+                points[idx].CloseSpawn();
+            }
         }
     }
     
-    List<EnemyBase> GetBestSetOfEnemy()
+    List<SpawnPoint> TryTakeSpawnPoints()
+    {
+        List<SpawnPoint> points = new List<SpawnPoint>();
+        foreach (SpawnPoint point in spawnPoints)
+        {
+            if (point.GetIsReady())
+                points.Add(point);
+        }
+        return points;
+    }
+
+    List<EnemyBase> GetBestSetOfEnemy(int countOfPoint)
     {
         List<EnemyBase> enemies = new List<EnemyBase>();
 
         foreach (EnemyDesc desc in enemyDescs)
         {
+            if (enemies.Count == countOfPoint)
+                return enemies;
+
             var countOfEnemy = desc.count;
             for (int idx = 0; idx < countOfEnemy; idx ++)
             {
@@ -80,7 +106,6 @@ public class AreaSpawnController : MonoBehaviour
         if (countOfEnemies == 0)
         {
             OnAllEnemiesDeath.Invoke();
-            return;
         }
     }
 

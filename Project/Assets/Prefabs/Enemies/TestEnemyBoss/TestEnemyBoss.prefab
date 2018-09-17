@@ -98,8 +98,8 @@ GameObject:
   - component: {fileID: 222824114233034810}
   - component: {fileID: 54354099961993484}
   m_Layer: 0
-  m_Name: TestEnemy3
-  m_TagString: Enemy3
+  m_Name: TestEnemyBoss
+  m_TagString: EnemyBoss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -263,7 +263,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c535bb0081fb35f4c84a81b98a7c80ad, type: 2}
+  - {fileID: 2100000, guid: 3035dbe31327aa648b64be5b7af660ad, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 102542668989873546}
-  health: 900
+  health: 1500
 --- !u!114 &114102461354786140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -531,8 +531,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1888000578819430}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.54089, y: 0, z: 10.760958}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -16.574997, y: 3.4099998, z: 18.650312}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4669901824632258}
   - {fileID: 4895250505809378}
@@ -542,6 +542,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11.54089, y: 0.0000009536743}
+  m_AnchoredPosition: {x: -16.574993, y: 3.41}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
