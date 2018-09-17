@@ -11,7 +11,6 @@ public class MovementController : MonoBehaviour {
     public void Init()
     {
         playerCamera = GameObject.FindGameObjectWithTag(PLAYER_CAMERA).GetComponent<Camera>();
-        //propRigid = GetComponent<Rigidbody>();
         currentSpeed = walkSpeed;
         StartCoroutine(MOVEMENT_UPDATE_COROUTINE); // Do it on start when all props are ready?
     }
