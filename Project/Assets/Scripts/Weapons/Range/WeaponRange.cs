@@ -112,7 +112,7 @@ public class WeaponRange : WeaponBase
         projectile.transform.SetPositionAndRotation(projectileSpawnInfo.projectileSpawnPoint.position, projectileSpawnInfo.projectileSpawnPoint.rotation);
 
         var projectileLogic = projectile.GetComponent<ProjectileBase>();
-        projectileLogic.Init(propDamager, damage, pool);
+        projectileLogic.Init(propDamager, pool, damage, projectileSpeed);
     }
 
     protected virtual void HandleOnReloaded()
