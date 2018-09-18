@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Enemy2
   - Enemy3
+  - EnemyBoss
   layers:
   - Default
   - TransparentFX

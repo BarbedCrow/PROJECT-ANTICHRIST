@@ -9,6 +9,7 @@ public class WeaponRange : WeaponBase
 {
     public float timeBetweenShots;
     public float timeForReload;
+    public float projectileSpeed;
 
     [HideInInspector]
     public UnityEvent OnShootEmpty = new UnityEvent();
@@ -112,7 +113,7 @@ public class WeaponRange : WeaponBase
         projectile.transform.SetPositionAndRotation(projectileSpawnInfo.projectileSpawnPoint.position, projectileSpawnInfo.projectileSpawnPoint.rotation);
 
         var projectileLogic = projectile.GetComponent<ProjectileBase>();
-        projectileLogic.Init(propDamager, damage, pool);
+        projectileLogic.Init(propDamager, pool, damage, projectileSpeed);
     }
 
     protected virtual void HandleOnReloaded()

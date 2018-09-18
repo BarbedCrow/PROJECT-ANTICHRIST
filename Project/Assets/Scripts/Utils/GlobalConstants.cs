@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class GlobalConstants : MonoBehaviour
 {
-    #region tags
+    #region Uid
 
-    public const string TAG_PLAYER = "Player";
+    public const string UID_POOL_ENEMIES = "PoolEnemies";
+    public const string UID_POOL_PROJECTILES = "PoolProjectiles";
 
     #endregion
 

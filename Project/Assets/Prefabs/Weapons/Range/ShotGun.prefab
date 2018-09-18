@@ -156,15 +156,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uid: 
-  damage: 50
-  timeBetweenShots: 0.1
-  timeForReload: 0.1
+  damage: 100
+  timeBetweenShots: 0.5
+  timeForReload: 2
   OnShootEmpty:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  maxBullets: 20
+  maxBullets: 12
   projectileSpawnInfo:
     projectileSpawnPoint: {fileID: 4902536162970522}
     projectilePrefab: {fileID: 1894509351135182, guid: b7c561d0c92e93f449f63f3c5cc76f58,

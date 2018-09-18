@@ -42,7 +42,7 @@ public class WeaponShotGun : WeaponRange
             projectile.transform.SetPositionAndRotation(projectileSpawnInfo.projectileSpawnPoint.position, anglesForShots[i]);
 
             var projectileLogic = projectile.GetComponent<ProjectileBase>();
-            projectileLogic.Init(propDamager, bulletDmg, pool);
+            projectileLogic.Init(propDamager, pool, bulletDmg, projectileSpeed);
         }
     }
 

@@ -7,11 +7,11 @@ using UnityEngine;
 [RequireComponent(typeof(DamagableBase))]
 public class ProjectileBase : MonoBehaviour {
 
-    public float speed;
     public float lifetime = 3;
 
-    public virtual void Init(DamagerBase propDamager, float damage, PoolBase pool)
+    public virtual void Init(DamagerBase propDamager, PoolBase pool, float damage, float speed)
     {
+        this.speed = speed; 
         this.pool = pool;
         timer = GetComponent<Timer>();
         timer.Init(lifetime);
@@ -38,6 +38,7 @@ public class ProjectileBase : MonoBehaviour {
 
     const string COROUTINE_MOVE = "Move";
 
+    float speed = 15;
     PoolBase pool;
     Timer timer;
     float damage;

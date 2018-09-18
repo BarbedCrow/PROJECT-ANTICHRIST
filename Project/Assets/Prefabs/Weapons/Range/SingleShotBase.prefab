@@ -157,8 +157,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uid: 
   damage: 50
-  timeBetweenShots: 0.1
-  timeForReload: 4
+  timeBetweenShots: 0.2
+  timeForReload: 2
   OnShootEmpty:
     m_PersistentCalls:
       m_Calls: []

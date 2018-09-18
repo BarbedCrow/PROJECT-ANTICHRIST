@@ -40,7 +40,7 @@ public class GameArea : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Equals(GlobalConstants.TAG_PLAYER))
+        if (other.tag.Equals(Tags.TAG_PLAYER))
         {
             
             myCollider.isTrigger = false;

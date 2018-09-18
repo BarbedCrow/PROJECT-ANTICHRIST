@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PoolBase : MonoBehaviour
 {
-
+    public string uid;
     public PoolObjectDesc[] descs;
     public int maxCapacity;
     public GameObject poolFolder;

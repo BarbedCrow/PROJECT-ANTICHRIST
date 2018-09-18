@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 102542668989873546}
-  health: 300
+  health: 600
 --- !u!114 &114102461354786140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -455,6 +455,13 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  scannerPresets:
+  - type: 0
+    maxHorAngle: 90
+    maxDistance: 50
+  - type: 1
+    maxHorAngle: 360
+    maxDistance: 25
 --- !u!114 &114818807018556962
 MonoBehaviour:
   m_ObjectHideFlags: 1
