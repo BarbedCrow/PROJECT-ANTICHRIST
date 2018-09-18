@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114593633450777846}
   - component: {fileID: 114221593678880848}
   - component: {fileID: 114500516177146734}
+  - component: {fileID: 114409032478150968}
   m_Layer: 0
   m_Name: GameMain
   m_TagString: Untagged
@@ -67,6 +68,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63821efe8866f7544ac84b0f09a91a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114409032478150968
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1846460767787248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c1002cdf28f8744977ec51a82775e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uid: PoolProjectiles
+  descs:
+  - gameObject: {fileID: 1894509351135182, guid: b7c561d0c92e93f449f63f3c5cc76f58,
+      type: 2}
+    initialCount: 1000
+  maxCapacity: 1000
+  poolFolder: {fileID: 0}
 --- !u!114 &114500516177146734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -78,20 +97,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c1002cdf28f8744977ec51a82775e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uid: PoolEnemies
   descs:
-  - gameObject: {fileID: 1894509351135182, guid: b7c561d0c92e93f449f63f3c5cc76f58,
-      type: 2}
-    initialCount: 1000
   - gameObject: {fileID: 1888000578819430, guid: 360e9b20756bfdf44b119cb0bf844782,
       type: 2}
-    initialCount: 5
+    initialCount: 6
   - gameObject: {fileID: 1888000578819430, guid: a2e67d1887a95434cb5d339871d5946f,
       type: 2}
     initialCount: 2
   - gameObject: {fileID: 1888000578819430, guid: 0d4650551a33b6b48acb29b67a08f6c7,
       type: 2}
     initialCount: 2
-  maxCapacity: 2000
+  - gameObject: {fileID: 1888000578819430, guid: b926470e4bb4cc540b0653802976cf74,
+      type: 2}
+    initialCount: 1
+  maxCapacity: 11
   poolFolder: {fileID: 0}
 --- !u!114 &114593633450777846
 MonoBehaviour:

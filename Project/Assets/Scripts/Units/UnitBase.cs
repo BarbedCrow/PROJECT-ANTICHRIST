@@ -10,10 +10,12 @@ public class UnitBase : MonoBehaviour
     public virtual void Init()
     {
         InitComponents();
+        SubscribeComponents();
     }
 
     public virtual void Terminate()
     {
+        UnsubscribeComponents();
         TerminateComponents();
         Destroy(gameObject);
     }
@@ -37,6 +39,21 @@ public class UnitBase : MonoBehaviour
     {
         propDamagable.Terminate();
         propDamager.Terminate();
+    }
+
+    protected virtual void SubscribeComponents()
+    {
+        propDamagable.OnDie.AddListener(Die);
+    }
+
+    protected virtual void UnsubscribeComponents()
+    {
+        propDamagable.OnDie.RemoveListener(Die);
+    }
+
+    protected virtual void Die(DamageInfo info)
+    {
+
     }
 
     #endregion

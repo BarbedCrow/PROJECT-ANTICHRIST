@@ -333,7 +333,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackInputUid: 1
-  weapon: {fileID: 0}
+  weaponDesc:
+    transform: {fileID: 0}
+    prefab: {fileID: 0}
 --- !u!114 &114590483324340114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -398,7 +400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 0}
-  health: 0
+  health: 20
 --- !u!114 &114983515635069540
 MonoBehaviour:
   m_ObjectHideFlags: 1

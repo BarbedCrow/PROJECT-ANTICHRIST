@@ -58,6 +58,20 @@ public class WeaponUserRange : WeaponUserBase
         }
     }
 
+    public override void RequestAttack()
+    {
+        base.RequestAttack();
+
+        currentWeapon.RequestAttack();
+    }
+
+    public override void RequestStopAttack()
+    {
+        currentWeapon.RequestStopAttack();
+
+        base.RequestStopAttack();
+    }
+
     #region private
 
     List<WeaponRange> weapons = new List<WeaponRange>();
@@ -70,20 +84,6 @@ public class WeaponUserRange : WeaponUserBase
     void Debugg()
     {
         Debug.Log("asd");
-    }
-
-    protected override void RequestAttack()
-    {
-        base.RequestAttack();
-
-        currentWeapon.RequestAttack();
-    }
-
-    protected override void RequestStopAttack()
-    {
-        currentWeapon.RequestStopAttack();
-
-        base.RequestStopAttack();
     }
 
     void Reload()

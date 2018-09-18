@@ -49,21 +49,23 @@ public class WeaponUserBase : MonoBehaviour
         return isEnabled;
     }
 
+    public virtual void RequestAttack()
+    {
+
+    }
+
+    public virtual void RequestStopAttack()
+    {
+
+    }
+
     #region private
 
     InputHold attackInput;
     protected InputsLibrary inputsLibrary;
     bool isEnabled = false;
 
-    protected virtual void RequestAttack()
-    {
-
-    }
-
-    protected virtual void RequestStopAttack()
-    {
-
-    }
+    
 
     #endregion
 

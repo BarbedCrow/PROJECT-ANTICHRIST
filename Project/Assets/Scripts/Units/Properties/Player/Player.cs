@@ -80,6 +80,11 @@ public class Player : UnitBase
         base.TerminateComponents();
     }
 
+    protected override void Die(DamageInfo info)
+    {
+        Destroy(gameObject);
+    }
+
     void InitInputs()
     {
         swapWeaponInput = (InputTap)inputsLibrary.GetInput(swapWeaponInputUid);

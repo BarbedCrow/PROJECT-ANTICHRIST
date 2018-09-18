@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(AssaultController))]
 [RequireComponent(typeof(AiPlayerDetector))]
 [RequireComponent(typeof(AiMovement))]
 public class EnemyBase : UnitBase 
@@ -22,11 +23,20 @@ public class EnemyBase : UnitBase
 
     }
 
+    public int GetReturnCost()
+    {
+        return returnCost;
+    }
+
     #region private
 
     PoolBase pool;
     AiMovement propMovement;
     AiPlayerDetector propPlayerDetector;
+    AssaultController propAssault;
+
+    bool isChasing;
+    bool isAttacking;
 
     protected override void InitComponents()
     {
@@ -37,27 +47,18 @@ public class EnemyBase : UnitBase
 
         propDamagable.OnDie.AddListener(Die);
 
+        propAssault = GetComponent<AssaultController>();
+        propAssault.Init();
+
         propPlayerDetector = GetComponent<AiPlayerDetector>();
         propPlayerDetector.OnMiss.AddListener(HandleOnPlayerMiss);
         propPlayerDetector.OnSeen.AddListener(HandleOnPlayerSeen);
         propPlayerDetector.Init();
-
-    }
-
-    public void Die(DamageInfo info)
-    {
-        pool.Release(gameObject);
-        OnDeath.Invoke();
-        OnDeath.RemoveAllListeners();
-    }
-
-    public int GetReturnCost()
-    {
-        return returnCost;
     }
 
     protected override void TerminateComponents()
     {
+        propAssault.Terminate();
         propMovement.Terminate();
         propPlayerDetector.Terminate();
 
@@ -66,12 +67,23 @@ public class EnemyBase : UnitBase
 
     void HandleOnPlayerSeen(Transform playerTransform)
     {
+        isChasing = true;
         propMovement.StartChase(playerTransform);
+        propAssault.StartCheck(playerTransform);
     }
 
     void HandleOnPlayerMiss()
     {
+        isChasing = false;
         propMovement.StopChase();
+        propAssault.StopCheck();
+    }
+
+    protected override void Die(DamageInfo info)
+    {
+        pool.Release(gameObject);
+        OnDeath.Invoke();
+        OnDeath.RemoveAllListeners();
     }
 
     #endregion
