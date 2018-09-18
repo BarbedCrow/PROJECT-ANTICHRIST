@@ -8,7 +8,7 @@ using UnityEngine.Events;
 public class SpawnPoint : MonoBehaviour
 {
     [HideInInspector]
-    public UnityEvent OnOpenSpawn = new UnityEvent();
+    public UnityEvent OnEnabled = new UnityEvent();
 
     public float closingTime;
 
@@ -18,9 +18,9 @@ public class SpawnPoint : MonoBehaviour
         timer.Init(closingTime);
     }
 
-    public bool GetIsReady()
+    public bool GetIsEnabled()
     {
-        return isReady;
+        return isEnabled;
     }
 
     public void Terminate()
@@ -28,23 +28,23 @@ public class SpawnPoint : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void CloseSpawn()
+    public void Disable()
     {
-        isReady = false;
+        isEnabled = false;
         timer.StartWork();
-        timer.OnTimersFinished.AddListener(OpenSpawn);
+        timer.OnTimersFinished.AddListener(Enabled);
     }
 
     #region private
 
-    bool isReady = true;
+    bool isEnabled = true;
     Timer timer;
 
-    void OpenSpawn()
+    void Enabled()
     {
         timer.OnTimersFinished.RemoveAllListeners();
-        isReady = true;
-        OnOpenSpawn.Invoke();
+        isEnabled = true;
+        OnEnabled.Invoke();
     }
 
     #endregion

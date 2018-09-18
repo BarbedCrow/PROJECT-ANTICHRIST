@@ -22,7 +22,7 @@ public class AreaSpawnController : MonoBehaviour
         foreach(SpawnPoint point in spawnPoints)
         {
             point.Init();
-            point.OnOpenSpawn.AddListener(TrySpawnEnemies);
+            point.OnEnabled.AddListener(TrySpawnEnemies);
         }
 
         foreach(EnemyDesc enemies in enemyDescs)
@@ -43,10 +43,10 @@ public class AreaSpawnController : MonoBehaviour
     GameArea gameArea;
     SpawnManager spawnManager;
 
-    void SpawnEnemies(EnemyBase enemy, Transform SpawnPoint)
+    void SpawnEnemy(EnemyBase enemy, Transform SpawnPoint)
     {
         var prefab = spawnManager.SpawnUnit(enemy, SpawnPoint);
-        prefab.OnDeath.AddListener(() => EnemyDeath(prefab));
+        prefab.OnDeath.AddListener(() => EnemyDeath(prefab));        
     }
 
     void TrySpawnEnemies()
@@ -54,13 +54,10 @@ public class AreaSpawnController : MonoBehaviour
         List<SpawnPoint> points = TryTakeSpawnPoints();
         List<EnemyBase> enemies = GetBestSetOfEnemy(points.Count);
 
-        if (enemies.Count != 0)
+        for (int idx = 0; idx < enemies.Count; idx++)
         {
-            for(int idx = 0; idx < enemies.Count; idx++)
-            {
-                SpawnEnemies(enemies[idx], points[idx].transform);
-                points[idx].CloseSpawn();
-            }
+            SpawnEnemy(enemies[idx], points[idx].transform);
+            points[idx].Disable();
         }
     }
     
@@ -69,7 +66,7 @@ public class AreaSpawnController : MonoBehaviour
         List<SpawnPoint> points = new List<SpawnPoint>();
         foreach (SpawnPoint point in spawnPoints)
         {
-            if (point.GetIsReady())
+            if (point.GetIsEnabled())
                 points.Add(point);
         }
         return points;

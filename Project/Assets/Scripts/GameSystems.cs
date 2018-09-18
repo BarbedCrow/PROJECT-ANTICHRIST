@@ -13,13 +13,13 @@ public class GameSystems : MonoBehaviour
 
         foreach (PoolBase pool in pools)
         {
-            if (pool.uid == "PoolEnemies")
+            if (pool.uid == GlobalConstants.UID_POOL_ENEMIES)
             {
                 poolEnemies = pool;
                 poolEnemies.Init();
             }
 
-            if (pool.uid == "PoolProjectiles")
+            if (pool.uid == GlobalConstants.UID_POOL_PROJECTILES)
             {
                 poolProjectiles = pool;
                 poolProjectiles.Init();
