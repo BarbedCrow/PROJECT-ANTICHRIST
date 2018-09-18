@@ -7,7 +7,6 @@ public class WeaponBase : MonoBehaviour
 {
     public string uid;
     public float damage;
-    public float projectileSpeed;
 
 
     public virtual void Init()

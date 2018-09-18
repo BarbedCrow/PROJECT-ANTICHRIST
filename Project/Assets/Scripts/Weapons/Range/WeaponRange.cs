@@ -9,6 +9,7 @@ public class WeaponRange : WeaponBase
 {
     public float timeBetweenShots;
     public float timeForReload;
+    public float projectileSpeed;
 
     [HideInInspector]
     public UnityEvent OnShootEmpty = new UnityEvent();
