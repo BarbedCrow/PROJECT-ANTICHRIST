@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 8
+  serializedVersion: 9
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -38,7 +38,8 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -54,11 +55,10 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 9
+    serializedVersion: 10
     m_Resolution: 2
     m_BakeResolution: 40
-    m_TextureWidth: 1024
-    m_TextureHeight: 1024
+    m_AtlasSize: 1024
     m_AO: 0
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
@@ -88,6 +88,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -292,11 +293,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114500516177146734, guid: 884116aa1931abc43874a363c86a3d53,
-        type: 2}
-      propertyPath: descs.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 4558695183220542, guid: 884116aa1931abc43874a363c86a3d53, type: 2}
       propertyPath: m_LocalPosition.x
       value: -5.8500004
@@ -329,91 +325,24 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114709300522713642, guid: 884116aa1931abc43874a363c86a3d53,
-        type: 2}
-      propertyPath: gameAreas.Array.data[0]
-      value: 
-      objectReference: {fileID: 729275074}
     - target: {fileID: 114500516177146734, guid: 884116aa1931abc43874a363c86a3d53,
         type: 2}
       propertyPath: poolFolder
       value: 
       objectReference: {fileID: 2081854088}
-    - target: {fileID: 114500516177146734, guid: 884116aa1931abc43874a363c86a3d53,
+    - target: {fileID: 114709300522713642, guid: 884116aa1931abc43874a363c86a3d53,
         type: 2}
-      propertyPath: descs.Array.data[1].initialCount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114500516177146734, guid: 884116aa1931abc43874a363c86a3d53,
-        type: 2}
-      propertyPath: descs.Array.data[0].gameObject
+      propertyPath: gameAreas.Array.data[0]
       value: 
-      objectReference: {fileID: 1888000578819430, guid: 360e9b20756bfdf44b119cb0bf844782,
+      objectReference: {fileID: 729275074}
+    - target: {fileID: 114409032478150968, guid: 884116aa1931abc43874a363c86a3d53,
         type: 2}
-    - target: {fileID: 114500516177146734, guid: 884116aa1931abc43874a363c86a3d53,
-        type: 2}
-      propertyPath: descs.Array.data[0].initialCount
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114500516177146734, guid: 884116aa1931abc43874a363c86a3d53,
-        type: 2}
-      propertyPath: descs.Array.data[1].gameObject
+      propertyPath: poolFolder
       value: 
-      objectReference: {fileID: 1888000578819430, guid: a2e67d1887a95434cb5d339871d5946f,
-        type: 2}
-    - target: {fileID: 114500516177146734, guid: 884116aa1931abc43874a363c86a3d53,
-        type: 2}
-      propertyPath: descs.Array.data[2].gameObject
-      value: 
-      objectReference: {fileID: 1888000578819430, guid: 0d4650551a33b6b48acb29b67a08f6c7,
-        type: 2}
-    - target: {fileID: 114500516177146734, guid: 884116aa1931abc43874a363c86a3d53,
-        type: 2}
-      propertyPath: descs.Array.data[3].gameObject
-      value: 
-      objectReference: {fileID: 1888000578819430, guid: b926470e4bb4cc540b0653802976cf74,
-        type: 2}
-    - target: {fileID: 114500516177146734, guid: 884116aa1931abc43874a363c86a3d53,
-        type: 2}
-      propertyPath: descs.Array.data[3].initialCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114500516177146734, guid: 884116aa1931abc43874a363c86a3d53,
-        type: 2}
-      propertyPath: maxCapacity
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 114500516177146734, guid: 884116aa1931abc43874a363c86a3d53,
-        type: 2}
-      propertyPath: uid
-      value: PoolEnemies
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2081854088}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 884116aa1931abc43874a363c86a3d53, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &938459265 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1846460767787248, guid: 884116aa1931abc43874a363c86a3d53,
-    type: 2}
-  m_PrefabInternal: {fileID: 938459264}
---- !u!114 &938459266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 938459265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5c1002cdf28f8744977ec51a82775e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uid: PoolProjectiles
-  descs:
-  - gameObject: {fileID: 1894509351135182, guid: b7c561d0c92e93f449f63f3c5cc76f58,
-      type: 2}
-    initialCount: 1000
-  maxCapacity: 1000
-  poolFolder: {fileID: 2081854088}
 --- !u!1 &1270000917
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,6 +375,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 54617c44dd604124ea586f3081569b2e, type: 2}
   m_StaticBatchInfo:
@@ -476,9 +406,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Convex: 0
-  m_InflateMesh: 0
+  m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &1270000920
@@ -663,7 +593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f76f73e0d38528c4da3152d9345f4c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnOpenSpawn:
+  OnEnabled:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -726,7 +656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f76f73e0d38528c4da3152d9345f4c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnOpenSpawn:
+  OnEnabled:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -789,7 +719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f76f73e0d38528c4da3152d9345f4c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnOpenSpawn:
+  OnEnabled:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -852,7 +782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f76f73e0d38528c4da3152d9345f4c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnOpenSpawn:
+  OnEnabled:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -943,7 +873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f76f73e0d38528c4da3152d9345f4c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnOpenSpawn:
+  OnEnabled:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,

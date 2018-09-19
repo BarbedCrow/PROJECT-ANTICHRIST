@@ -5,16 +5,22 @@ using UnityEngine;
 public class WeaponUserMelee : WeaponUserBase
 {
 
-    public WeaponMelee weapon;
+    public WeaponSpawnDesc weaponDesc;
 
     public override void Init()
     {
         base.Init();
-        if (weapon == null)
+
+        if (weaponDesc.prefab == null)
         {
             return;
         }
-            weapon.Init();
+
+        var weaponObj = Instantiate(weaponDesc.prefab, weaponDesc.transform.position, weaponDesc.transform.rotation);
+        
+        weapon = weaponObj.GetComponent<WeaponMelee>();
+        weapon.Init();
+        weapon.transform.SetParent(weaponDesc.transform);
     }
 
     public override void Terminate()
@@ -24,14 +30,16 @@ public class WeaponUserMelee : WeaponUserBase
         base.Terminate();
     }
 
-    #region private
-
-    protected override void RequestAttack()
+    public override void RequestAttack()
     {
         base.RequestAttack();
 
         weapon.Attack();
     }
+
+    #region private
+
+    WeaponMelee weapon;
 
     #endregion
 

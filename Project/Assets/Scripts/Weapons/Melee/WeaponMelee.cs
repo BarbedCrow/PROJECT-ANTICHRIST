@@ -25,6 +25,7 @@ public class WeaponMelee : WeaponBase
 
     public void Attack()
     {
+        UnsubscribeFromCollisionDetector(); // temp while animations won't be added
         SubscribeOnCollisionDetector();
     }
 
