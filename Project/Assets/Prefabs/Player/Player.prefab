@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 114582984440666676}
   - component: {fileID: 114590483324340114}
   - component: {fileID: 114710090126550736}
-  - component: {fileID: 54562572079225594}
+  - component: {fileID: 54001405324695166}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -163,7 +163,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1967835695666956}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.793681, y: 1, z: 4.8991895}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4980827624481908}
@@ -211,7 +211,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 92f83e09a579478458b61cd951da62d8, type: 2}
   m_StaticBatchInfo:
@@ -246,7 +245,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 54617c44dd604124ea586f3081569b2e, type: 2}
   m_StaticBatchInfo:
@@ -282,7 +280,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1967835695666956}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54562572079225594
+--- !u!54 &54001405324695166
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -399,7 +397,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c2003bf08480144aa8275c81d831ec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 0}
   health: 20
 --- !u!114 &114983515635069540
 MonoBehaviour:

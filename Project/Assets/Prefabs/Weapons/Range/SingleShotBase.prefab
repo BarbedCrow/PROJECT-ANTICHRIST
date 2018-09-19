@@ -160,7 +160,7 @@ MonoBehaviour:
   damage: 50
   timeBetweenShots: 0.2
   timeForReload: 2
-  projectileSpeed: 20
+  projectileSpeed: 30
   OnShootEmpty:
     m_PersistentCalls:
       m_Calls: []
