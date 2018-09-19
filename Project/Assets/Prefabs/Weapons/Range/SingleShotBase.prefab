@@ -88,6 +88,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 54617c44dd604124ea586f3081569b2e, type: 2}
   m_StaticBatchInfo:
@@ -159,6 +160,7 @@ MonoBehaviour:
   damage: 50
   timeBetweenShots: 0.2
   timeForReload: 2
+  projectileSpeed: 20
   OnShootEmpty:
     m_PersistentCalls:
       m_Calls: []
