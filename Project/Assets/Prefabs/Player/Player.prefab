@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 114582984440666676}
   - component: {fileID: 114590483324340114}
   - component: {fileID: 114710090126550736}
-  - component: {fileID: 54562572079225594}
+  - component: {fileID: 54001405324695166}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -280,7 +280,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1967835695666956}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54562572079225594
+--- !u!54 &54001405324695166
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
