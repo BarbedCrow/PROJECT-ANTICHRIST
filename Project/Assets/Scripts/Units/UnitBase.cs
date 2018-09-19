@@ -17,11 +17,13 @@ public class UnitBase : MonoBehaviour
     {
         UnsubscribeComponents();
         TerminateComponents();
+        Destroy(hpText);
         Destroy(gameObject);
     }
 
     #region private
 
+    TextMesh hpText;
     protected DamagableBase propDamagable;
     DamagerBase propDamager;
 
@@ -31,6 +33,9 @@ public class UnitBase : MonoBehaviour
     {
         propDamagable = GetComponent<DamagableBase>();
         propDamagable.Init();
+        hpText = propDamagable.GetHPText();
+        hpText.gameObject.SetActive(true);
+
         propDamager = GetComponent<DamagerBase>();
         propDamager.Init();
     }
