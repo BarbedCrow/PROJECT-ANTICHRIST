@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class AiMovement : MonoBehaviour
 {
 
-
+    public float maxDistToPlayer = 1f;
 
     public void Init()
     {
@@ -44,7 +44,20 @@ public class AiMovement : MonoBehaviour
     {
         for(; ; )
         {
+            var dist = Vector3.Distance(playerTransform.position, transform.position);
+            if (dist <= maxDistToPlayer && !navMeshAgent.isStopped)
+            {
+                navMeshAgent.isStopped = true;
+                navMeshAgent.SetDestination(transform.position);
+                yield return new WaitForFixedUpdate();
+            }
+
             navMeshAgent.SetDestination(playerTransform.position);
+            if (navMeshAgent.isStopped)
+            {
+                navMeshAgent.isStopped = false;
+            }
+
             yield return new WaitForFixedUpdate();
         }
     }

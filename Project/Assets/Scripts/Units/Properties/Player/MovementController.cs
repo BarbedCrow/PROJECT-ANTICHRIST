@@ -10,6 +10,8 @@ public class MovementController : MonoBehaviour {
 
     public void Init()
     {
+        propCharController = GetComponent<CharacterController>();
+
         playerCamera = GameObject.FindGameObjectWithTag(PLAYER_CAMERA).GetComponent<Camera>();
         currentSpeed = walkSpeed;
         StartCoroutine(MOVEMENT_UPDATE_COROUTINE); // Do it on start when all props are ready?
@@ -29,6 +31,7 @@ public class MovementController : MonoBehaviour {
 
     Camera playerCamera;
     float currentSpeed;
+    CharacterController propCharController;
 
     IEnumerator MovementUpdate()
     {
@@ -62,7 +65,7 @@ public class MovementController : MonoBehaviour {
 
     void Move(Vector3 velocity)
     {
-        transform.position = transform.position + velocity * currentSpeed;
+        propCharController.Move(velocity * currentSpeed);
     }
 
     #endregion

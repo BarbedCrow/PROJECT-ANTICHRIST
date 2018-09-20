@@ -77,7 +77,6 @@ GameObject:
   - component: {fileID: 114088834093444674}
   - component: {fileID: 114818807018556962}
   - component: {fileID: 195285551767479014}
-  - component: {fileID: 114673164043932356}
   - component: {fileID: 222824114233034810}
   - component: {fileID: 54354099961993484}
   - component: {fileID: 114175910011975924}
@@ -200,6 +199,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: c535bb0081fb35f4c84a81b98a7c80ad, type: 2}
   m_StaticBatchInfo:
@@ -234,6 +234,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 54617c44dd604124ea586f3081569b2e, type: 2}
   m_StaticBatchInfo:
@@ -282,7 +283,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &65301605741657916
 BoxCollider:
@@ -336,6 +337,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf61f83155b35f948b5cbfc9557d5b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoredTags:
+  - Enemy3
   attackInputUid: 0
   weaponDesc:
     transform: {fileID: 4895250505809378}
@@ -372,18 +375,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDistToAttack: 1
   timeBetweenAttack: 2
---- !u!114 &114673164043932356
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1888000578819430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f902a109b9ea2044f9cbf9ce28019699, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ignoredTags: []
 --- !u!114 &114785965934183240
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -429,6 +420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e964f2ca18424d4383744dd3b0a0954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxDistToPlayer: 1
 --- !u!136 &136614814718954286
 CapsuleCollider:
   m_ObjectHideFlags: 1

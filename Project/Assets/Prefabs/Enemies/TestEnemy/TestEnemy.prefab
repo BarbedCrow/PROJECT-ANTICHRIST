@@ -78,7 +78,6 @@ GameObject:
   - component: {fileID: 114088834093444674}
   - component: {fileID: 114818807018556962}
   - component: {fileID: 195285551767479014}
-  - component: {fileID: 114673164043932356}
   - component: {fileID: 114903539600110178}
   - component: {fileID: 222824114233034810}
   - component: {fileID: 54354099961993484}
@@ -126,7 +125,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1981816084578792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.451}
+  m_LocalPosition: {x: 0, y: 0, z: 0.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4895250505809378}
@@ -200,6 +199,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 745761e221c42a24499e71c3281d0f84, type: 2}
   m_StaticBatchInfo:
@@ -234,6 +234,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 54617c44dd604124ea586f3081569b2e, type: 2}
   m_StaticBatchInfo:
@@ -276,13 +277,13 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1888000578819430}
   serializedVersion: 2
-  m_Mass: 0.0000001
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &65301605741657916
 BoxCollider:
@@ -336,9 +337,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf61f83155b35f948b5cbfc9557d5b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoredTags:
+  - Enemy
   attackInputUid: 0
   weaponDesc:
-    transform: {fileID: 4895250505809378}
+    transform: {fileID: 4138086222199458}
     prefab: {fileID: 1490721152349794, guid: 1cf3af2b5703f09488bcb0f0e43176fa, type: 2}
 --- !u!114 &114370812271043578
 MonoBehaviour:
@@ -359,18 +362,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114673164043932356
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1888000578819430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f902a109b9ea2044f9cbf9ce28019699, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ignoredTags: []
 --- !u!114 &114785965934183240
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -416,6 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e964f2ca18424d4383744dd3b0a0954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxDistToPlayer: 1.3
 --- !u!114 &114903539600110178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -427,7 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b70b39daacbe56442aa65de3a6d772c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistToAttack: 1
+  maxDistToAttack: 3
   timeBetweenAttack: 2
 --- !u!136 &136614814718954286
 CapsuleCollider:
@@ -476,7 +468,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1888000578819430}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -3.1875563}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4669901824632258}
@@ -486,6 +478,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 2.8426638, y: 1}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}

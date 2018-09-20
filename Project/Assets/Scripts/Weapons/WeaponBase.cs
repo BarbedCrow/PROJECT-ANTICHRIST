@@ -8,7 +8,6 @@ public class WeaponBase : MonoBehaviour
     public string uid;
     public float damage;
 
-
     public virtual void Init()
     {
         propDamager = GetComponent<DamagerBase>();
@@ -20,8 +19,14 @@ public class WeaponBase : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void AddIgnoredTags(List<string> ignoredTags)
+    {
+        this.ignoredTags = ignoredTags;
+    }
+
     #region private
 
+    protected List<string> ignoredTags;
     protected DamagerBase propDamager;
 
     #endregion

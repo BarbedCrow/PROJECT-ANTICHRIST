@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 114582984440666676}
   - component: {fileID: 114590483324340114}
   - component: {fileID: 114710090126550736}
-  - component: {fileID: 54001405324695166}
+  - component: {fileID: 143584839577681360}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -211,6 +211,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 92f83e09a579478458b61cd951da62d8, type: 2}
   m_StaticBatchInfo:
@@ -245,6 +246,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 54617c44dd604124ea586f3081569b2e, type: 2}
   m_StaticBatchInfo:
@@ -280,21 +282,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1967835695666956}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54001405324695166
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1967835695666956}
-  serializedVersion: 2
-  m_Mass: 0.0000001
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!65 &65909294152462866
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -302,7 +289,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1161346314463684}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -330,6 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf61f83155b35f948b5cbfc9557d5b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoredTags: []
   attackInputUid: 1
   weaponDesc:
     transform: {fileID: 0}
@@ -345,6 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38105cc6810daa4cb4a1597e01fcf03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoredTags: []
   attackInputUid: 1
   swapInputUids: 030000000400000005000000
   weaponDescs:
@@ -421,4 +410,21 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!143 &143584839577681360
+CharacterController:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1967835695666956}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}

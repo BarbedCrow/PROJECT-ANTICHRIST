@@ -56,18 +56,18 @@ public class ProjectileBase : MonoBehaviour {
         collisionDetector.OnCollideWith.RemoveListener(HandleOnCollideWith);
     }
 
-    void HandleOnCollideWith(Collision collision)
+    void HandleOnCollideWith(Collider other)
     {
-        var propDamagable = collision.gameObject.GetComponent<DamagableBase>();
+        var propDamagable = other.gameObject.GetComponent<DamagableBase>();
         if (propDamagable != null)
         {
-            DoDamage(collision, propDamagable);
+            DoDamage(other, propDamagable);
         }
 
         pool.Release(gameObject);
     }
 
-    void DoDamage(Collision collision, DamagableBase propDamagable)
+    void DoDamage(Collider other, DamagableBase propDamagable)
     {
         UnsubscribeFromCollisionDetector();
         var damageInfo = new DamageInfo();
