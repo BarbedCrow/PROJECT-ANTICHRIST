@@ -11,6 +11,8 @@ public class WeaponMelee : WeaponBase
         base.Init();
 
         collisionDetector = GetComponent<CollisionDetector>();
+        collisionDetector.AddIgnoredTags(ignoredTags);
+
         propDamager = GetComponent<DamagerBase>();
         propDamager.Init();
     }
@@ -43,16 +45,16 @@ public class WeaponMelee : WeaponBase
         collisionDetector.OnCollideWith.RemoveListener(HandleOnCollideWith);
     }
 
-    void HandleOnCollideWith(Collision collision)
+    void HandleOnCollideWith(Collider other)
     {
-        var propDamagable = collision.gameObject.GetComponent<DamagableBase>();
+        var propDamagable = other.gameObject.GetComponent<DamagableBase>();
         if (propDamagable != null)
         {
-            DoDamage(collision, propDamagable);
+            DoDamage(other, propDamagable);
         }
     }
 
-    void DoDamage(Collision collision, DamagableBase propDamagable)
+    void DoDamage(Collider other, DamagableBase propDamagable)
     {
         UnsubscribeFromCollisionDetector();
         var damageInfo = new DamageInfo();

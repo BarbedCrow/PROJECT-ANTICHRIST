@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponUserBase : MonoBehaviour
 {
 
+    public List<string> ignoredTags;
     public InputUid attackInputUid;
 
 	public virtual void Init()

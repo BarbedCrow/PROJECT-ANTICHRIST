@@ -19,6 +19,7 @@ public class WeaponUserMelee : WeaponUserBase
         var weaponObj = Instantiate(weaponDesc.prefab, weaponDesc.transform.position, weaponDesc.transform.rotation);
         
         weapon = weaponObj.GetComponent<WeaponMelee>();
+        weapon.AddIgnoredTags(ignoredTags);
         weapon.Init();
         weapon.transform.SetParent(weaponDesc.transform);
     }
