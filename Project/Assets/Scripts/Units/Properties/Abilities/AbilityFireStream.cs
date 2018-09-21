@@ -25,7 +25,7 @@ public class AbilityFireStream : AbilityAttack
         {
             var fireFX = (GameObject)Instantiate(particlesPrefab, transform.position, transform.rotation);
             dmgDlr = fireFX.GetComponent<AbilityDamageDealer>();
-            dmgDlr.Init(propDamager, damage);
+            dmgDlr.Init(propDamager, damage, ignoredTags);
             fireFX.transform.SetParent(transform);
 
             StopSfx(fireFX);

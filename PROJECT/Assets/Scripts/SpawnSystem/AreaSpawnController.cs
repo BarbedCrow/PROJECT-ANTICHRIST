@@ -78,12 +78,11 @@ public class AreaSpawnController : MonoBehaviour
 
         foreach (EnemyDesc desc in enemyDescs)
         {
-            if (enemies.Count == countOfPoint)
-                return enemies;
-
             var countOfEnemy = desc.count;
             for (int idx = 0; idx < countOfEnemy; idx ++)
             {
+                if (enemies.Count == countOfPoint)
+                    return enemies;
                 if (desc.cost > currentSpawnCurrency)
                     return enemies;
                 enemies.Add(desc.enemyType);
@@ -103,6 +102,7 @@ public class AreaSpawnController : MonoBehaviour
         if (countOfEnemies == 0)
         {
             OnAllEnemiesDeath.Invoke();
+            gameArea.Terminate();
         }
     }
 

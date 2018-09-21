@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 114590483324340114}
   - component: {fileID: 114710090126550736}
   - component: {fileID: 143584839577681360}
+  - component: {fileID: 54689720027442928}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -211,7 +212,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 92f83e09a579478458b61cd951da62d8, type: 2}
   m_StaticBatchInfo:
@@ -246,7 +246,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 54617c44dd604124ea586f3081569b2e, type: 2}
   m_StaticBatchInfo:
@@ -282,6 +281,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1967835695666956}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &54689720027442928
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1967835695666956}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!65 &65909294152462866
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -333,7 +347,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38105cc6810daa4cb4a1597e01fcf03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoredTags: []
+  ignoredTags:
+  - Bullet
+  - Player
+  - WeaponMelee
+  - GameArea
   attackInputUid: 1
   swapInputUids: 030000000400000005000000
   weaponDescs:
@@ -361,6 +379,8 @@ MonoBehaviour:
   - ability: {fileID: 114133346385797206, guid: 007826a8c8624cf4d894722f07da0ee1,
       type: 2}
     spawnPoint: {fileID: 4975869709213542}
+  ignoredTags:
+  - Player
 --- !u!114 &114886277207438918
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -386,7 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c2003bf08480144aa8275c81d831ec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  health: 100
 --- !u!114 &114983515635069540
 MonoBehaviour:
   m_ObjectHideFlags: 1

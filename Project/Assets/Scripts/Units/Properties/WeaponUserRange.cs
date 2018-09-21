@@ -19,7 +19,9 @@ public class WeaponUserRange : WeaponUserBase
             var weapon = Instantiate(desc.prefab, desc.transform.position, desc.transform.rotation);
             var weaponLogic = weapon.GetComponent<WeaponRange>();
             weapon.transform.SetParent(desc.transform);
+
             weaponLogic.Init(pool);
+            weaponLogic.AddIgnoredTags(ignoredTags);
             weapons.Add(weaponLogic);
         }
 

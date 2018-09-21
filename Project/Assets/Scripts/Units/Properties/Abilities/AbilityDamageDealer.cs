@@ -5,10 +5,12 @@ using UnityEngine;
 public class AbilityDamageDealer : MonoBehaviour
 {
 
-    public virtual void Init(DamagerBase propDamager, float damage)
+    public virtual void Init(DamagerBase propDamager, float damage, List<string> ignoredTags)
     {
         this.damage = damage;
         this.propDamager = propDamager;
+        this.ignoredTags = ignoredTags;
+        propDamager.Init();
         partSys = GetComponent<ParticleSystem>();
     }
 
@@ -19,18 +21,24 @@ public class AbilityDamageDealer : MonoBehaviour
 
     #region private
 
+    List<string> ignoredTags;
     float damage;
     ParticleSystem partSys;
     DamagerBase propDamager;
 
     void OnParticleCollision(GameObject other)
     {
-            Debug.Log(other.ToString());
-            var propDamagable = other.gameObject.GetComponent<DamagableBase>();
-            if (propDamagable != null)
-            {
-                DoDamage(propDamagable);
-            }
+        if (ignoredTags != null && ignoredTags.Contains(other.tag))
+        {
+            return;
+        }
+
+        Debug.Log(other.ToString());
+        var propDamagable = other.gameObject.GetComponent<DamagableBase>();
+        if (propDamagable != null)
+        {
+            DoDamage(propDamagable);
+        }
     }
 
     void DoDamage(DamagableBase propDamagable)

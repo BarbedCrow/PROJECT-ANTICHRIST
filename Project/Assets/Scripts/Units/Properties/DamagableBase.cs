@@ -46,7 +46,6 @@ public class DamagableBase : MonoBehaviour
 
         if (currentHp <= 0)
         {
-            Destroy(hpText);
             Die(info);
         }
 
@@ -72,6 +71,7 @@ public class DamagableBase : MonoBehaviour
 
     void Die(DamageInfo info)
     {
+        Destroy(hpText.gameObject);
         OnDie.Invoke(info);
     }
 

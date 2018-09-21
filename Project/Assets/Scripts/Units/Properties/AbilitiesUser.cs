@@ -5,6 +5,7 @@ using UnityEngine;
 public class AbilitiesUser : MonoBehaviour
 {
     public List<AbilityDesc> abilityDescs;
+    public List<string> ignoredTags;
 
     public virtual void Init()
     {
@@ -13,7 +14,7 @@ public class AbilitiesUser : MonoBehaviour
             var ability = Instantiate(desc.ability, desc.spawnPoint.position, desc.spawnPoint.rotation);
             ability.transform.SetParent(transform);
             var abilityLogic = ability.GetComponent<AbilityBase>();
-            abilityLogic.Init(inputsLibrary);
+            abilityLogic.Init(inputsLibrary, ignoredTags);
             abilities.Add(abilityLogic);
         }
     }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class WeaponUserMelee : WeaponUserBase
 {
-
     public WeaponSpawnDesc weaponDesc;
 
     public override void Init()

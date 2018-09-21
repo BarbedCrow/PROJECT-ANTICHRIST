@@ -94,7 +94,7 @@ public class WeaponRange : WeaponBase
     #region private
 
     protected const int NO_BULLETS = 0;
-
+    
     protected PoolBase pool;
     protected bool isShooting = false;
     protected bool isReloading = false;
@@ -113,7 +113,7 @@ public class WeaponRange : WeaponBase
         projectile.transform.SetPositionAndRotation(projectileSpawnInfo.projectileSpawnPoint.position, projectileSpawnInfo.projectileSpawnPoint.rotation);
 
         var projectileLogic = projectile.GetComponent<ProjectileBase>();
-        projectileLogic.Init(propDamager, pool, damage, projectileSpeed);
+        projectileLogic.Init(propDamager, pool, damage, projectileSpeed,ignoredTags);
     }
 
     protected virtual void HandleOnReloaded()

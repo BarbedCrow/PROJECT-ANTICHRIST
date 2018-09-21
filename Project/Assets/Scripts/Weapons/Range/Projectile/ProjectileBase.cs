@@ -9,7 +9,7 @@ public class ProjectileBase : MonoBehaviour {
 
     public float lifetime = 3;
 
-    public virtual void Init(DamagerBase propDamager, PoolBase pool, float damage, float speed)
+    public virtual void Init(DamagerBase propDamager, PoolBase pool, float damage, float speed, List<string> ignoredTags)
     {
         this.speed = speed; 
         this.pool = pool;
@@ -22,6 +22,7 @@ public class ProjectileBase : MonoBehaviour {
         velocity = transform.forward;
         this.propDamager = propDamager;
         collisionDetector = GetComponent<CollisionDetector>();
+        collisionDetector.AddIgnoredTags(ignoredTags);
         SubscribeOnCollisionDetector();
         StartCoroutine(COROUTINE_MOVE);
     }
@@ -38,6 +39,7 @@ public class ProjectileBase : MonoBehaviour {
 
     const string COROUTINE_MOVE = "Move";
 
+    List<string> ignoredTags;
     float speed = 15;
     PoolBase pool;
     Timer timer;
