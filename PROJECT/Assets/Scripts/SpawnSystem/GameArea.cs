@@ -12,6 +12,7 @@ public class GameArea : MonoBehaviour
     public UnityEvent PlayerEntered = new UnityEvent();
 
     public SpawnManager spawnManager;
+    public List<GameObject> objForDelOnClearArea;
 
     public void Init(SpawnManager spawnManager)
     {
@@ -26,6 +27,10 @@ public class GameArea : MonoBehaviour
     public void Terminate()
     {
         Destroy(gameObject);
+        foreach(GameObject gO in objForDelOnClearArea)
+        {
+            Destroy(gO);
+        }
     }
     
     #region private

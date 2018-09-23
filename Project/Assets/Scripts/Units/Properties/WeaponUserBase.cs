@@ -65,9 +65,7 @@ public class WeaponUserBase : MonoBehaviour
     InputHold attackInput;
     protected InputsLibrary inputsLibrary;
     bool isEnabled = false;
-
     
-
     #endregion
 
 }

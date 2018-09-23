@@ -6,9 +6,8 @@ public class AbilityBase : MonoBehaviour
 {
     public GameObject particlesPrefab;
     public InputUid activateInputUid;
-    //public 
 
-    public virtual void Init(InputsLibrary inputsLibrary)
+    public virtual void Init(InputsLibrary inputsLibrary, List<string> ignoredTags)
     {
         activateInput = (InputTap)inputsLibrary.GetInput(activateInputUid);
         activateInput.OnUse.AddListener(Activate);

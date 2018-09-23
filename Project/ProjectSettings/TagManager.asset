@@ -11,6 +11,8 @@ TagManager:
   - Enemy3
   - EnemyBoss
   - HPText
+  - WeaponMelee
+  - GameArea
   layers:
   - Default
   - TransparentFX
