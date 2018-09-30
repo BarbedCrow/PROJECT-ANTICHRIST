@@ -2,23 +2,60 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : UnitBase
 {
 
-    public void Init()
+    public override void Setup(params MonoBehaviour[] args)
     {
+        base.Setup(args);
 
+        foreach(MonoBehaviour arg in args)
+        {
+            if(inputsLibrary == null && arg is InputsLibrary)
+            {
+                inputsLibrary = (InputsLibrary)arg;
+            }
+
+            if (projectilesPool == null && arg is PoolBase)
+            {
+                projectilesPool = (PoolBase)arg;
+            }
+        }
     }
 
-    public void Terminate()
+    public override void Enable()
     {
-        Destroy(gameObject);
+        base.Enable();
+
+        currentWeaponUser = propWeaponUsers[0];
+        currentWeaponUser.Enable();
+        propMovement.Enable();
+        
     }
-	
+
+    #region private
+
+    InputsLibrary inputsLibrary;
+    PoolBase projectilesPool;
+    PropWeaponUserBase currentWeaponUser;
+
+    protected override void SetupComponents()
+    {
+        base.SetupComponents();
+
+        foreach(PropWeaponUserBase user in propWeaponUsers)
+        {
+            user.Setup(inputsLibrary, projectilesPool);
+        }
+    }
+
+    #endregion
+
 }
 
+[System.Serializable]
 public class PlayerSpawnInfo
 {
-    Player player;
-    Transform spawnTransform;
+    public Player player;
+    public Transform spawnTransform;
 }
