@@ -38,6 +38,11 @@ public class UnitBase : MonoBehaviour
 
     }
 
+    public PropDamagable GetDamagable()
+    {
+        return damagable;
+    }
+
     #region private
 
     protected PropDamagable damagable;

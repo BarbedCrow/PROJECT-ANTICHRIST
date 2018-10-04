@@ -9,6 +9,7 @@ public class GameMain : MonoBehaviour
     [SerializeField] PlayerSpawnInfo playerSpawnInfo;
     [SerializeField] GameSystems gameSystems;
     [SerializeField] List<GameArea> gameAreas;
+    [SerializeField] HUDManager hudManager;
 
     #region private
 
@@ -28,6 +29,8 @@ public class GameMain : MonoBehaviour
         player.Init();
 
         player.Enable();
+
+        hudManager.Init(player);
     }
 
     private void OnDestroy()
