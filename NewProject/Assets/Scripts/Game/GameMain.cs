@@ -9,7 +9,6 @@ public class GameMain : MonoBehaviour
     [SerializeField] PlayerSpawnInfo playerSpawnInfo;
     [SerializeField] GameSystems gameSystems;
     [SerializeField] List<GameArea> gameAreas;
-    [SerializeField] HUDManager hudManager;
 
     #region private
 
@@ -17,8 +16,6 @@ public class GameMain : MonoBehaviour
 
     private void Start()
     {
-        InitComponents();
-
         foreach(var area in gameAreas)
         {
             area.Init(gameSystems.GetEnemiesPool());
@@ -29,8 +26,8 @@ public class GameMain : MonoBehaviour
         player.Init();
 
         player.Enable();
-
-        hudManager.Init(player);
+        
+        InitComponents();
     }
 
     private void OnDestroy()

@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class HUDBaseController : MonoBehaviour
+public class UIBaseController : MonoBehaviour
 {
-    public virtual void Init(Transform attachPoint)
-    {
+    [SerializeField] UIBaseView uiView;
 
-    }
-
-    public virtual void Init(PropDamagable damagablePlayer, Vector3 attachPoint, Transform folder)
+    public virtual void Init()
     {
 
     }

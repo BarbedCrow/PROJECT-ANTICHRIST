@@ -5,10 +5,9 @@ using UnityEngine.Events;
 
 public class HUDHealthController : HUDBaseController
 {
-    public override void Init(PropDamagable damagablePlayer, Vector3 attachPoint, Transform folder)
+    public override void Init()
     {
-        var controllerElement = gameObject.AddComponent<HPControllerElement>();
-        controllerElement.Init(damagablePlayer, attachPoint, folder);
+
     }
 
     #region private
