@@ -8,7 +8,7 @@ public class UIHealthController : UIBaseController
     public void Init()
     {
         damagablePlayer = GameObject.FindWithTag(Tags.PLAYER).GetComponent<PropDamagable>();
-        hpView.Init(new UIHealthViewData(damagablePlayer.GetHealth());
+        hpView.Init(new UIHealthViewData(damagablePlayer.GetHealth()));
     }
 
     #region private

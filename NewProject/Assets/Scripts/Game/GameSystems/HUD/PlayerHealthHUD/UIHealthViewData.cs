@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class UIHealthViewData : MonoBehaviour
 {
-    public void Init(float HP)
+    public UIHealthViewData(float HP)
     {
         healthPoints = HP;
     }
