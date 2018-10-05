@@ -24,7 +24,7 @@ public class HUDBaseController : MonoBehaviour
 
     #region private
 
-    void Terminate()
+    protected void Terminate()
     {
 
     }

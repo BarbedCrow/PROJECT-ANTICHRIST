@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class UIHealthViewData : MonoBehaviour
+public class UIHealthViewData : UIBaseViewData
 {
-    public UIHealthViewData(float HP)
+    public void Init(float HP)
     {
         healthPoints = HP;
     }
@@ -18,11 +18,6 @@ public class UIHealthViewData : MonoBehaviour
     #region private
 
     float healthPoints;
-
-    void Terminate()
-    {
-
-    }
 
     #endregion
 

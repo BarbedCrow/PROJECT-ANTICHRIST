@@ -5,20 +5,25 @@ using UnityEngine.Events;
 
 public class UIHealthController : UIBaseController
 {
-    public void Init()
+    public override void Init()
     {
+        base.Init();
         damagablePlayer = GameObject.FindWithTag(Tags.PLAYER).GetComponent<PropDamagable>();
-        hpView.Init(new UIHealthViewData(damagablePlayer.GetHealth()));
+        UIHealthViewData data = new UIHealthViewData();
+        data.Init(damagablePlayer.GetHealth());
+        uiView.Init(data);
+        damagablePlayer.OnGotDamage.AddListener(InitialUpdate);
     }
 
     #region private
 
     PropDamagable damagablePlayer;
-    UIHealthView hpView;
 
-    void Terminate()
+    void InitialUpdate(DamageInfo damageInfo)
     {
-
+        UIHealthViewData data = new UIHealthViewData();
+        data.Init(damagablePlayer.GetHealth());
+        uiView.UpdateUI(data);
     }
 
     #endregion

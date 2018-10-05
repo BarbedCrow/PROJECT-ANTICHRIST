@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class UIBaseController : MonoBehaviour
 {
-    [SerializeField] UIBaseView uiView;
+    public UIBaseView uiView;
 
     public virtual void Init()
     {
@@ -24,7 +24,7 @@ public class UIBaseController : MonoBehaviour
 
     #region private
 
-    void Terminate()
+    protected void Terminate()
     {
 
     }

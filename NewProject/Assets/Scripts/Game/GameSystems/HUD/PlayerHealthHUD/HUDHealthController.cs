@@ -7,15 +7,10 @@ public class HUDHealthController : HUDBaseController
 {
     public override void Init()
     {
-
+        base.Init();
     }
 
     #region private
-
-    void Terminate()
-    {
-
-    }
 
     #endregion
 

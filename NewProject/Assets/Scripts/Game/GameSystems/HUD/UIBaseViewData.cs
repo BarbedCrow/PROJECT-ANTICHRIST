@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class IUBaseViewData : MonoBehaviour
+public class UIBaseViewData
 {
     public virtual void Init()
     {
@@ -12,7 +12,7 @@ public class IUBaseViewData : MonoBehaviour
 
     #region private
 
-    void Terminate()
+    protected void Terminate()
     {
 
     }
