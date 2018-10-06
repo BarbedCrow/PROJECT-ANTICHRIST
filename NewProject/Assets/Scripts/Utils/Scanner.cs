@@ -17,6 +17,7 @@ public class Scanner : MonoBehaviour
 
     public void Init(Transform owner, string tagToLook)
     {
+        this.owner = owner;
         this.tagToLook = tagToLook;
     }
 

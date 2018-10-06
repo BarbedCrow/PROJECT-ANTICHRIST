@@ -17,7 +17,7 @@ public class PropBase : MonoBehaviour
 
     public virtual void Terminate()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     public virtual void Enable()

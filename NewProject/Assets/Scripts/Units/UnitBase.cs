@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class UnitBase : MonoBehaviour
 {
-
+    [HideInInspector]
     public EventOnDie OnDie = new EventOnDie();
 
-    public PropMovement propMovement;
-    public List<PropWeaponUserBase> propWeaponUsers;
+    [SerializeField] protected PropAnimMovementController propAnimMovementController;
+    [SerializeField] protected PropMovement propMovement;
+    [SerializeField] protected List<PropWeaponUserBase> propWeaponUsers;
 
     public virtual void Setup(params MonoBehaviour[] args)
     {
@@ -50,6 +51,7 @@ public class UnitBase : MonoBehaviour
     protected virtual void InitComponents()
     {
         damagable = GetComponent<PropDamagable>();
+        damagable.OnDie.AddListener(Die);
         damagable.Init(transform);
 
         propMovement.Init(transform);
@@ -57,16 +59,25 @@ public class UnitBase : MonoBehaviour
         {
             user.Init(transform);
         }
+
+        propAnimMovementController?.Init(transform);
     }
 
     protected virtual void TerminateComponents()
     {
+        damagable.OnDie.RemoveListener(Die);
+        propAnimMovementController?.Terminate();
         foreach (PropWeaponUserBase user in propWeaponUsers)
         {
             user.Terminate();
         }
 
         propMovement.Terminate();
+    }
+
+    protected virtual void Die(DamageInfo info)
+    {
+
     }
 
     #endregion

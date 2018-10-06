@@ -5,7 +5,8 @@ using UnityEngine;
 public class PropMovementPlayer : PropMovement
 {
 
-    public float speed;
+    //[SerializeField] CharacterController charControler;
+    [SerializeField] float speed;
 
     public override void Init(Transform owner)
     {
@@ -13,6 +14,8 @@ public class PropMovementPlayer : PropMovement
 
         currentSpeed = speed;
         gameCamera = GameObject.FindGameObjectWithTag(GAME_CAMERA).GetComponent<Camera>();
+
+        body = owner.GetComponent<Rigidbody>();
     }
 
     public override void Enable()
@@ -36,6 +39,7 @@ public class PropMovementPlayer : PropMovement
     const string VERTICAL_AXIS = "Vertical";
     const string MOVEMENT_UPDATE_COROUTINE = "MovementUpdate";
 
+    Rigidbody body;
     Camera gameCamera;
     float currentSpeed;
 
@@ -45,6 +49,9 @@ public class PropMovementPlayer : PropMovement
         {
             CheckInputs();
             UpdateRotation();
+
+            body.velocity = Vector3.zero;
+
             yield return new WaitForFixedUpdate();
         }
     }
@@ -69,7 +76,9 @@ public class PropMovementPlayer : PropMovement
 
     void Move(Vector3 velocity)
     {
+        //charControler.Move(velocity * currentSpeed);
         owner.position = owner.position + velocity * currentSpeed;
+        OnMove.Invoke(velocity);
     }
 
 

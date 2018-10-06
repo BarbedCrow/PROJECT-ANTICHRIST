@@ -153,6 +153,7 @@ public class WeaponRange : WeaponBase
 
     void StartReload()
     {
+        isReloading = true;
         reloadTimer.OnTimersFinished.AddListener(StopReload);
         reloadTimer.StartWork();
         OnReloadStarted.Invoke();
@@ -160,6 +161,7 @@ public class WeaponRange : WeaponBase
 
     void StopReload()
     {
+        isReloading = false;
         currClipBullets = RefillClip();
         
         OnReloadStopped.Invoke();
