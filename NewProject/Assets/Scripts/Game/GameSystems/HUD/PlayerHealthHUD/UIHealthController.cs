@@ -13,7 +13,7 @@ public class UIHealthController : UIBaseController
         data.maxHealthPoints = damagablePlayer.GetMaxHealth();
         uiView.Init(data);
         
-        damagablePlayer.OnGotDamage.AddListener(UpdateUI);
+        damagablePlayer.OnHealthChanged.AddListener(UpdateUI);
     }
 
     #region private
@@ -21,7 +21,7 @@ public class UIHealthController : UIBaseController
     UIHealthViewData data = new UIHealthViewData();
     PropDamagable damagablePlayer;
 
-    void UpdateUI(DamageInfo damageInfo)
+    void UpdateUI()
     {
         data.currentHealthPoints = damagablePlayer.GetCurrentHealth();
         data.maxHealthPoints = damagablePlayer.GetMaxHealth();
