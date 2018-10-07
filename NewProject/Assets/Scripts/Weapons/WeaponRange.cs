@@ -115,8 +115,10 @@ public class WeaponRange : WeaponBase
         {
             return;
         }
+        
 
         Shoot();
+        OnAttackStopped.Invoke();
     }
 
     bool CheckConditions()

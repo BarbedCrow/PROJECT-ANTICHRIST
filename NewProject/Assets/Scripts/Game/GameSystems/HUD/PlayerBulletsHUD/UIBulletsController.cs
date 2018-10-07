@@ -15,7 +15,7 @@ public class UIBulletsController : UIBaseController
         uiView.Init(data);
         
         weapon.OnAttackStopped.AddListener(UpdateUI);
-        weapon.OnReloadStarted.AddListener(UpdateUI);
+        weapon.OnReloadStopped.AddListener(UpdateUI);
     }
 
     #region private
