@@ -115,10 +115,9 @@ public class WeaponRange : WeaponBase
         {
             return;
         }
-        
 
+        OnAttackStared.Invoke();
         Shoot();
-        OnAttackStopped.Invoke();
     }
 
     bool CheckConditions()
@@ -146,6 +145,7 @@ public class WeaponRange : WeaponBase
     {
         shootTimer?.OnTimersFinished.RemoveListener(TryShoot);
         isShooting = false;
+        OnAttackStopped.Invoke();
 
         base.RequestStopAttackInternal();
     }
