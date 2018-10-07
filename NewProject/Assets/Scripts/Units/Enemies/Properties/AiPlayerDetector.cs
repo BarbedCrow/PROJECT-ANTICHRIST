@@ -36,6 +36,20 @@ public class AiPlayerDetector : PropBase
         base.Terminate();
     }
 
+    public override void Enable()
+    {
+        base.Enable();
+
+        scanner.Enable();
+    }
+
+    public override void Disable()
+    {
+        scanner.Disable();
+
+        base.Disable();
+    }
+
     #region private
 
     Scanner scanner;

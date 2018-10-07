@@ -25,12 +25,15 @@ public class Enemy : UnitBase
     {
         base.Enable();
 
+        playerDetector.OnSeen.AddListener(HandleOnSeenPlayer);
+        playerDetector.OnMiss.AddListener(HandleOnMissPlayer);
         playerDetector.Enable();
     }
 
     public override void Disable()
     {
-
+        playerDetector.OnSeen.RemoveListener(HandleOnSeenPlayer);
+        playerDetector.OnMiss.RemoveListener(HandleOnMissPlayer);
 
         base.Disable();
     }
@@ -44,6 +47,8 @@ public class Enemy : UnitBase
 
     EnemiesPool pool;
 
+    bool isChasing = false;
+
     protected override void InitComponents()
     {
         base.InitComponents();
@@ -53,12 +58,33 @@ public class Enemy : UnitBase
 
     protected override void TerminateComponents()
     {
+        playerDetector.OnSeen.RemoveListener(HandleOnSeenPlayer);
+        playerDetector.OnMiss.RemoveListener(HandleOnMissPlayer);
         playerDetector.Terminate();
 
         base.TerminateComponents();
     }
 
+    void HandleOnSeenPlayer(Transform player)
+    {
+        isChasing = true;
+        var aiProp = (PropMovementAI)propMovement;
+        aiProp.StartChasing(player);
+    }
 
+    void HandleOnMissPlayer()
+    {
+        isChasing = false;
+        var aiProp = (PropMovementAI)propMovement;
+        aiProp.StopChasing();
+    }
+
+    protected override void Die(DamageInfo info)
+    {
+        base.Die(info);
+
+        pool.Release(gameObject);
+    }
 
     #endregion
 
