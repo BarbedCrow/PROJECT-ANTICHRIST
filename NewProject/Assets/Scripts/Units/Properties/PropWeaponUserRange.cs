@@ -34,7 +34,7 @@ public class PropWeaponUserRange : PropWeaponUserBase
 
     #region private
 
-    void RequestReload()
+    protected void RequestReload()
     {
         var rangeWeapon = (WeaponRange)currentWeapon;
         rangeWeapon.TryReload();

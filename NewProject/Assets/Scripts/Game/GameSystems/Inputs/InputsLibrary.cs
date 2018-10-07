@@ -35,5 +35,6 @@ public class InputsLibrary : MonoBehaviour
 public enum InputType
 {
     ATTACK,
+    RELOAD,
     MAX_COUNT
 }

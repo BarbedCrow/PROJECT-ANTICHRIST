@@ -153,6 +153,11 @@ public class WeaponRange : WeaponBase
 
     void StartReload()
     {
+        if (isShooting)
+        {
+            RequestStopAttackInternal();
+        }
+
         isReloading = true;
         reloadTimer.OnTimersFinished.AddListener(StopReload);
         reloadTimer.StartWork();

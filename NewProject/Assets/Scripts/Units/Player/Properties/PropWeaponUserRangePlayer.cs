@@ -5,6 +5,7 @@ using UnityEngine;
 public class PropWeaponUserRangePlayer : PropWeaponUserRange {
 
     [SerializeField] InputType attackInputType;
+    [SerializeField] InputType reloadInputType;
 
     public override void Setup(params MonoBehaviour[] args)
     {
@@ -24,23 +25,27 @@ public class PropWeaponUserRangePlayer : PropWeaponUserRange {
         base.Init(owner);
 
         attackInput = (InputHold)inputsLibrary.GetInput(attackInputType);
+        reloadInput = (InputTap)inputsLibrary.GetInput(reloadInputType);
     }
 
     #region private
 
     InputsLibrary inputsLibrary;
     InputHold attackInput;
+    InputTap reloadInput;
 
     public override void Enable()
     {
         base.Enable();
 
+        reloadInput.OnUse.AddListener(RequestReload);
         attackInput.OnPressed.AddListener(RequestStartAttackInternal);
         attackInput.OnReleased.AddListener(RequestStopAttackInternal);
     }
 
     public override void Disable()
     {
+        reloadInput.OnUse.RemoveListener(RequestReload);
         attackInput.OnPressed.RemoveListener(RequestStartAttackInternal);
         attackInput.OnReleased.RemoveListener(RequestStopAttackInternal);
 

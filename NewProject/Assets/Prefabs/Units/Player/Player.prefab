@@ -424,7 +424,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1884374494990710}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.1551719, y: -0.01, z: -4.4962754}
+  m_LocalPosition: {x: 17.05761, y: 91.12289, z: -36.4999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4009149068991732}
@@ -505,6 +505,7 @@ MonoBehaviour:
   - {fileID: 114818037254180774}
   ignoredTags: []
   attackInputType: 0
+  reloadInputType: 1
 --- !u!114 &114460124671963870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -625,7 +626,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  timeBetweenShots: 0.1
+  timeBetweenShots: 0.3
   timeForReload: 0.5
   projectileSpeed: 20
   maxBulletsInClip: 10
