@@ -9,20 +9,20 @@ public class UIHealthController : UIBaseController
     {
         base.Init();
         damagablePlayer = GameObject.FindWithTag(Tags.PLAYER).GetComponent<PropDamagable>();
-        UIHealthViewData data = new UIHealthViewData();
-        data.Init(damagablePlayer.GetHealth());
-        uiView.Init(data);
-        damagablePlayer.OnGotDamage.AddListener(InitialUpdate);
+        uiView.Init(damagablePlayer.GetHealth());
+        UpdateUI(new DamageInfo());
+        
+        damagablePlayer.OnGotDamage.AddListener(UpdateUI);
     }
 
     #region private
 
+    UIHealthViewData data = new UIHealthViewData();
     PropDamagable damagablePlayer;
 
-    void InitialUpdate(DamageInfo damageInfo)
+    void UpdateUI(DamageInfo damageInfo)
     {
-        UIHealthViewData data = new UIHealthViewData();
-        data.Init(damagablePlayer.GetHealth());
+        data.healthPoints = damagablePlayer.GetHealth();
         uiView.UpdateUI(data);
     }
 

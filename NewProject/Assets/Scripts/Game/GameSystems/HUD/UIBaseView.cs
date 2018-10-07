@@ -13,7 +13,7 @@ public class UIBaseView : MonoBehaviour
         
     }
 
-    public virtual void Init(UIHealthViewData hpViewData)
+    public virtual void Init(float startHP)
     {
 
     }
