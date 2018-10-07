@@ -32,6 +32,11 @@ public class PropWeaponUserRange : PropWeaponUserBase
         rangeWeapon.OnShootEmpty.AddListener(RequestReload);
     }
 
+    public WeaponBase GetWeapon()
+    {
+        return currentWeapon;
+    }
+
     #region private
 
     void RequestReload()

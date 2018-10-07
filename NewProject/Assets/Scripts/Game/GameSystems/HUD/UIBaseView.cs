@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class UIBaseView : MonoBehaviour
 {
-    public List<Image> viewElements;
+    public List<MonoBehaviour> viewElements;
 
     public virtual void Init()
     {

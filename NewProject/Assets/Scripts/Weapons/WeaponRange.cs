@@ -77,6 +77,16 @@ public class WeaponRange : WeaponBase
         StartReload();
     }
 
+    public int GetCurrClipBullets()
+    {
+        return currClipBullets;
+    }
+
+    public int GetCurrBullets()
+    {
+        return currBullets;
+    }
+
     #region private
 
     const int NO_BULLETS = 0;
@@ -148,8 +158,6 @@ public class WeaponRange : WeaponBase
         var projectileLogic = projectile.GetComponent<ProjectileBase>();
         projectileLogic.Enable(pivot, damage, projectileSpeed, damager);
     }
-
-    
 
     void StartReload()
     {

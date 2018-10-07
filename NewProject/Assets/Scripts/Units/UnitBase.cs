@@ -10,6 +10,11 @@ public class UnitBase : MonoBehaviour
     public PropMovement propMovement;
     public List<PropWeaponUserBase> propWeaponUsers;
 
+    public PropWeaponUserRange GetWeaponUserRange()
+    {
+        return (PropWeaponUserRange)propWeaponUsers[0];
+    }
+
     public virtual void Setup(params MonoBehaviour[] args)
     {
 
