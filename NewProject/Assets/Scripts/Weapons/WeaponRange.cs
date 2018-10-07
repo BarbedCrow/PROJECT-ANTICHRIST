@@ -176,6 +176,7 @@ public class WeaponRange : WeaponBase
 
     void StopReload()
     {
+        reloadTimer.OnTimersFinished.RemoveListener(StopReload);
         isReloading = false;
         currClipBullets = RefillClip();
         
@@ -184,16 +185,17 @@ public class WeaponRange : WeaponBase
 
     int RefillClip()
     {
-        int bulletsToRefill = 0;
+        int requiredBulletsToRefill = maxBulletsInClip - currClipBullets;
+        int bulletsToRefill = currClipBullets;
 
-        if (currBullets >= maxBulletsInClip)
+        if (currBullets >= requiredBulletsToRefill)
         {
-            currBullets -= maxBulletsInClip;
-            bulletsToRefill = maxBulletsInClip;
+            currBullets -= requiredBulletsToRefill;
+            bulletsToRefill += requiredBulletsToRefill;
         }
         else
         {
-            bulletsToRefill = currBullets;
+            bulletsToRefill += currBullets;
         }
 
         return bulletsToRefill;
