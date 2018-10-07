@@ -11,6 +11,11 @@ public class UnitBase : MonoBehaviour
     [SerializeField] protected PropMovement propMovement;
     [SerializeField] protected List<PropWeaponUserBase> propWeaponUsers;
 
+    public PropWeaponUserRange GetWeaponUserRange()
+    {
+        return (PropWeaponUserRange)propWeaponUsers[0];
+    }
+
     public virtual void Setup(params MonoBehaviour[] args)
     {
 
@@ -37,6 +42,11 @@ public class UnitBase : MonoBehaviour
     public virtual void Disable()
     {
 
+    }
+
+    public PropDamagable GetDamagable()
+    {
+        return damagable;
     }
 
     #region private

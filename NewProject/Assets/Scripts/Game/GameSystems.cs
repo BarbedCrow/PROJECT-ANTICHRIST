@@ -5,9 +5,10 @@ using UnityEngine;
 public class GameSystems : MonoBehaviour
 {
 
-    public InputsLibrary inputsLibrary;
-    public ProjectilesPool projectilesPool;
-    public EnemiesPool enemiesPool;
+    [SerializeField] InputsLibrary inputsLibrary;
+    [SerializeField] ProjectilesPool projectilesPool;
+    [SerializeField] EnemiesPool enemiesPool;
+    [SerializeField] HUDManager hudManager;
 
     public void Init()
     {
@@ -42,6 +43,7 @@ public class GameSystems : MonoBehaviour
         enemiesPool.Init();
         projectilesPool.Init();
         inputsLibrary.Init();
+        hudManager.Init();
     }
 
     void TerminateComponents()

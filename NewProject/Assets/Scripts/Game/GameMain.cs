@@ -16,8 +16,6 @@ public class GameMain : MonoBehaviour
 
     private void Start()
     {
-        InitComponents();
-
         foreach(var area in gameAreas)
         {
             area.Init(gameSystems.GetEnemiesPool());
@@ -29,6 +27,8 @@ public class GameMain : MonoBehaviour
         player.Init();
 
         player.Enable();
+        
+        InitComponents();
     }
 
     private void OnDestroy()
