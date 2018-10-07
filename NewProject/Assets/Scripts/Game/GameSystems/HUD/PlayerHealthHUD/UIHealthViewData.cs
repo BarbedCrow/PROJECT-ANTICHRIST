@@ -5,5 +5,6 @@ using UnityEngine.Events;
 
 public class UIHealthViewData : UIBaseViewData
 {
-    public float healthPoints;
+    public float currentHealthPoints;
+    public float maxHealthPoints;
 }

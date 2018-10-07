@@ -9,9 +9,9 @@ public class UIHealthController : UIBaseController
     {
         base.Init();
         damagablePlayer = GameObject.FindWithTag(Tags.PLAYER).GetComponent<PropDamagable>();
-        data.healthPoints = damagablePlayer.GetHealth();
-        uiView.UpdateUI(data);
-        UpdateUI(new DamageInfo());
+        data.currentHealthPoints = damagablePlayer.GetCurrentHealth();
+        data.maxHealthPoints = damagablePlayer.GetMaxHealth();
+        uiView.Init(data);
         
         damagablePlayer.OnGotDamage.AddListener(UpdateUI);
     }
@@ -23,7 +23,8 @@ public class UIHealthController : UIBaseController
 
     void UpdateUI(DamageInfo damageInfo)
     {
-        data.healthPoints = damagablePlayer.GetHealth();
+        data.currentHealthPoints = damagablePlayer.GetCurrentHealth();
+        data.maxHealthPoints = damagablePlayer.GetMaxHealth();
         uiView.UpdateUI(data);
     }
 

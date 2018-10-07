@@ -17,7 +17,12 @@ public class PropDamagable : PropBase
         currentHp = health;
     }
 
-    public float GetHealth()
+    public float GetCurrentHealth()
+    {
+        return currentHp;
+    }
+
+    public float GetMaxHealth()
     {
         return health;
     }
