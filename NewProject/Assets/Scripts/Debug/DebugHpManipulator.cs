@@ -7,6 +7,7 @@ public class DebugHpManipulator : MonoBehaviour {
     PropDamagable damagable;
     bool isCtrlPressed = false;
     bool isDPressed = false;
+    bool isXPressed = false;
     bool isUsed = false;
 
 	void Update ()
@@ -36,7 +37,17 @@ public class DebugHpManipulator : MonoBehaviour {
             isUsed = false;
         }
 
-        if(isDPressed && isCtrlPressed && !isUsed)
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            isXPressed = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.X))
+        {
+            isXPressed = false;
+            isUsed = false;
+        }
+
+        if (isDPressed && isCtrlPressed && !isUsed)
         {
             isUsed = true;
             var info = new DamageInfo();
@@ -44,6 +55,12 @@ public class DebugHpManipulator : MonoBehaviour {
             info.damage = 10;
             info.damageType = DamageType.PHYSICAL;
             damagable.GetDamage(info);
+        }
+
+        if (isXPressed && isCtrlPressed && !isUsed)
+        {
+            isUsed = true;
+            damagable.RestoreHP(10);
         }
     }
 
