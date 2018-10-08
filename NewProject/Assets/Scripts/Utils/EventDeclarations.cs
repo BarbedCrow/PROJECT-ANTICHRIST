@@ -13,3 +13,4 @@ public class EventOnDie : UnityEvent<DamageInfo> { }
 public class EventOnGotDamage : UnityEvent<DamageInfo> { }
 public class EventOnSeen : UnityEvent<Transform> { }
 public class EventOnMove : UnityEvent<Vector3> { }
+public class EventOnCursorTrigger : UnityEvent<Collider> { }
