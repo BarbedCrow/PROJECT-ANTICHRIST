@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PropAnimPlayerBodyController : PropAnimMovementController
+public class PropAnimPlayerBodyController : PropAnimController
 {
 
     public override void Init(Transform owner)
