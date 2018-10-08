@@ -25,19 +25,17 @@ public class UICursorController : UIBaseController
 
     void CursorTriggerOn(Collider other)
     {
-        if (other.GetComponents<Enemy>() != null)
+        if (other.GetComponent<Enemy>() != null)
         {
             isEnemy = true;
-            Debug.Log("true");
         }
     }
 
     void CursorTriggerOut(Collider other)
     {
-        if (other.GetComponents<Enemy>() != null)
+        if (other.GetComponent<Enemy>() != null)
         {
             isEnemy = false;
-            Debug.Log("false");
         }
     }
 
