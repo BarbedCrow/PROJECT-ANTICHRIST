@@ -20,8 +20,8 @@ public class UICursorView : UIBaseView
         var data = (UICursorViewData)viewData;
         viewElements[0].transform.position = Input.mousePosition;
         animator.SetBool(IS_ENEMY, data.isEnemy);
-        animator.speed = 0;
-        animator.Play("enemy", 0, 0);
+        //animator.speed = 0;
+        //animator.Play("enemy", 0, 0);
     }
 
     #region private
