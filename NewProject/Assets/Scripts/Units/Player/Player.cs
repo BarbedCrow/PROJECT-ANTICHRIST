@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player : UnitBase
 {
 
+    [SerializeField] PropAnimPlayerBodyController propAnimBodyController;
+
     public override void Setup(params MonoBehaviour[] args)
     {
         base.Setup(args);
@@ -47,6 +49,20 @@ public class Player : UnitBase
         {
             user.Setup(inputsLibrary, projectilesPool);
         }
+    }
+
+    protected override void InitComponents()
+    {
+        base.InitComponents();
+
+        propAnimBodyController.Init(transform);
+    }
+
+    protected override void TerminateComponents()
+    {
+        propAnimBodyController.Terminate();
+
+        base.TerminateComponents();
     }
 
     #endregion
