@@ -33,7 +33,7 @@ public class UICursorView : UIBaseView
 
     #region private
 
-    const string ANIM_DEFAULT = "New State";
+    const string ANIM_DEFAULT = "default";
 
     Animator animator;
 
