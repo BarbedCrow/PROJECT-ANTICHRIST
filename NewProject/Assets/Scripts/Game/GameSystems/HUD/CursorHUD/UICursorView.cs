@@ -13,20 +13,27 @@ public class UICursorView : UIBaseView
         base.Init();
 
         animator = viewElements[0].GetComponent<Animator>();
+        animator.speed = 0;
     }
 
     public override void UpdateUI(UIBaseViewData viewData)
     {
         var data = (UICursorViewData)viewData;
         viewElements[0].transform.position = Input.mousePosition;
-        animator.SetBool(IS_ENEMY, data.isEnemy);
-        //animator.speed = 0;
-        //animator.Play("enemy", 0, 0);
+
+        if (data.isEnemy)
+        {
+            animator.Play(ANIM_DEFAULT, 0, 0.99f);// вмместо 0.99f должен быть процент хп врага 1 поставить нельзя, потому что юнити не может проиграть анимацию на 100 процентах
+        }
+        else
+        {
+            animator.Play(ANIM_DEFAULT,0, 0);
+        }
     }
 
     #region private
 
-    const string IS_ENEMY = "isEnemy";
+    const string ANIM_DEFAULT = "New State";
 
     Animator animator;
 
