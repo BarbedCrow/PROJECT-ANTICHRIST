@@ -82,7 +82,6 @@ public class Enemy : UnitBase
     protected override void Die(DamageInfo info)
     {
         base.Die(info);
-
         pool.Release(gameObject);
     }
 

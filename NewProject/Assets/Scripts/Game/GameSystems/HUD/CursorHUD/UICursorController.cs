@@ -49,9 +49,9 @@ public class UICursorController : UIBaseController
 
     void EnemyDead(DamageInfo info)
     {
+        enemy.OnDie.RemoveListener(EnemyDead);
         isEnemy = false;
         enemy = null;
-        enemy.OnDie.RemoveListener(EnemyDead);
     }
 
     void Update()

@@ -8,23 +8,14 @@ public class AreaSpawnController : MonoBehaviour
 
     [HideInInspector]
     public UnityEvent OnAllEnemiesDeath = new UnityEvent();
-
-    public List<EnemyDesc> enemyDescs;
-    public List<SpawnPoint> spawnPoints;
-    public int maxSpawnCurrency;
+    public List<WaveDesc> WaveDesks;
 
     public void Init(EnemiesPool enemiesPool, GameArea gameArea)
     {
+        currentWave = WaveDesks[0];
         this.enemiesPool = enemiesPool;
         this.gameArea = gameArea;
-        currentSpawnCurrency = maxSpawnCurrency;
-
-        foreach(var point in spawnPoints)
-        {
-            point.Init();
-            point.OnEnabled.AddListener(TrySpawnEnemies);
-        }
-
+        SetupNextWave();
         gameArea.OnPlayerEntered.AddListener(TrySpawnEnemies);
     }
 
@@ -32,7 +23,7 @@ public class AreaSpawnController : MonoBehaviour
     {
         gameArea.OnPlayerEntered.RemoveListener(TrySpawnEnemies);
 
-        foreach (var point in spawnPoints)
+        foreach (var point in currentWave.spawnPoints)
         {
             point.OnEnabled.RemoveListener(TrySpawnEnemies);
             point.Terminate();
@@ -45,6 +36,21 @@ public class AreaSpawnController : MonoBehaviour
     int currentSpawnCurrency;
     GameArea gameArea;
     EnemiesPool enemiesPool;
+    WaveDesc currentWave;
+    
+    void SetupNextWave()
+    {
+        currentSpawnCurrency = currentWave.maxSpawnCurrency;
+
+        foreach (var point in currentWave.spawnPoints)
+        {
+            point.Init();
+            point.OnEnabled.AddListener(TrySpawnEnemies);
+        }
+
+        foreach (var enemyDesc in currentWave.enemyDescs)
+            countOfEnemies += enemyDesc.count;
+    }
 
     void TrySpawnEnemies()
     {
@@ -61,7 +67,7 @@ public class AreaSpawnController : MonoBehaviour
     List<SpawnPoint> TryTakeSpawnPoints()
     {
         List<SpawnPoint> points = new List<SpawnPoint>();
-        foreach (SpawnPoint point in spawnPoints)
+        foreach (SpawnPoint point in currentWave.spawnPoints)
         {
             if (point.IsEnabled())
                 points.Add(point);
@@ -73,7 +79,7 @@ public class AreaSpawnController : MonoBehaviour
     {
         List<Enemy> enemies = new List<Enemy>();
 
-        foreach (EnemyDesc desc in enemyDescs)
+        foreach (EnemyDesc desc in currentWave.enemyDescs)
         {
             var countOfEnemy = desc.count;
             for (int idx = 0; idx < countOfEnemy; idx++)
@@ -101,18 +107,37 @@ public class AreaSpawnController : MonoBehaviour
 
     void EnemyDeath(Enemy enemy)
     {
+        enemy.OnDie.RemoveListener((_) => EnemyDeath(enemy));
         currentSpawnCurrency += enemy.GetReturnCost();
         countOfEnemies--;
         TrySpawnEnemies();
-        if (countOfEnemies == 0)
+        if (countOfEnemies <= 0)
         {
-            OnAllEnemiesDeath.Invoke();
+            WaveDesks.RemoveAt(0);
+            if (WaveDesks.Count != 0)
+            {
+                currentWave = WaveDesks[0];
+                SetupNextWave();
+                TrySpawnEnemies();
+            }
+            else
+            {
+                OnAllEnemiesDeath.Invoke();
+            }
             //gameArea.Terminate();
         }
     }
 
     #endregion
 
+}
+
+[System.Serializable]
+public class WaveDesc
+{
+    public List<EnemyDesc> enemyDescs;
+    public List<SpawnPoint> spawnPoints;
+    public int maxSpawnCurrency;
 }
 
 [System.Serializable]

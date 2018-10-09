@@ -87,7 +87,7 @@ public class UnitBase : MonoBehaviour
 
     protected virtual void Die(DamageInfo info)
     {
-
+        OnDie.Invoke(info);
     }
 
     #endregion
