@@ -26,9 +26,10 @@ public class UICursorView : UIBaseView
             var procentHP = data.currHP / data.maxHP;
             if (procentHP == 1.0f) procentHP = 0.99f;
             animator.Play(ANIM_DEFAULT, 0, procentHP);
+        }
         else
         {
-            animator.Play(ANIM_DEFAULT,0, 0);
+            animator.Play(ANIM_DEFAULT, 0, 0);
         }
     }
 
