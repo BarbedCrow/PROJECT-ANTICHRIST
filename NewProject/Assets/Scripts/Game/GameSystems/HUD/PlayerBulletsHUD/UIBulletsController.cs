@@ -14,7 +14,7 @@ public class UIBulletsController : UIBaseController
         data.currentAllBullets = weapon.GetCurrBullets();
         uiView.Init(data);
         
-        weapon.OnAttackStopped.AddListener(UpdateUI);
+        weapon.OnShoot.AddListener(UpdateUI);
         weapon.OnReloadStopped.AddListener(UpdateUI);
     }
 

@@ -10,6 +10,9 @@ public class WeaponRange : WeaponBase
     public UnityEvent OnShootEmpty = new UnityEvent();
 
     [HideInInspector]
+    public UnityEvent OnShoot = new UnityEvent();
+
+    [HideInInspector]
     public UnityEvent OnReloadStarted = new UnityEvent();
 
     [HideInInspector]
@@ -118,6 +121,7 @@ public class WeaponRange : WeaponBase
 
         OnAttackStared.Invoke();
         Shoot();
+        OnShoot.Invoke();
     }
 
     bool CheckConditions()
