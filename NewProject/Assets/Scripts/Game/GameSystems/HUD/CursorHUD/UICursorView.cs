@@ -25,8 +25,7 @@ public class UICursorView : UIBaseView
         {
             var procentHP = data.currHP / data.maxHP;
             if (procentHP == 1.0f) procentHP = 0.99f;
-            animator.Play(ANIM_DEFAULT, 0, procentHP);// вмместо 0.99f должен быть процент хп врага 1 поставить нельзя, потому что юнити не может проиграть анимацию на 100 процентах
-        }
+            animator.Play(ANIM_DEFAULT, 0, procentHP);
         else
         {
             animator.Play(ANIM_DEFAULT,0, 0);
