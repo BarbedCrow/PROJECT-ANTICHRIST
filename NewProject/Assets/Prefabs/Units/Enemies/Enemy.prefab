@@ -326,7 +326,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1247264825186712}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.1058522, y: -0.01, z: 8.47}
+  m_LocalPosition: {x: 9.786873, y: -4.013109, z: 6.0370097}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4360308804411172}
@@ -454,8 +454,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51694b85a707d854bb948409bf1550e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 114197389786945420}
+  weaponDescs:
+  - slot: 0
+    weapon: {fileID: 114197389786945420}
   ignoredTags: []
 --- !u!114 &114197389786945420
 MonoBehaviour:
@@ -481,6 +482,11 @@ MonoBehaviour:
   pivot: {fileID: 4462204388681194}
   damage: 10
   OnShootEmpty:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnShoot:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -511,6 +517,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb088661b1b2bd4cabe6fe0e16a6efa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   health: 100
 --- !u!114 &114439670730892950
 MonoBehaviour:
@@ -523,8 +534,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65133e3c0bcfd4f4db061d8c2b723c17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 114650847181568974}
+  weaponDescs:
+  - slot: 0
+    weapon: {fileID: 114650847181568974}
   ignoredTags: []
 --- !u!114 &114650847181568974
 MonoBehaviour:
@@ -550,6 +562,11 @@ MonoBehaviour:
   pivot: {fileID: 4731663538154044}
   damage: 10
   OnShootEmpty:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnShoot:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -671,7 +688,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:

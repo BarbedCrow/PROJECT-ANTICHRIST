@@ -18,9 +18,10 @@ public class PropWeaponUserRange : PropWeaponUserBase
             }
         }
 
-        foreach(WeaponBase weapon in weapons)
+        foreach (WeaponDesc weaponDesc in weaponDescs)
         {
-            weapon.Setup(projectilesPool);
+            var rangeWeapon = (WeaponRange)weaponDesc.weapon;
+            rangeWeapon.Setup(projectilesPool);
         }
     }
 
@@ -38,6 +39,28 @@ public class PropWeaponUserRange : PropWeaponUserBase
     }
 
     #region private
+
+    protected override void SwapWeapon(SlotType slot)
+    {
+        int idx;
+        if (currentSlot != slot)
+        {
+            if (slot == SlotType.SLOT_1 && weaponDescs.Count > 0)
+                idx = 0;
+            else if (slot == SlotType.SLOT_2 && weaponDescs.Count > 1)
+                idx = 1;
+            else if (slot == SlotType.SLOT_3 && weaponDescs.Count > 2)
+                idx = 2;
+            else return;
+        }
+        else return;
+
+        Debug.Log(idx);
+        currentWeapon.Disable();
+        currentWeapon = weaponDescs[idx].weapon;
+        currentSlot = weaponDescs[idx].slot;
+        currentWeapon.Enable();
+    }
 
     protected void RequestReload()
     {

@@ -36,5 +36,8 @@ public enum InputType
 {
     ATTACK,
     RELOAD,
+    SWAP_1,
+    SWAP_2,
+    SWAP_3,
     MAX_COUNT
 }

@@ -52,8 +52,10 @@ public class WeaponRange : WeaponBase
 
     public override void Disable()
     {
-        RequestStopAttackInternal();
         reloadTimer?.OnTimersFinished.RemoveListener(StopReload);
+        reloadTimer?.StopWork();
+        isReloading = false;
+        RequestStopAttackInternal();
 
         base.Disable();
     }
@@ -61,8 +63,6 @@ public class WeaponRange : WeaponBase
     public override void Enable()
     {
         base.Enable();
-
-
     }
 
     public void TryReload()
@@ -148,6 +148,7 @@ public class WeaponRange : WeaponBase
     protected override void RequestStopAttackInternal()
     {
         shootTimer?.OnTimersFinished.RemoveListener(TryShoot);
+        shootTimer?.StopWork();
         isShooting = false;
         OnAttackStopped.Invoke();
 
@@ -180,11 +181,12 @@ public class WeaponRange : WeaponBase
 
     void StopReload()
     {
-        reloadTimer.OnTimersFinished.RemoveListener(StopReload);
+        reloadTimer?.OnTimersFinished.RemoveListener(StopReload);
+        reloadTimer?.StopWork();
         isReloading = false;
         currClipBullets = RefillClip();
         
-        OnReloadStopped.Invoke();
+        OnReloadStopped.Invoke();        
     }
 
     int RefillClip()
