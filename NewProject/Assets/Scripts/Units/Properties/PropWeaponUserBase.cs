@@ -5,7 +5,7 @@ using UnityEngine;
 public class PropWeaponUserBase : PropBase
 {
     
-    public List<WeaponBase> weapons;
+    public List<WeaponDesc> weaponDescs;
     public List<string> ignoredTags;
 
     public override void Setup(params MonoBehaviour[] args)
@@ -13,9 +13,9 @@ public class PropWeaponUserBase : PropBase
         base.Setup(args);
 
         propDamager = gameObject.AddComponent<PropDamager>();
-        foreach (WeaponBase weapon in weapons)
+        foreach (WeaponDesc weaponDesc in weaponDescs)
         {
-            weapon.Setup(propDamager);
+            weaponDesc.weapon.Setup(propDamager);
         }
     }
 
@@ -23,20 +23,21 @@ public class PropWeaponUserBase : PropBase
     {
         base.Init(owner);
 
-        foreach(WeaponBase weapon in weapons)
+        foreach (WeaponDesc weaponDesc in weaponDescs)
         {
-            weapon.Init();
+            weaponDesc.weapon.Init();
         }
 
-        currentWeapon = weapons[0];
+        currentWeapon = weaponDescs[0].weapon;
+        currentSlot = weaponDescs[0].slot;
         currentWeapon.Enable();
     }
 
     public override void Terminate()
     {
-        foreach (WeaponBase weapon in weapons)
+        foreach (WeaponDesc weaponDesc in weaponDescs)
         {
-            weapon.Terminate();
+            weaponDesc.weapon.Terminate();
         }
 
         base.Terminate();
@@ -45,6 +46,8 @@ public class PropWeaponUserBase : PropBase
     #region private
 
     protected WeaponBase currentWeapon;
+    protected SlotType currentSlot;
+
     protected PropDamager propDamager;
 
     protected virtual void RequestStartAttackInternal()
@@ -57,6 +60,26 @@ public class PropWeaponUserBase : PropBase
         currentWeapon.RequestStopAttack();
     }
 
-    #endregion
+    protected virtual void SwapWeapon(SlotType slot)
+    {
+    }
 
+    #endregion
 }
+
+[System.Serializable]
+public class WeaponDesc
+{
+    public SlotType slot;
+    public WeaponBase weapon;
+}
+
+[System.Serializable]
+public enum SlotType
+{
+    SLOT_1,
+    SLOT_2,
+    SLOT_3
+}
+
+
