@@ -77,6 +77,7 @@ public class WeaponRange : WeaponBase
             return;
         }
 
+        wasShooting = isShooting;
         StartReload();
     }
 
@@ -103,6 +104,7 @@ public class WeaponRange : WeaponBase
 
     bool isShooting = false;
     bool isReloading = false;
+    bool wasShooting = false;
 
     protected override void RequestStartAttackInternal()
     {
@@ -147,6 +149,11 @@ public class WeaponRange : WeaponBase
 
     protected override void RequestStopAttackInternal()
     {
+        if (!isShooting)
+        {
+            wasShooting = false;
+        }
+
         shootTimer?.OnTimersFinished.RemoveListener(TryShoot);
         shootTimer?.StopWork();
         isShooting = false;
@@ -186,7 +193,12 @@ public class WeaponRange : WeaponBase
         isReloading = false;
         currClipBullets = RefillClip();
         
-        OnReloadStopped.Invoke();        
+        OnReloadStopped.Invoke();
+
+        if (wasShooting)
+        {
+            RequestStartAttackInternal();
+        }
     }
 
     int RefillClip()

@@ -29,8 +29,22 @@ public class PropWeaponUserRange : PropWeaponUserBase
     {
         base.Init(owner);
 
-        var rangeWeapon = (WeaponRange)currentWeapon;
-        rangeWeapon.OnShootEmpty.AddListener(RequestReload);
+        foreach(var weaponDesc in weaponDescs)
+        {
+            var range = (WeaponRange)weaponDesc.weapon;
+            range.OnShootEmpty.AddListener(RequestReload);
+        }
+    }
+
+    public override void Terminate()
+    {
+        foreach (var weaponDesc in weaponDescs)
+        {
+            var range = (WeaponRange)weaponDesc.weapon;
+            range.OnShootEmpty.RemoveListener(RequestReload);
+        }
+
+        base.Terminate();
     }
 
     public WeaponBase GetWeapon()
