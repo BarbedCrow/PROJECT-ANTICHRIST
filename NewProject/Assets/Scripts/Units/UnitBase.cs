@@ -16,6 +16,11 @@ public class UnitBase : MonoBehaviour
         return (PropWeaponUserRange)propWeaponUsers[0];
     }
 
+    public PropWeaponUserMelee GetWeaponUserMelee()
+    {
+        return (PropWeaponUserMelee)propWeaponUsers[1];
+    }
+
     public virtual void Setup(params MonoBehaviour[] args)
     {
 

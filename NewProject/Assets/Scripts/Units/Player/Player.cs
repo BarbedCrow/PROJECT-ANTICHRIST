@@ -29,8 +29,12 @@ public class Player : UnitBase
     {
         base.Enable();
 
-        currentWeaponUser = propWeaponUsers[0];
-        currentWeaponUser.Enable();
+        
+        foreach(var user in propWeaponUsers)
+        {
+            user.Enable();
+        }
+
         propMovement.Enable();
         
     }
@@ -39,7 +43,6 @@ public class Player : UnitBase
 
     InputsLibrary inputsLibrary;
     PoolBase projectilesPool;
-    PropWeaponUserBase currentWeaponUser;
 
     protected override void SetupComponents()
     {
