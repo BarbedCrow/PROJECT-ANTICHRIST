@@ -14,7 +14,7 @@ public class CursorInDetector : MonoBehaviour
     private void Update()
     {
         var mousePos = gameCamera.ScreenToWorldPoint(Input.mousePosition);
-        var newPosition = new Vector3(mousePos.x, 0.5f, mousePos.z);
+        var newPosition = new Vector3(mousePos.x, 0.25f, mousePos.z);
         transform.SetPositionAndRotation(newPosition, new Quaternion());
     }
 
