@@ -49,6 +49,7 @@ public class PropWeaponUserRangePlayer : PropWeaponUserRange {
     const int SLOT_1 = 0;
     const int SLOT_2 = 1;
     const int SLOT_3 = 2;
+
     public override void Enable()
     {
         base.Enable();
