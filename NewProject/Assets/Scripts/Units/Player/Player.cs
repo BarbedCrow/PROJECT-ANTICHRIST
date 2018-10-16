@@ -48,6 +48,7 @@ public class Player : UnitBase
     {
         base.SetupComponents();
 
+        propAbilityUser.Setup(inputsLibrary);
         foreach(PropWeaponUserBase user in propWeaponUsers)
         {
             user.Setup(inputsLibrary, projectilesPool);
