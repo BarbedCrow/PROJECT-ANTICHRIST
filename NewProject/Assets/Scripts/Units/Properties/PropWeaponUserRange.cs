@@ -18,9 +18,9 @@ public class PropWeaponUserRange : PropWeaponUserBase
             }
         }
 
-        foreach (WeaponDesc weaponDesc in weaponDescs)
+        foreach (WeaponBase weapon in weapons)
         {
-            var rangeWeapon = (WeaponRange)weaponDesc.weapon;
+            var rangeWeapon = (WeaponRange)weapon;
             rangeWeapon.Setup(projectilesPool);
         }
     }
@@ -29,18 +29,18 @@ public class PropWeaponUserRange : PropWeaponUserBase
     {
         base.Init(owner);
 
-        foreach(var weaponDesc in weaponDescs)
+        foreach(var weapon in weapons)
         {
-            var range = (WeaponRange)weaponDesc.weapon;
+            var range = (WeaponRange)weapon;
             range.OnShootEmpty.AddListener(RequestReload);
         }
     }
 
     public override void Terminate()
     {
-        foreach (var weaponDesc in weaponDescs)
+        foreach (var weapon in weapons)
         {
-            var range = (WeaponRange)weaponDesc.weapon;
+            var range = (WeaponRange)weapon;
             range.OnShootEmpty.RemoveListener(RequestReload);
         }
 
@@ -54,25 +54,17 @@ public class PropWeaponUserRange : PropWeaponUserBase
 
     #region private
 
-    protected override void SwapWeapon(SlotType slot)
+    protected override void SwapWeapon(int slot)
     {
         int idx;
-        if (currentSlot != slot)
-        {
-            if (slot == SlotType.SLOT_1 && weaponDescs.Count > 0)
-                idx = 0;
-            else if (slot == SlotType.SLOT_2 && weaponDescs.Count > 1)
-                idx = 1;
-            else if (slot == SlotType.SLOT_3 && weaponDescs.Count > 2)
-                idx = 2;
-            else return;
-        }
-        else return;
-
-        Debug.Log(idx);
+        if (currentSlot != slot && weapons.Count > slot)
+            idx = slot;
+        else
+            return;
+        
         currentWeapon.Disable();
-        currentWeapon = weaponDescs[idx].weapon;
-        currentSlot = weaponDescs[idx].slot;
+        currentWeapon = weapons[idx];
+        currentSlot = idx;
         currentWeapon.Enable();
     }
 

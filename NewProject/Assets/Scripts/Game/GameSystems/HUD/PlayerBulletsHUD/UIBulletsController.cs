@@ -25,11 +25,11 @@ public class UIBulletsController : UIBaseController
 
     void SubscribeOnWeapons(PropWeaponUserRangePlayer userRangePlayer)
     {
-        foreach (WeaponDesc desc in userRangePlayer.weaponDescs)
+        foreach (WeaponBase wpu in userRangePlayer.weapons)
         {
-            var weaponDesc = (WeaponRange)desc.weapon;
-            weaponDesc.OnShoot.AddListener(UpdateUI);
-            weaponDesc.OnReloadStopped.AddListener(UpdateUI);
+            var weaponFromUser = (WeaponRange)wpu;
+            weaponFromUser.OnShoot.AddListener(UpdateUI);
+            weaponFromUser.OnReloadStopped.AddListener(UpdateUI);
         }
     }
 
