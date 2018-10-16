@@ -10,6 +10,7 @@ public class UnitBase : MonoBehaviour
     [SerializeField] protected PropAnimMovementController propAnimMovementController;
     [SerializeField] protected PropMovement propMovement;
     [SerializeField] protected List<PropWeaponUserBase> propWeaponUsers;
+    [SerializeField] protected PropAbilityUser propAbilityUser;
 
     public PropWeaponUserRange GetWeaponUserRange()
     {
@@ -19,6 +20,11 @@ public class UnitBase : MonoBehaviour
     public PropWeaponUserMelee GetWeaponUserMelee()
     {
         return (PropWeaponUserMelee)propWeaponUsers[1];
+    }
+
+    public PropAbilityUser GetAbilityUser()
+    {
+        return propAbilityUser;
     }
 
     public virtual void Setup(params MonoBehaviour[] args)
@@ -75,6 +81,8 @@ public class UnitBase : MonoBehaviour
             user.Init(transform);
         }
 
+        propAbilityUser.Init(transform);
+
         propAnimMovementController?.Init(transform);
     }
 
@@ -82,6 +90,7 @@ public class UnitBase : MonoBehaviour
     {
         damagable.OnDie.RemoveListener(Die);
         propAnimMovementController?.Terminate();
+        propAbilityUser.Terminate();
         foreach (PropWeaponUserBase user in propWeaponUsers)
         {
             user.Terminate();

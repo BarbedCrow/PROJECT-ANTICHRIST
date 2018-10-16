@@ -77,6 +77,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1342151229998144
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4297938990619278}
+  - component: {fileID: 114024087218490990}
+  m_Layer: 0
+  m_Name: AbilityUser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1444010339838552
 GameObject:
   m_ObjectHideFlags: 1
@@ -261,6 +277,19 @@ Transform:
   m_Father: {fileID: 4765401761267930}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4297938990619278
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1342151229998144}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4360308804411172}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4333177212435454
 Transform:
   m_ObjectHideFlags: 1
@@ -289,6 +318,7 @@ Transform:
   - {fileID: 4248251876281580}
   - {fileID: 4333177212435454}
   - {fileID: 4955922079822494}
+  - {fileID: 4297938990619278}
   m_Father: {fileID: 4476329506013170}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -326,7 +356,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1247264825186712}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.786873, y: -4.013109, z: 6.0370097}
+  m_LocalPosition: {x: 6.5221314, y: 3.7775974e-18, z: -0.17012787}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4360308804411172}
@@ -443,6 +473,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!114 &114024087218490990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1342151229998144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3880588b4501ca94d91fdf6682a1984e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114065921013160852
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -605,6 +646,7 @@ MonoBehaviour:
   propWeaponUsers:
   - {fileID: 114439670730892950}
   - {fileID: 114065921013160852}
+  propAbilityUser: {fileID: 114024087218490990}
   playerDetector: {fileID: 114938334127714014}
   returnCost: 0
 --- !u!114 &114938334127714014
