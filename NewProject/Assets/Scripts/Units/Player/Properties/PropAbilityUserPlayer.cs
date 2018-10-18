@@ -45,10 +45,8 @@ public class PropAbilityUserPlayer : PropAbilityUser
 
     protected override void CreateAbilities()
     {
-        infos = GameObject.FindGameObjectWithTag(Tags.USER).GetComponent<User>().GetAbilityInfos();
-        abilities.Clear();
-        for (int i = 0; i < (int)AbilitySlot.MAX_COUNT; i++)
-            abilities.Add(null);
+        infos = GameObject.FindGameObjectWithTag(Tags.USER).GetComponent<User>().GetAbilityInfos();        
+        abilities = new List<AbilityLogicBase>() { null, null };
 
         foreach (var info in infos)
         {

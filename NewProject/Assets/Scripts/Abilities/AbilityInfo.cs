@@ -9,7 +9,7 @@ public class AbilityInfo : MonoBehaviour
     AbilityUid uid;
 
     [SerializeField]
-    LvlAbilities lvl;
+    int lvl;
 
     [SerializeField]
     AbilitySlot slot;
@@ -19,7 +19,7 @@ public class AbilityInfo : MonoBehaviour
         return uid;
     }
 
-    public LvlAbilities GetLvl()
+    public int GetLvl()
     {
         return lvl;
     }

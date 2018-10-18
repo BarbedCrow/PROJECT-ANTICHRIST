@@ -1266,7 +1266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uid: 1
-  lvl: 1
+  lvl: 0
   slot: 1
 --- !u!1 &898284874
 GameObject:
@@ -2148,6 +2148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityInfos:
+  - {fileID: 1962991907}
   - {fileID: 866684932}
 --- !u!4 &1863374769
 Transform:
@@ -2442,7 +2443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uid: 0
-  lvl: 0
+  lvl: 1
   slot: 0
 --- !u!1 &1982017529
 GameObject:

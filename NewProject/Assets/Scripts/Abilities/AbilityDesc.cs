@@ -11,9 +11,9 @@ public class AbilityDesc : MonoBehaviour
     [SerializeField]
     AbilityLogicBase[] logics;
 
-    public AbilityLogicBase GetAbilityLogicByLvl(LvlAbilities lvl)
+    public AbilityLogicBase GetAbilityLogicByLvl(int lvl)
     {
-        return logics[(int)lvl];
+        return logics[lvl];
     }
 
     public AbilityUid GetUid()
@@ -26,13 +26,5 @@ public enum AbilityUid
 {
     FIRE,
     ICE,
-    MAX_COUNT
-}
-
-public enum LvlAbilities
-{
-    FIRST,
-    SECOND,
-    THIRD,
     MAX_COUNT
 }
