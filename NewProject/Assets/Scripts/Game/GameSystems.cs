@@ -9,6 +9,7 @@ public class GameSystems : MonoBehaviour
     [SerializeField] ProjectilesPool projectilesPool;
     [SerializeField] EnemiesPool enemiesPool;
     [SerializeField] HUDManager hudManager;
+    [SerializeField] AbilitiesLibrary abilitiesLibrary;
 
     public void Init()
     {
@@ -29,6 +30,11 @@ public class GameSystems : MonoBehaviour
     public PoolBase GetProjectilesPool()
     {
         return projectilesPool;
+    }
+
+    public AbilitiesLibrary GetAbilitiesLibrary()
+    {
+        return abilitiesLibrary;
     }
 
     public EnemiesPool GetEnemiesPool()

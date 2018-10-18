@@ -6,7 +6,7 @@ public class AbilityDesc : MonoBehaviour
 {
 
     [SerializeField]
-    string uid;
+    AbilityUid uid;
 
     [SerializeField]
     AbilityLogicBase[] logics;
@@ -16,9 +16,15 @@ public class AbilityDesc : MonoBehaviour
         return logics[lvl];
     }
 
-    public string GetUid()
+    public AbilityUid GetUid()
     {
         return uid;
     }
+}
 
+public enum AbilityUid
+{
+    FIRE,
+    ICE,
+    MAX_COUNT
 }

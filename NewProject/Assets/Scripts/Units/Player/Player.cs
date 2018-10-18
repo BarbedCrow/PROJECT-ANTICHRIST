@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Player : UnitBase
 {
-
     [SerializeField] PropAnimPlayerBodyController propAnimBodyController;
 
     public override void Setup(params MonoBehaviour[] args)
@@ -22,6 +21,11 @@ public class Player : UnitBase
             {
                 projectilesPool = (PoolBase)arg;
             }
+
+            if (abilitiesLibrary == null && arg is AbilitiesLibrary)
+            {
+                abilitiesLibrary = (AbilitiesLibrary)arg;
+            }
         }
     }
 
@@ -35,6 +39,8 @@ public class Player : UnitBase
             user.Enable();
         }
 
+        propAbilityUser.Enable();
+
         propMovement.Enable();
         
     }
@@ -42,13 +48,14 @@ public class Player : UnitBase
     #region private
 
     InputsLibrary inputsLibrary;
+    AbilitiesLibrary abilitiesLibrary;
     PoolBase projectilesPool;
 
     protected override void SetupComponents()
     {
         base.SetupComponents();
 
-        propAbilityUser.Setup(inputsLibrary);
+        propAbilityUser.Setup(inputsLibrary, abilitiesLibrary);
         foreach(PropWeaponUserBase user in propWeaponUsers)
         {
             user.Setup(inputsLibrary, projectilesPool);

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PropWeaponUserBase : PropBase
 {
     
-    public List<WeaponDesc> weaponDescs;
+    public List<WeaponBase> weapons;
     public List<string> ignoredTags;
 
     public override void Setup(params MonoBehaviour[] args)
@@ -13,9 +13,9 @@ public class PropWeaponUserBase : PropBase
         base.Setup(args);
 
         propDamager = gameObject.AddComponent<PropDamager>();
-        foreach (WeaponDesc weaponDesc in weaponDescs)
+        foreach (WeaponBase weapon in weapons)
         {
-            weaponDesc.weapon.Setup(propDamager);
+            weapon.Setup(propDamager);
         }
     }
 
@@ -23,21 +23,21 @@ public class PropWeaponUserBase : PropBase
     {
         base.Init(owner);
 
-        foreach (WeaponDesc weaponDesc in weaponDescs)
+        foreach (WeaponBase weapon in weapons)
         {
-            weaponDesc.weapon.Init();
+            weapon.Init();
         }
 
-        currentWeapon = weaponDescs[0].weapon;
-        currentSlot = weaponDescs[0].slot;
+        currentWeapon = weapons[0];
+        currentSlot = 0;
         currentWeapon.Enable();
     }
 
     public override void Terminate()
     {
-        foreach (WeaponDesc weaponDesc in weaponDescs)
+        foreach (WeaponBase weapon in weapons)
         {
-            weaponDesc.weapon.Terminate();
+            weapon.Terminate();
         }
 
         base.Terminate();
@@ -46,7 +46,7 @@ public class PropWeaponUserBase : PropBase
     #region private
 
     protected WeaponBase currentWeapon;
-    protected SlotType currentSlot;
+    protected int currentSlot;
 
     protected PropDamager propDamager;
 
@@ -60,26 +60,11 @@ public class PropWeaponUserBase : PropBase
         currentWeapon.RequestStopAttack();
     }
 
-    protected virtual void SwapWeapon(SlotType slot)
+    protected virtual void SwapWeapon(int slot)
     {
     }
 
     #endregion
-}
-
-[System.Serializable]
-public class WeaponDesc
-{
-    public SlotType slot;
-    public WeaponBase weapon;
-}
-
-[System.Serializable]
-public enum SlotType
-{
-    SLOT_1,
-    SLOT_2,
-    SLOT_3
 }
 
 

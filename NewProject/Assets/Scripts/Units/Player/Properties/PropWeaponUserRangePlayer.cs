@@ -46,6 +46,10 @@ public class PropWeaponUserRangePlayer : PropWeaponUserRange {
     InputTap swap2;
     InputTap swap3;
 
+    const int SLOT_1 = 0;
+    const int SLOT_2 = 1;
+    const int SLOT_3 = 2;
+
     public override void Enable()
     {
         base.Enable();
@@ -53,9 +57,9 @@ public class PropWeaponUserRangePlayer : PropWeaponUserRange {
         reloadInput.OnUse.AddListener(RequestReload);
         attackInput.OnPressed.AddListener(RequestStartAttackInternal);
         attackInput.OnReleased.AddListener(RequestStopAttackInternal);
-        swap1.OnUse.AddListener(() => SwapWeapon(SlotType.SLOT_1));
-        swap2.OnUse.AddListener(() => SwapWeapon(SlotType.SLOT_2));
-        swap3.OnUse.AddListener(() => SwapWeapon(SlotType.SLOT_3));
+        swap1.OnUse.AddListener(() => SwapWeapon(SLOT_1));
+        swap2.OnUse.AddListener(() => SwapWeapon(SLOT_2));
+        swap3.OnUse.AddListener(() => SwapWeapon(SLOT_3));
     }
 
     public override void Disable()
@@ -67,7 +71,7 @@ public class PropWeaponUserRangePlayer : PropWeaponUserRange {
         base.Disable();
     }
 
-    protected override void SwapWeapon(SlotType slot)
+    protected override void SwapWeapon(int slot)
     {
         base.SwapWeapon(slot);
         OnSwapWeapon.Invoke();

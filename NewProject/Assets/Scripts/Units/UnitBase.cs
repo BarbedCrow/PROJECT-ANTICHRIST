@@ -41,8 +41,8 @@ public class UnitBase : MonoBehaviour
     public virtual void Terminate()
     {
         TerminateComponents();
-
-        Destroy(gameObject);
+        if(gameObject)
+            Destroy(gameObject);
     }
 
     public virtual void Enable()

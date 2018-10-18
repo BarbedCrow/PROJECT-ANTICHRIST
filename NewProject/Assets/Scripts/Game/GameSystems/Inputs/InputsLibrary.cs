@@ -40,5 +40,7 @@ public enum InputType
     SWAP_2,
     SWAP_3,
     MELEE,
+    ABILITY1,
+    ABILITY2,
     MAX_COUNT
 }

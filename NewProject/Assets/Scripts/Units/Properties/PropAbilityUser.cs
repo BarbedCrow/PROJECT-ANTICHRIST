@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class PropAbilityUser : PropBase
 {
+    [SerializeField] protected List<AbilityLogicBase> abilities;
+    public List<string> ignoredTags;
 
-    public void StartUse()
+    public override void Setup(params MonoBehaviour[] args)
     {
+        base.Setup(args);
 
-    }
-
-    public void StopUse()
-    {
-
+        propDamager = gameObject.AddComponent<PropDamager>();
+        foreach (AbilityLogicBase ability in abilities)
+        {
+            ability.Setup(propDamager);
+        }
     }
 
     public override void Init(Transform owner)
@@ -22,31 +25,58 @@ public class PropAbilityUser : PropBase
         CreateAbilities();
     }
 
+    public override void Terminate()
+    {
+        foreach (AbilityLogicBase ability in abilities)
+        {
+            if(ability)
+                ability.Terminate();
+        }
+
+        base.Terminate();
+    }
+
+    protected virtual void StartUse(int idx)
+    {
+        if (idx < abilities.Count && abilities[idx] != null)
+            StartUseInternal(idx);
+    }
+
+    protected virtual void StopUse(int idx)
+    {
+        if (idx < abilities.Count && abilities[idx] != null)
+            StopUseInternal(idx);
+    }
+
     #region private
 
-    List<AbilityLogicBase> abilities;
+    protected PropDamager propDamager;
 
-    void CreateAbilities()
+    protected virtual void CreateAbilities()
     {
-
+        foreach (AbilityLogicBase ability in abilities)
+        {
+            ability.Init();
+        }
     }
 
-    public void StartUseInternal()
+    public void StartUseInternal(int idx)
     {
-
+        abilities[idx].StartUse();
     }
 
-    public void StopUseInternal()
+    public void StopUseInternal(int idx)
     {
-
+        abilities[idx].StopUse();
     }
 
     #endregion
-
 }
 
-enum AbilitySlot
+public enum AbilitySlot
 {
     SLOT_1,
-    SLOT_2
+    SLOT_2,
+    MAX_COUNT
 }
+
