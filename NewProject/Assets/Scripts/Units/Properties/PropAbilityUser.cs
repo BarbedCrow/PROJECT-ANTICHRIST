@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PropAbilityUser : PropBase
 {
-
-    [SerializeField] List<AbilityLogicBase> abilities;
+    [SerializeField] protected List<AbilityLogicBase> abilities;
     public List<string> ignoredTags;
 
     public override void Setup(params MonoBehaviour[] args)
@@ -30,7 +29,8 @@ public class PropAbilityUser : PropBase
     {
         foreach (AbilityLogicBase ability in abilities)
         {
-            ability.Terminate();
+            if(ability)
+                ability.Terminate();
         }
 
         base.Terminate();
@@ -38,19 +38,21 @@ public class PropAbilityUser : PropBase
 
     protected virtual void StartUse(int idx)
     {
-        StartUseInternal(idx);
+        if (idx < abilities.Count && abilities[idx] != null)
+            StartUseInternal(idx);
     }
 
     protected virtual void StopUse(int idx)
     {
-        StopUseInternal(idx);
+        if (idx < abilities.Count && abilities[idx] != null)
+            StopUseInternal(idx);
     }
 
     #region private
 
     protected PropDamager propDamager;
 
-    void CreateAbilities()
+    protected virtual void CreateAbilities()
     {
         foreach (AbilityLogicBase ability in abilities)
         {
@@ -71,9 +73,10 @@ public class PropAbilityUser : PropBase
     #endregion
 }
 
-enum AbilitySlot
+public enum AbilitySlot
 {
     SLOT_1,
-    SLOT_2
+    SLOT_2,
+    MAX_COUNT
 }
 

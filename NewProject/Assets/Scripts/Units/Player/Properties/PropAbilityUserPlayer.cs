@@ -17,6 +17,11 @@ public class PropAbilityUserPlayer : PropAbilityUser
             {
                 inputsLibrary = (InputsLibrary)arg;
             }
+
+            if (abilitiesLibrary == null && arg is AbilitiesLibrary)
+            { 
+                abilitiesLibrary = (AbilitiesLibrary)arg;
+            }
         }
     }
 
@@ -31,10 +36,25 @@ public class PropAbilityUserPlayer : PropAbilityUser
     #region private
 
     InputsLibrary inputsLibrary;
+    AbilitiesLibrary abilitiesLibrary;
     InputHold abilitySlot1;
     InputHold abilitySlot2;
     const int SLOT_1 = 0;
     const int SLOT_2 = 1;
+    AbilityInfo[] infos;
+
+    protected override void CreateAbilities()
+    {
+        infos = GameObject.FindGameObjectWithTag(Tags.USER).GetComponent<User>().GetAbilityInfos();
+        abilities.Clear();
+        for (int i = 0; i < (int)AbilitySlot.MAX_COUNT; i++)
+            abilities.Add(null);
+
+        foreach (var info in infos)
+        {
+            abilities[(int)info.GetSlot()] = abilitiesLibrary.GetDescByUid(info.GetUid()).GetAbilityLogicByLvl(info.GetLvl());
+        }
+    }
 
     public override void Enable()
     {

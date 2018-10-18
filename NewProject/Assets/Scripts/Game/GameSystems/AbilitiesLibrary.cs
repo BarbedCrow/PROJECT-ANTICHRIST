@@ -8,7 +8,7 @@ public class AbilitiesLibrary : MonoBehaviour
     [SerializeField]
     AbilityDesc[] descs;
 
-    public AbilityDesc GetDescByUid(string uid)
+    public AbilityDesc GetDescByUid(AbilityUid uid)
     {
         foreach(var desc in descs)
         {
@@ -20,5 +20,4 @@ public class AbilitiesLibrary : MonoBehaviour
 
         return null;
     }
-	
 }
