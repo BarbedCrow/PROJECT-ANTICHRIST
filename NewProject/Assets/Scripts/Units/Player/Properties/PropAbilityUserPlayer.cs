@@ -9,8 +9,6 @@ public class PropAbilityUserPlayer : PropAbilityUser
 
     public override void Setup(params MonoBehaviour[] args)
     {
-        base.Setup(args);
-
         foreach (MonoBehaviour arg in args)
         {
             if (inputsLibrary == null && arg is InputsLibrary)
@@ -23,6 +21,8 @@ public class PropAbilityUserPlayer : PropAbilityUser
                 abilitiesLibrary = (AbilitiesLibrary)arg;
             }
         }
+
+        base.Setup(args);
     }
 
     public override void Init(Transform owner)

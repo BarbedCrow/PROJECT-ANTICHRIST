@@ -7,7 +7,7 @@ public class AbilityFireFirst : AbilityAttackBase
 {
     public override void StartUse()
     {
-        Debug.Log("Fire1");
+        sprite.Enable(pivot, damage, speed, damager);
     }
 
     public override void StopUse()

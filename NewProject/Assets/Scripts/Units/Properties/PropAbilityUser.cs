@@ -7,14 +7,22 @@ public class PropAbilityUser : PropBase
     [SerializeField] protected List<AbilityLogicBase> abilities;
     public List<string> ignoredTags;
 
+    [SerializeField] protected Transform pivot;
+
     public override void Setup(params MonoBehaviour[] args)
     {
         base.Setup(args);
+        CreateAbilities();
 
         propDamager = gameObject.AddComponent<PropDamager>();
         foreach (AbilityLogicBase ability in abilities)
         {
-            ability.Setup(propDamager);
+            if (ability is AbilityAttackBase)
+            {
+                ability.Setup(propDamager);
+                var attackAbility = (AbilityAttackBase)ability;
+                attackAbility.SetupPivot(pivot);
+            }
         }
     }
 
@@ -22,7 +30,10 @@ public class PropAbilityUser : PropBase
     {
         base.Init(owner);
 
-        CreateAbilities();
+        foreach (AbilityLogicBase ability in abilities)
+        {
+            ability.Init();
+        }
     }
 
     public override void Terminate()
@@ -52,13 +63,7 @@ public class PropAbilityUser : PropBase
 
     protected PropDamager propDamager;
 
-    protected virtual void CreateAbilities()
-    {
-        foreach (AbilityLogicBase ability in abilities)
-        {
-            ability.Init();
-        }
-    }
+    protected virtual void CreateAbilities() {}
 
     public void StartUseInternal(int idx)
     {
