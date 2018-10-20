@@ -284,7 +284,7 @@ Prefab:
     - target: {fileID: 224404003472624878, guid: 353c1c67b7250e447ba613df3d8ffaa9,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224404003472624878, guid: 353c1c67b7250e447ba613df3d8ffaa9,
         type: 2}
@@ -294,7 +294,7 @@ Prefab:
     - target: {fileID: 224072097683896924, guid: 353c1c67b7250e447ba613df3d8ffaa9,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 35
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224072097683896924, guid: 353c1c67b7250e447ba613df3d8ffaa9,
         type: 2}
@@ -460,12 +460,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 150357476}
-  - component: {fileID: 150357480}
   - component: {fileID: 150357479}
-  - component: {fileID: 150357478}
   - component: {fileID: 150357477}
+  - component: {fileID: 150357480}
+  - component: {fileID: 150357478}
   m_Layer: 0
-  m_Name: Sprite
+  m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -479,7 +479,7 @@ RectTransform:
   m_GameObject: {fileID: 150357475}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 5.985224}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1068526670}
   m_RootOrder: 0
@@ -500,7 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2729a2502ce5dbc449e80d0f8213e297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 100
+  lifetime: 3
 --- !u!95 &150357478
 Animator:
   serializedVersion: 3
@@ -510,7 +510,7 @@ Animator:
   m_GameObject: {fileID: 150357475}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0cfe43b83a8e50446bcc9afd8e5df1c1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -528,10 +528,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 2.5
-  m_Height: 2.5
+  m_Radius: 1
+  m_Height: 1
   m_Direction: 0
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.8, z: 0}
 --- !u!212 &150357480
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -567,15 +567,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 55f2674ca9958584a92eb3ca5fad8f76, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.12, y: 5.12}
+  m_Size: {x: 3, y: 5.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &170076733
@@ -873,7 +873,7 @@ RectTransform:
   m_Children:
   - {fileID: 1842959012}
   m_Father: {fileID: 1510951937}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -983,7 +983,7 @@ Prefab:
     - target: {fileID: 224315576345437306, guid: 39683b3622e35324fb83f2de4024bd1e,
         type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224315576345437306, guid: 39683b3622e35324fb83f2de4024bd1e,
         type: 2}
@@ -1834,9 +1834,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 538924755}
-  - {fileID: 106256362}
   - {fileID: 289365363}
+  - {fileID: 106256362}
+  - {fileID: 538924755}
   m_Father: {fileID: 1898403989}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
