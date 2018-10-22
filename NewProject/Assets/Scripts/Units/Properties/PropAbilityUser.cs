@@ -32,7 +32,8 @@ public class PropAbilityUser : PropBase
 
         foreach (AbilityLogicBase ability in abilities)
         {
-            ability.Init();
+            if(ability)
+                ability.Init();
         }
     }
 
@@ -47,17 +48,23 @@ public class PropAbilityUser : PropBase
         base.Terminate();
     }
 
-    protected virtual void StartUse(int idx)
+    public virtual void StartUse(int idx)
     {
         if (idx < abilities.Count && abilities[idx] != null)
             StartUseInternal(idx);
     }
 
-    protected virtual void StopUse(int idx)
+    public virtual void StopUse(int idx)
     {
         if (idx < abilities.Count && abilities[idx] != null)
             StopUseInternal(idx);
     }
+
+    public List<AbilityLogicBase> GetAbilities()
+    {
+        return abilities;
+    }
+    
 
     #region private
 
@@ -65,12 +72,12 @@ public class PropAbilityUser : PropBase
 
     protected virtual void CreateAbilities() {}
 
-    public void StartUseInternal(int idx)
+    protected void StartUseInternal(int idx)
     {
-        abilities[idx].StartUse();
+        abilities[idx].TryStartUse();
     }
 
-    public void StopUseInternal(int idx)
+    protected void StopUseInternal(int idx)
     {
         abilities[idx].StopUse();
     }
