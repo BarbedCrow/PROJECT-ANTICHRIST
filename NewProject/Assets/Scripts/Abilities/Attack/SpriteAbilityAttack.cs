@@ -23,9 +23,6 @@ public class SpriteAbilityAttack : MonoBehaviour
 
     public void Enable(Transform initTransfrom, float damage, float speed, PropDamager damager)
     {
-        if (gameObject.activeSelf)
-            return;
-
         var newRot = Quaternion.Euler(initTransfrom.rotation.eulerAngles.x, initTransfrom.rotation.eulerAngles.y + 90, initTransfrom.rotation.eulerAngles.z);
 
         transform.SetPositionAndRotation(initTransfrom.position, newRot);

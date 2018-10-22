@@ -7,12 +7,13 @@ public class AbilityIceFirst : AbilityAttackBase
 {
     public override void StartUse()
     {
+        base.StartUse();
         Debug.Log("Ice1");
     }
 
     public override void StopUse()
     {
-
+        base.StopUse();
     }
 
     #region private

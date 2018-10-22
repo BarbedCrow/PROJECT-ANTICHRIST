@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PropAbilityUserPlayer : PropAbilityUser
 {
@@ -33,6 +34,26 @@ public class PropAbilityUserPlayer : PropAbilityUser
         abilitySlot2 = (InputHold)inputsLibrary.GetInput(abilitySlot2InputType);
     }
 
+    public override void Enable()
+    {
+        base.Enable();
+
+        abilitySlot1.OnPressed.AddListener(() => StartUse(SLOT_1));
+        abilitySlot1.OnReleased.AddListener(() => StopUse(SLOT_1));
+        abilitySlot2.OnPressed.AddListener(() => StartUse(SLOT_2));
+        abilitySlot2.OnReleased.AddListener(() => StopUse(SLOT_2));
+    }
+
+    public override void Disable()
+    {
+        abilitySlot1.OnPressed.RemoveListener(() => StartUse(SLOT_1));
+        abilitySlot1.OnReleased.RemoveListener(() => StopUse(SLOT_1));
+        abilitySlot2.OnPressed.RemoveListener(() => StartUse(SLOT_2));
+        abilitySlot2.OnReleased.RemoveListener(() => StopUse(SLOT_2));
+
+        base.Disable();
+    }
+
     #region private
 
     InputsLibrary inputsLibrary;
@@ -54,25 +75,6 @@ public class PropAbilityUserPlayer : PropAbilityUser
         }
     }
 
-    public override void Enable()
-    {
-        base.Enable();
-
-        abilitySlot1.OnPressed.AddListener(() => StartUse(SLOT_1));
-        abilitySlot1.OnReleased.AddListener(() => StopUse(SLOT_1));
-        abilitySlot2.OnPressed.AddListener(() => StartUse(SLOT_2));
-        abilitySlot2.OnReleased.AddListener(() => StopUse(SLOT_2));
-    }
-
-    public override void Disable()
-    {
-        abilitySlot1.OnPressed.RemoveListener(() => StartUse(SLOT_1));
-        abilitySlot1.OnReleased.RemoveListener(() => StopUse(SLOT_1));
-        abilitySlot2.OnPressed.RemoveListener(() => StartUse(SLOT_2));
-        abilitySlot2.OnReleased.RemoveListener(() => StopUse(SLOT_2));
-
-        base.Disable();
-    }
     #endregion
 
 }
