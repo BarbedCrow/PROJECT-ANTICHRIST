@@ -15,7 +15,7 @@ public class UIAbilityController : UIBaseController
         {
             data.isFirstExist = true;
             data.canUseFirst = true;
-            abilities[0].OnAbilityAttack.AddListener(UpdateUI);
+            abilities[0].OnAbilityStartUse.AddListener(UpdateUI);
             abilities[0].OnAbilityStopReload.AddListener(UpdateUI);
         }
 
@@ -23,7 +23,7 @@ public class UIAbilityController : UIBaseController
         {
             data.isSecondExist = true;
             data.canUseSecond = true;
-            abilities[1].OnAbilityAttack.AddListener(UpdateUI);
+            abilities[1].OnAbilityStartUse.AddListener(UpdateUI);
             abilities[1].OnAbilityStopReload.AddListener(UpdateUI);
         }
 
@@ -39,12 +39,12 @@ public class UIAbilityController : UIBaseController
     {
         if (abilities[0])
         {
-            data.canUseFirst = abilities[0].GetCanUse();
+            data.canUseFirst = abilities[0].CanUse();
         }
 
         if (abilities[1])
         {
-            data.canUseSecond = abilities[1].GetCanUse();
+            data.canUseSecond = abilities[1].CanUse();
         }
 
         uiView.UpdateUI(data);

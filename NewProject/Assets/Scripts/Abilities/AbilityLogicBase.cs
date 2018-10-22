@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class AbilityLogicBase : MonoBehaviour
 {
-    [HideInInspector] public UnityEvent OnAbilityAttack = new UnityEvent();
+    [HideInInspector] public UnityEvent OnAbilityStartUse = new UnityEvent();
     [HideInInspector] public UnityEvent OnAbilityStopReload = new UnityEvent();
 
     [SerializeField] protected float timeToReload;
@@ -46,7 +46,7 @@ public class AbilityLogicBase : MonoBehaviour
         timerToReload.StartWork();
         canUse = false;
         timerToReload.OnTimersFinished.AddListener(StopReloadAbility);
-        OnAbilityAttack.Invoke();
+        OnAbilityStartUse.Invoke();
     }
 
     public virtual void StopUse()
@@ -64,7 +64,7 @@ public class AbilityLogicBase : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public bool GetCanUse()
+    public bool CanUse()
     {
         return canUse;
     }
