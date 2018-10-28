@@ -37,7 +37,8 @@ public class PropDamagable : PropBase
         OnGotDamage.Invoke(info);
 
         if (currentHp <= 0)
-        {
+        {   
+                info.damager.KillDamagable(info);
             Die(info);
         }
 

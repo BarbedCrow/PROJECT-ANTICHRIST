@@ -5,8 +5,7 @@ using UnityEngine.Events;
 
 public class EventDeclarations : MonoBehaviour
 {
-
-	
+    
 }
 
 public class EventOnDie : UnityEvent<DamageInfo> { }
@@ -15,3 +14,4 @@ public class EventOnSeen : UnityEvent<Transform> { }
 public class EventOnMove : UnityEvent<Vector3> { }
 public class EventOnCursorTrigger : UnityEvent<Collider> { }
 public class EventOnDifficultChanged : UnityEvent<DifficultyType> { }
+public class EventOnKillEnemy : UnityEvent<DamageInfo> { }

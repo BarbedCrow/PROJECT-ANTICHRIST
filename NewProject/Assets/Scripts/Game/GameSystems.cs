@@ -10,6 +10,7 @@ public class GameSystems : MonoBehaviour
     [SerializeField] EnemiesPool enemiesPool;
     [SerializeField] HUDManager hudManager;
     [SerializeField] AbilitiesLibrary abilitiesLibrary;
+    [SerializeField] RewardRulesLibrary rewardRulesLibrary;
 
     public void Init()
     {
@@ -50,6 +51,7 @@ public class GameSystems : MonoBehaviour
         projectilesPool.Init();
         inputsLibrary.Init();
         hudManager.Init();
+        rewardRulesLibrary.Init();
     }
 
     void TerminateComponents()

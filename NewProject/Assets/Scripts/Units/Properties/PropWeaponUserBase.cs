@@ -43,6 +43,16 @@ public class PropWeaponUserBase : PropBase
         base.Terminate();
     }
 
+    public List<WeaponBase> GetWeapons()
+    {
+        return weapons;
+    }
+
+    public PropDamager GetPropDamager()
+    {
+        return propDamager;
+    }
+
     #region private
 
     protected WeaponBase currentWeapon;

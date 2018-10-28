@@ -64,7 +64,11 @@ public class PropAbilityUser : PropBase
     {
         return abilities;
     }
-    
+
+    public PropDamager GetPropDamager()
+    {
+        return propDamager;
+    }
 
     #region private
 
