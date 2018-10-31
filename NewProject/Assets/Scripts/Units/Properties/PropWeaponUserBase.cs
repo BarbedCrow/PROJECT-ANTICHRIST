@@ -12,7 +12,10 @@ public class PropWeaponUserBase : PropBase
     {
         base.Setup(args);
 
-        propDamager = gameObject.AddComponent<PropDamager>();
+        foreach (var arg in args)
+            if (arg is PropDamager)
+                propDamager = (PropDamager)arg;
+
         foreach (WeaponBase weapon in weapons)
         {
             weapon.Setup(propDamager);
@@ -41,6 +44,16 @@ public class PropWeaponUserBase : PropBase
         }
 
         base.Terminate();
+    }
+
+    public List<WeaponBase> GetWeapons()
+    {
+        return weapons;
+    }
+
+    public PropDamager GetPropDamager()
+    {
+        return propDamager;
     }
 
     #region private

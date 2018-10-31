@@ -29,12 +29,11 @@ public class UnitBase : MonoBehaviour
 
     public virtual void Setup(params MonoBehaviour[] args)
     {
-
+        SetupComponents();
     }
 
     public virtual void Init()
     {
-        SetupComponents();
         InitComponents();
     }
 
@@ -60,13 +59,26 @@ public class UnitBase : MonoBehaviour
         return damagable;
     }
 
+    public PropDamager GetDamager()
+    {
+        return damager;
+    }
+
     #region private
 
     protected PropDamagable damagable;
+    protected PropDamager damager;
 
     protected virtual void SetupComponents()
     {
+        damager = gameObject.AddComponent<PropDamager>();
 
+        foreach (PropWeaponUserBase user in propWeaponUsers)
+        {
+            user.Setup(damager);
+        }
+        
+        propAbilityUser.Setup(damager);
     }
 
     protected virtual void InitComponents()

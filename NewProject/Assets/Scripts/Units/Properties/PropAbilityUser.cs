@@ -12,9 +12,17 @@ public class PropAbilityUser : PropBase
     public override void Setup(params MonoBehaviour[] args)
     {
         base.Setup(args);
+
+        foreach (var arg in args)
+        {
+            if (propDamager == null && arg is PropDamager)
+            {
+                propDamager = (PropDamager)arg;
+            }
+        }
+
         CreateAbilities();
 
-        propDamager = gameObject.AddComponent<PropDamager>();
         foreach (AbilityLogicBase ability in abilities)
         {
             if (ability is AbilityAttackBase)
@@ -64,7 +72,11 @@ public class PropAbilityUser : PropBase
     {
         return abilities;
     }
-    
+
+    public PropDamager GetPropDamager()
+    {
+        return propDamager;
+    }
 
     #region private
 

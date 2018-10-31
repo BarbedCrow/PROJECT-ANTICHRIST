@@ -8,8 +8,6 @@ public class Player : UnitBase
 
     public override void Setup(params MonoBehaviour[] args)
     {
-        base.Setup(args);
-
         foreach(MonoBehaviour arg in args)
         {
             if(inputsLibrary == null && arg is InputsLibrary)
@@ -27,6 +25,8 @@ public class Player : UnitBase
                 abilitiesLibrary = (AbilitiesLibrary)arg;
             }
         }
+        
+        base.Setup(inputsLibrary, abilitiesLibrary);
     }
 
     public override void Enable()
@@ -53,13 +53,13 @@ public class Player : UnitBase
 
     protected override void SetupComponents()
     {
-        base.SetupComponents();
-
         propAbilityUser.Setup(inputsLibrary, abilitiesLibrary);
         foreach(PropWeaponUserBase user in propWeaponUsers)
         {
             user.Setup(inputsLibrary, projectilesPool);
         }
+
+        base.SetupComponents();
     }
 
     protected override void InitComponents()
