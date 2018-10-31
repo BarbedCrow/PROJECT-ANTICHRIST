@@ -12,7 +12,10 @@ public class PropWeaponUserBase : PropBase
     {
         base.Setup(args);
 
-        propDamager = gameObject.AddComponent<PropDamager>();
+        foreach (var arg in args)
+            if (arg is PropDamager)
+                propDamager = (PropDamager)arg;
+
         foreach (WeaponBase weapon in weapons)
         {
             weapon.Setup(propDamager);

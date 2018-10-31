@@ -21,9 +21,12 @@ public class PropAbilityUserPlayer : PropAbilityUser
             { 
                 abilitiesLibrary = (AbilitiesLibrary)arg;
             }
-        }
 
-        base.Setup(args);
+            if (propDamager == null && arg is PropDamager)
+            {
+                base.Setup(args);
+            }
+        }
     }
 
     public override void Init(Transform owner)

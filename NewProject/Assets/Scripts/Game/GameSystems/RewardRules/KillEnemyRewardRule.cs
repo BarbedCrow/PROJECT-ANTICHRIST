@@ -9,9 +9,7 @@ public class KillEnemyRewardRule : RewardRuleBase
         base.Init();
 
         var player = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<Player>();
-        player.GetWeaponUserMelee().GetPropDamager().onKillEnemy.AddListener(AddScore);
-        player.GetWeaponUserRange().GetPropDamager().onKillEnemy.AddListener(AddScore);
-        player.GetAbilityUser().GetPropDamager().onKillEnemy.AddListener(AddScore);
+        player.GetDamager().onKillEnemy.AddListener(AddScore);
     }
 
     #region private
