@@ -32,6 +32,7 @@ public class PropMovementAI : PropMovement
         for (; ; )
         {
             var dist = Vector3.Distance(playerTransform.position, transform.position);
+            OnMove.Invoke(agent.nextPosition);
             if (dist <= maxDistToPlayer && !agent.isStopped)
             {
                 agent.isStopped = true;

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Player : UnitBase
 {
-    [SerializeField] PropAnimPlayerBodyController propAnimBodyController;
-
     public override void Setup(params MonoBehaviour[] args)
     {
         foreach(MonoBehaviour arg in args)

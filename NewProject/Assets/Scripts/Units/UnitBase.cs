@@ -11,6 +11,7 @@ public class UnitBase : MonoBehaviour
     [SerializeField] protected PropMovement propMovement;
     [SerializeField] protected List<PropWeaponUserBase> propWeaponUsers;
     [SerializeField] protected PropAbilityUser propAbilityUser;
+    [SerializeField] protected PropAnimPlayerBodyController propAnimBodyController;
 
     public PropWeaponUserRange GetWeaponUserRange()
     {
