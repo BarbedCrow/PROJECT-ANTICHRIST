@@ -16,8 +16,26 @@ public class KillEnemyRewardRule : RewardRuleBase
 
     void AddScore(DamageInfo info)
     {
-        user.AddScore(100);
-        Debug.Log(user.GetScore().ToString());
+        if (info.damagable.GetComponentInParent<Enemy>())
+        {
+            if (difficulty.GetDifficult() == DifficultyType.EASY)
+            {
+                user.AddScore(100);
+            }
+            if (difficulty.GetDifficult() == DifficultyType.MEDIUM)
+            {
+                user.AddScore(200);
+            }
+            if (difficulty.GetDifficult() == DifficultyType.HARD)
+            {
+                user.AddScore(300);
+            }
+            if (difficulty.GetDifficult() == DifficultyType.MOMMY_WILL_NOT_HELP_YOU)
+            {
+                user.AddScore(500);
+            }
+            Debug.Log(user.GetScore().ToString());
+        }
     }
 
     #endregion

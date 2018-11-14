@@ -8,7 +8,7 @@ public class PropDamagable : PropBase
 
     public EventOnDie OnDie = new EventOnDie();
     public EventOnGotDamage OnGotDamage = new EventOnGotDamage();
-    public UnityEvent OnHealthChanged = new UnityEvent();
+    [HideInInspector]public UnityEvent OnHealthChanged = new UnityEvent();
 
     [SerializeField] float health;
 
