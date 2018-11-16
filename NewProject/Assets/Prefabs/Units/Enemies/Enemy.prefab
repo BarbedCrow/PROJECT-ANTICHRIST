@@ -737,6 +737,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  maxRangeForAttack: 3
+  coolDownTime: 1.5
 --- !u!114 &114868689310289542
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -751,10 +753,10 @@ MonoBehaviour:
   propAnimMovementController: {fileID: 114006911599494884}
   propMovement: {fileID: 114958298333526284}
   propWeaponUsers:
-  - {fileID: 114439670730892950}
   - {fileID: 114065921013160852}
+  - {fileID: 114439670730892950}
   propAbilityUser: {fileID: 114024087218490990}
-  propAnimBodyController: {fileID: 0}
+  propAnimBodyController: {fileID: 114237340545673470}
   playerDetector: {fileID: 114938334127714014}
   returnCost: 0
 --- !u!114 &114934013626668724

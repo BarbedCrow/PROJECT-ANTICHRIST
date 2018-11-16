@@ -43,11 +43,28 @@ public class Enemy : UnitBase
         return returnCost;
     }
 
+    public AiPlayerDetector GetPlayerDetector()
+    {
+        return playerDetector;
+    }
+
     #region private
 
     EnemiesPool pool;
 
     bool isChasing = false;
+
+    protected override void SetupComponents()
+    {
+        base.SetupComponents();
+
+        foreach (PropWeaponUserBase user in propWeaponUsers)
+        {
+            user.Setup(damager, playerDetector);
+        }
+
+        propAbilityUser.Setup(damager, playerDetector);
+    }
 
     protected override void InitComponents()
     {
