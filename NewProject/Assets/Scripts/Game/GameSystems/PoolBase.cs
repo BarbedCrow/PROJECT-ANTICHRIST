@@ -8,7 +8,7 @@ public class PoolBase : MonoBehaviour
     public int maxCapacity;
     
 
-    public virtual void Init()
+    public virtual void Init(params MonoBehaviour[] args)
     {
         foreach (PoolObjectDesc desc in descs)
         {

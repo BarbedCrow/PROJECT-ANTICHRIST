@@ -10,15 +10,20 @@ public class Enemy : UnitBase
 
     public override void Setup(params MonoBehaviour[] args)
     {
-        base.Setup(args);
-
         foreach(var arg in args)
         {
-            if(pool == null && arg is EnemiesPool)
+            if(enemiesPool == null && arg is EnemiesPool)
             {
-                pool = (EnemiesPool)arg;
+                enemiesPool = (EnemiesPool)arg;
+            }
+
+            if (projectilesPool == null && arg is ProjectilesPool)
+            {
+                projectilesPool = (ProjectilesPool)arg;
             }
         }
+
+        base.Setup(args);
     }
 
     public override void Enable()
@@ -50,7 +55,8 @@ public class Enemy : UnitBase
 
     #region private
 
-    EnemiesPool pool;
+    EnemiesPool enemiesPool;
+    ProjectilesPool projectilesPool;
 
     bool isChasing = false;
 
@@ -60,7 +66,7 @@ public class Enemy : UnitBase
 
         foreach (PropWeaponUserBase user in propWeaponUsers)
         {
-            user.Setup(damager, playerDetector);
+            user.Setup(damager, playerDetector, projectilesPool, propWeaponUsers[0], propWeaponUsers[1]);
         }
 
         propAbilityUser.Setup(damager, playerDetector);
@@ -99,7 +105,7 @@ public class Enemy : UnitBase
     protected override void Die(DamageInfo info)
     {
         base.Die(info);
-        pool.Release(gameObject);
+        enemiesPool.Release(gameObject);
     }
 
     #endregion

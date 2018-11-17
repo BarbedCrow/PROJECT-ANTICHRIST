@@ -7,6 +7,11 @@ public class PropWeaponUserMeleeAI : PropWeaponUserMelee
     [SerializeField] float maxRangeForAttack;
     [SerializeField] float coolDownTime;
 
+    public float GetMaxRange()
+    {
+        return maxRangeForAttack;
+    }
+
     public override void Setup(params MonoBehaviour[] args)
     {
         foreach (var arg in args)
@@ -14,6 +19,11 @@ public class PropWeaponUserMeleeAI : PropWeaponUserMelee
             if (playerDetector == null && arg is AiPlayerDetector)
             {
                 playerDetector = (AiPlayerDetector)arg;
+            }
+
+            if (userRangeAI == null && arg is PropWeaponUserRangeAI)
+            {
+                userRangeAI = (PropWeaponUserRangeAI)arg;
             }
         }
 
@@ -31,36 +41,43 @@ public class PropWeaponUserMeleeAI : PropWeaponUserMelee
         playerDetector.OnMiss.AddListener(HandleOnMiss);
     }
 
+    public bool GetCanMeleeAttack()
+    {
+        return canMeleeAttack;
+    }
+
     #region private
 
     Timer cdTimer;
     bool detectPlayer = false;
     AiPlayerDetector playerDetector;
     Transform playerPosition;
-    bool canAttack = true;
+    bool canMeleeAttack = false;
+
+    PropWeaponUserRangeAI userRangeAI;
 
     void HandleOnSeen(Transform playerPosition)
     {
         detectPlayer = true;
+        canMeleeAttack = true;
         this.playerPosition = playerPosition;
-        TryAttack();
     }
 
     void HandleOnMiss()
     {
         detectPlayer = false;
+        canMeleeAttack = false;
         playerPosition = null;
     }
 
     void TryAttack()
     {
         var rangeBetween = Vector3.Distance(gameObject.transform.position, playerPosition.position);
-        Debug.Log(rangeBetween.ToString());
         if (rangeBetween <= maxRangeForAttack)
         {
             RequestStartAttackInternal();
             cdTimer.StartWork();
-            canAttack = false;
+            canMeleeAttack = false;
             cdTimer.OnTimersFinished.AddListener(SetCanAttack);
             RequestStartAttackInternal();
         }
@@ -69,12 +86,12 @@ public class PropWeaponUserMeleeAI : PropWeaponUserMelee
     void SetCanAttack()
     {
         cdTimer.OnTimersFinished.RemoveListener(SetCanAttack);
-        canAttack = true;
+        canMeleeAttack = true;
     }
 
     void Update()
     {
-        if(detectPlayer && canAttack)
+        if (detectPlayer && canMeleeAttack)
             TryAttack();
     }
 

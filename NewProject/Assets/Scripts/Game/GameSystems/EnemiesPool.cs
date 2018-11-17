@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class EnemiesPool : PoolBase
 {
-
-    public override void Init()
+    public override void Init(params MonoBehaviour[] args)
     {
         base.Init();
+
+        foreach (var arg in args)
+        {
+            if (projectilesPool == null && arg is ProjectilesPool)
+                projectilesPool = (ProjectilesPool)arg;
+        }
 
         foreach (var objs in availableObjects)
         {
             foreach (var obj in objs.Value)
             {
                 var enemy = obj.GetComponent<Enemy>();
-                enemy.Setup(this);
+                enemy.Setup(this, projectilesPool);
                 enemy.Init();
             }
         }
@@ -33,4 +38,10 @@ public class EnemiesPool : PoolBase
 
         base.Terminate();
     }
+
+    #region private
+
+    ProjectilesPool projectilesPool;
+
+    #endregion
 }
