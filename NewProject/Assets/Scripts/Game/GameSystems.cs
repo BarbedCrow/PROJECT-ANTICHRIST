@@ -47,8 +47,8 @@ public class GameSystems : MonoBehaviour
 
     void InitComponents()
     {
-        enemiesPool.Init();
         projectilesPool.Init();
+        enemiesPool.Init(projectilesPool);
         inputsLibrary.Init();
         hudManager.Init();
         rewardRulesLibrary.Init();

@@ -5,8 +5,7 @@ using UnityEngine.Events;
 
 public class PropWeaponUserMelee : PropWeaponUserBase
 {
-
-    public UnityEvent OnStartAttack = new UnityEvent();
+    [HideInInspector] public UnityEvent OnStartAttack = new UnityEvent();
 
     public override void Init(Transform owner)
     {
@@ -26,6 +25,8 @@ public class PropWeaponUserMelee : PropWeaponUserBase
         {
             currentWeapon.RequestStartAttack();
         }
+
+        OnStartAttack.Invoke();
     }
 
     #endregion

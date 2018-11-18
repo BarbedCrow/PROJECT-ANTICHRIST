@@ -97,12 +97,12 @@ public class UnitBase : MonoBehaviour
         propAbilityUser.Init(transform);
 
         propAnimMovementController?.Init(transform);
+        propAnimBodyController?.Init(transform);
     }
 
     protected virtual void TerminateComponents()
     {
         damagable.OnDie.RemoveListener(Die);
-        propAnimMovementController?.Terminate();
         propAbilityUser.Terminate();
         foreach (PropWeaponUserBase user in propWeaponUsers)
         {
@@ -110,6 +110,9 @@ public class UnitBase : MonoBehaviour
         }
 
         propMovement.Terminate();
+
+        propAnimMovementController?.Terminate();
+        propAnimBodyController?.Terminate();
     }
 
     protected virtual void Die(DamageInfo info)

@@ -39,13 +39,6 @@ public class PropWeaponUserMeleePlayer : PropWeaponUserMelee
     InputsLibrary inputsLibrary;
     InputTap attackInput;
 
-    protected override void RequestStartAttackInternal()
-    {
-        base.RequestStartAttackInternal();
-
-        OnStartAttack.Invoke();
-    }
-
     #endregion
 
 }

@@ -63,14 +63,10 @@ public class Player : UnitBase
     protected override void InitComponents()
     {
         base.InitComponents();
-
-        propAnimBodyController.Init(transform);
     }
 
     protected override void TerminateComponents()
     {
-        propAnimBodyController.Terminate();
-
         base.TerminateComponents();
     }
 

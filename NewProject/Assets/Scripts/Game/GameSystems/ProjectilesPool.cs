@@ -5,7 +5,7 @@ using UnityEngine;
 public class ProjectilesPool : PoolBase
 {
 
-    public override void Init()
+    public override void Init(params MonoBehaviour[] args)
     {
         base.Init();
 
