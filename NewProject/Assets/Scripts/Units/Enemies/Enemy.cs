@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Enemy : UnitBase
 {
-
     [SerializeField] AiPlayerDetector playerDetector;
     [SerializeField] int returnCost;
 
@@ -66,7 +65,7 @@ public class Enemy : UnitBase
 
         foreach (PropWeaponUserBase user in propWeaponUsers)
         {
-            user.Setup(damager, playerDetector, projectilesPool, propWeaponUsers[0], propWeaponUsers[1]);
+            user.Setup(damager, playerDetector, projectilesPool);
         }
 
         propAbilityUser.Setup(damager, playerDetector);
@@ -77,6 +76,19 @@ public class Enemy : UnitBase
         base.InitComponents();
 
         playerDetector.Init(transform);
+
+        var propWeaponUserRangeAI = (PropWeaponUserRangeAI)propWeaponUsers[0];
+        var propWeaponUserMeleeAI = (PropWeaponUserMeleeAI)propWeaponUsers[1];
+        //var propAbilityUserAI = (PropAbilityUserAI)propAbilityUser;
+
+        propWeaponUserRangeAI.OnAIRangeAttackStart.AddListener(RangeAttackStart);
+        propWeaponUserRangeAI.OnAIRangeAttackStop.AddListener(RangeAttackStop);
+
+        //propWeaponUserMeleeAI.OnAIMeleeAttackStart.AddListener(MeleeAttackStart);
+        propWeaponUserMeleeAI.OnAIMeleeAttackStop.AddListener(MeleeAttackStop);
+
+        //propAbilityUserAI.OnAIAbilityUseStart.AddListener(AbilityUseStart);
+        //propAbilityUserAI.OnAIAbilityUseStop.AddListener(AbilityUseStop);
     }
 
     protected override void TerminateComponents()
@@ -107,6 +119,41 @@ public class Enemy : UnitBase
         base.Die(info);
         enemiesPool.Release(gameObject);
     }
+
+    protected void RangeAttackStart()
+    {
+        propWeaponUsers[0].Enable();
+        propWeaponUsers[1].Disable();
+    }
+
+    protected void RangeAttackStop()
+    {
+        propWeaponUsers[0].Disable();
+        propWeaponUsers[1].Enable();
+    }
+
+    /*protected void MeleeAttackStart()
+    {
+        propWeaponUsers[0].Disable();
+    }*/
+
+    protected void MeleeAttackStop()
+    {
+        propWeaponUsers[0].Enable();
+        propWeaponUsers[1].Disable();
+    }
+
+    /*protected void AbilityUseStart()
+    {
+        propWeaponUsers[0].Disable();
+        propWeaponUsers[1].Disable();
+    }
+
+    protected void AbilityUseStop()
+    {
+        propWeaponUsers[0].Enable();
+        propWeaponUsers[1].Enable();
+    }*/
 
     #endregion
 

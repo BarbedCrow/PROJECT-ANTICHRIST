@@ -706,6 +706,16 @@ MonoBehaviour:
   - {fileID: 114818037254180774}
   - {fileID: 114626555875024430}
   ignoredTags: []
+  OnPlayerRangeAttackStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnPlayerRangeAttackStop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   OnSwapWeapon:
     m_PersistentCalls:
       m_Calls: []
@@ -731,6 +741,16 @@ MonoBehaviour:
   - {fileID: 114988453194089290}
   ignoredTags: []
   OnStartAttack:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnPlayerMeleeAttackStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnPlayerMeleeAttackStop:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -913,7 +933,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   pivot: {fileID: 4551074029554966}
   damage: 20
-  attackTime: 33
+  attackTime: 1
 --- !u!136 &136554888487670278
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PropWeaponUserRangePlayer : PropWeaponUserRange {
-
+public class PropWeaponUserRangePlayer : PropWeaponUserRange
+{
+    [HideInInspector] public UnityEvent OnPlayerRangeAttackStart;
+    [HideInInspector] public UnityEvent OnPlayerRangeAttackStop;
     [HideInInspector] public UnityEvent OnSwapWeapon = new UnityEvent();
 
     [SerializeField] InputType attackInputType;
@@ -67,6 +69,9 @@ public class PropWeaponUserRangePlayer : PropWeaponUserRange {
         reloadInput.OnUse.RemoveListener(RequestReload);
         attackInput.OnPressed.RemoveListener(RequestStartAttackInternal);
         attackInput.OnReleased.RemoveListener(RequestStopAttackInternal);
+        swap1.OnUse.RemoveAllListeners();
+        swap2.OnUse.RemoveAllListeners();
+        swap3.OnUse.RemoveAllListeners();
 
         base.Disable();
     }
@@ -75,6 +80,19 @@ public class PropWeaponUserRangePlayer : PropWeaponUserRange {
     {
         base.SwapWeapon(slot);
         OnSwapWeapon.Invoke();
+    }
+
+    protected override void RequestStartAttackInternal()
+    {
+        OnPlayerRangeAttackStart.Invoke();
+        base.RequestStartAttackInternal();
+
+    }
+
+    protected override void RequestStopAttackInternal()
+    {
+        OnPlayerRangeAttackStop.Invoke();
+        base.RequestStopAttackInternal();
     }
     #endregion
 

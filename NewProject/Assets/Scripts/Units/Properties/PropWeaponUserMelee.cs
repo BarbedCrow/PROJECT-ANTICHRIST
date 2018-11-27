@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class PropWeaponUserMelee : PropWeaponUserBase
 {
-    [HideInInspector] public UnityEvent OnStartAttack = new UnityEvent();
+    [HideInInspector] public UnityEvent OnStartAttack;
 
     public override void Init(Transform owner)
     {
@@ -20,13 +20,13 @@ public class PropWeaponUserMelee : PropWeaponUserBase
     {
         base.RequestStartAttackInternal();
 
+        OnStartAttack.Invoke();
+
         var melee = (WeaponMelee)currentWeapon;
         if (!melee.IsAttacking())
         {
             currentWeapon.RequestStartAttack();
         }
-
-        OnStartAttack.Invoke();
     }
 
     #endregion

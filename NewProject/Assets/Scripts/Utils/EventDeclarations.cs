@@ -15,3 +15,5 @@ public class EventOnMove : UnityEvent<Vector3> { }
 public class EventOnCursorTrigger : UnityEvent<Collider> { }
 public class EventOnDifficultChanged : UnityEvent<DifficultyType> { }
 public class EventOnKillEnemy : UnityEvent<DamageInfo> { }
+public class EventOnPlayerAbilityUseStart : UnityEvent<int> { }
+public class EventOnPlayerAbilityUseStop : UnityEvent<int> { }

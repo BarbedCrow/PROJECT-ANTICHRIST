@@ -47,7 +47,14 @@ public class UnitBase : MonoBehaviour
 
     public virtual void Enable()
     {
+        foreach (var user in propWeaponUsers)
+        {
+            user.Enable();
+        }
 
+        propAbilityUser.Enable();
+
+        propMovement.Enable();
     }
 
     public virtual void Disable()
