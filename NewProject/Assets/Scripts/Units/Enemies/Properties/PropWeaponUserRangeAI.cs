@@ -1,9 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PropWeaponUserRangeAI : PropWeaponUserRange
 {
+    [HideInInspector] public UnityEvent OnAIRangeAttackStart;
+    [HideInInspector] public UnityEvent OnAIRangeAttackStop;
+
+    [SerializeField] float minRangeForAttack;
     [SerializeField] float maxRangeForAttack;
     [SerializeField] float coolDownTime;
 
@@ -15,11 +20,6 @@ public class PropWeaponUserRangeAI : PropWeaponUserRange
             {
                 playerDetector = (AiPlayerDetector)arg;
             }
-
-            if (userMeleeAI == null && arg is PropWeaponUserMeleeAI)
-            {
-                userMeleeAI = (PropWeaponUserMeleeAI)arg;
-            }
         }        
 
         cdTimer = gameObject.AddComponent<Timer>();
@@ -30,24 +30,18 @@ public class PropWeaponUserRangeAI : PropWeaponUserRange
     public override void Init(Transform owner)
     {
         base.Init(owner);
-
-        minRangeForAttack = userMeleeAI.GetMaxRange();
         cdTimer.Init(coolDownTime);
         playerDetector.OnSeen.AddListener(HandleOnSeen);
         playerDetector.OnMiss.AddListener(HandleOnMiss);
     }
 
     #region private
-
-    float minRangeForAttack;
-
+    
     Timer cdTimer;
     bool detectPlayer = false;
     AiPlayerDetector playerDetector;
     Transform playerPosition;
     bool canRangeAttack = false;
-
-    PropWeaponUserMeleeAI userMeleeAI;
 
     void HandleOnSeen(Transform playerPosition)
     {
@@ -66,11 +60,13 @@ public class PropWeaponUserRangeAI : PropWeaponUserRange
     void TryAttack()
     {
         var rangeBetween = Vector3.Distance(gameObject.transform.position, playerPosition.position);
-        if (!(rangeBetween <= maxRangeForAttack || rangeBetween > minRangeForAttack))
+        if (rangeBetween > maxRangeForAttack || rangeBetween <= minRangeForAttack)
         {
+            OnAIRangeAttackStop.Invoke();
             return;
         }
 
+        OnAIRangeAttackStart.Invoke();
         RequestStartAttackInternal();
         cdTimer.StartWork();
         canRangeAttack = false;
@@ -94,8 +90,6 @@ public class PropWeaponUserRangeAI : PropWeaponUserRange
 
         Ray ray = new Ray(gameObject.transform.position, transform.forward);
         RaycastHit raycastHit;
-
-        Debug.DrawRay(gameObject.transform.position, transform.forward);
 
         if (Physics.Raycast(ray, out raycastHit))
         {

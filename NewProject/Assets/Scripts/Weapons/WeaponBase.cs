@@ -5,12 +5,9 @@ using UnityEngine.Events;
 
 public class WeaponBase : MonoBehaviour
 {
+    [HideInInspector] public UnityEvent OnAttackStared = new UnityEvent();
 
-    [HideInInspector]
-    public UnityEvent OnAttackStared = new UnityEvent();
-
-    [HideInInspector]
-    public UnityEvent OnAttackStopped = new UnityEvent();
+    [HideInInspector] public UnityEvent OnAttackStopped = new UnityEvent();
 
     [SerializeField] protected Transform pivot;
 

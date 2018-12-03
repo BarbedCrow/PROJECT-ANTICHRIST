@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PropWeaponUserBase : PropBase
 {
-    
     public List<WeaponBase> weapons;
     public List<string> ignoredTags;
 
@@ -54,6 +54,25 @@ public class PropWeaponUserBase : PropBase
     public PropDamager GetPropDamager()
     {
         return propDamager;
+    }
+
+    public WeaponBase GetCurrentWeapon()
+    {
+        return currentWeapon;
+    }
+
+    public override void Enable()
+    {
+        base.Enable();
+
+        currentWeapon.Enable();
+    }
+
+    public override void Disable()
+    {
+        currentWeapon.Disable();
+
+        base.Disable();
     }
 
     #region private

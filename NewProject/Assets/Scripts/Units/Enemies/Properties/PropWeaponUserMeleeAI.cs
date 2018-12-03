@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PropWeaponUserMeleeAI : PropWeaponUserMelee
 {
+    [HideInInspector] public UnityEvent OnAIMeleeAttackStart;
+    [HideInInspector] public UnityEvent OnAIMeleeAttackStop;
+
     [SerializeField] float maxRangeForAttack;
     [SerializeField] float coolDownTime;
 
@@ -19,11 +23,6 @@ public class PropWeaponUserMeleeAI : PropWeaponUserMelee
             if (playerDetector == null && arg is AiPlayerDetector)
             {
                 playerDetector = (AiPlayerDetector)arg;
-            }
-
-            if (userRangeAI == null && arg is PropWeaponUserRangeAI)
-            {
-                userRangeAI = (PropWeaponUserRangeAI)arg;
             }
         }
 
@@ -54,8 +53,6 @@ public class PropWeaponUserMeleeAI : PropWeaponUserMelee
     Transform playerPosition;
     bool canMeleeAttack = false;
 
-    PropWeaponUserRangeAI userRangeAI;
-
     void HandleOnSeen(Transform playerPosition)
     {
         detectPlayer = true;
@@ -73,14 +70,17 @@ public class PropWeaponUserMeleeAI : PropWeaponUserMelee
     void TryAttack()
     {
         var rangeBetween = Vector3.Distance(gameObject.transform.position, playerPosition.position);
-        if (rangeBetween <= maxRangeForAttack)
+        if (rangeBetween > maxRangeForAttack)
         {
-            RequestStartAttackInternal();
-            cdTimer.StartWork();
-            canMeleeAttack = false;
-            cdTimer.OnTimersFinished.AddListener(SetCanAttack);
-            RequestStartAttackInternal();
+            OnAIMeleeAttackStop.Invoke();
+            return;
         }
+
+        RequestStartAttackInternal();
+        cdTimer.StartWork();
+        canMeleeAttack = false;
+        cdTimer.OnTimersFinished.AddListener(SetCanAttack);
+        RequestStartAttackInternal();
     }
 
     void SetCanAttack()
@@ -94,8 +94,6 @@ public class PropWeaponUserMeleeAI : PropWeaponUserMelee
         if (detectPlayer && canMeleeAttack)
             TryAttack();
     }
-
-
-
+    
     #endregion
 }

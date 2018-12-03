@@ -641,7 +641,18 @@ MonoBehaviour:
   weapons:
   - {fileID: 114197389786945420}
   ignoredTags: []
-  maxRangeForAttack: 10
+  OnAIRangeAttackStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnAIRangeAttackStop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  minRangeForAttack: 3
+  maxRangeForAttack: 15
   coolDownTime: 0.5
 --- !u!114 &114197389786945420
 MonoBehaviour:
@@ -735,6 +746,16 @@ MonoBehaviour:
   - {fileID: 114934013626668724}
   ignoredTags: []
   OnStartAttack:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnAIMeleeAttackStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnAIMeleeAttackStop:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,

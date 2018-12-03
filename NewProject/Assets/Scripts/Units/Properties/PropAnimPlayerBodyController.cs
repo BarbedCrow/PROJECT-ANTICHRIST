@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PropAnimPlayerBodyController : PropAnimController
 {
-
     public override void Init(Transform owner)
     {
         base.Init(owner);
