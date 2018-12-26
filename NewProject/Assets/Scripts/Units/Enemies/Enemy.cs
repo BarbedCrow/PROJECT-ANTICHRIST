@@ -56,18 +56,17 @@ public class Enemy : UnitBase
 
     EnemiesPool enemiesPool;
     ProjectilesPool projectilesPool;
+    Transform playerPosition;
 
     bool isChasing = false;
+    bool isRangeAttacking = false;
 
     protected override void SetupComponents()
     {
         base.SetupComponents();
 
-        foreach (PropWeaponUserBase user in propWeaponUsers)
-        {
-            user.Setup(damager, playerDetector, projectilesPool);
-        }
-
+        propWeaponUserMelee.Setup(damager, playerDetector, projectilesPool);
+        propWeaponUserRange.Setup(damager, playerDetector, projectilesPool);
         propAbilityUser.Setup(damager, playerDetector);
     }
 
@@ -77,18 +76,17 @@ public class Enemy : UnitBase
 
         playerDetector.Init(transform);
 
-        var propWeaponUserRangeAI = (PropWeaponUserRangeAI)propWeaponUsers[0];
-        var propWeaponUserMeleeAI = (PropWeaponUserMeleeAI)propWeaponUsers[1];
-        //var propAbilityUserAI = (PropAbilityUserAI)propAbilityUser;
+        var propWeaponUserRangeAI = (PropWeaponUserRangeAI)propWeaponUserRange;
+        var propWeaponUserMeleeAI = (PropWeaponUserMeleeAI)propWeaponUserMelee;
+        var propAbilityUserAI = (PropAbilityUserAI)propAbilityUser;
 
         propWeaponUserRangeAI.OnAIRangeAttackStart.AddListener(RangeAttackStart);
         propWeaponUserRangeAI.OnAIRangeAttackStop.AddListener(RangeAttackStop);
-
-        //propWeaponUserMeleeAI.OnAIMeleeAttackStart.AddListener(MeleeAttackStart);
+        
         propWeaponUserMeleeAI.OnAIMeleeAttackStop.AddListener(MeleeAttackStop);
 
-        //propAbilityUserAI.OnAIAbilityUseStart.AddListener(AbilityUseStart);
-        //propAbilityUserAI.OnAIAbilityUseStop.AddListener(AbilityUseStop);
+        propAbilityUserAI.OnAIAbilityUseStart.AddListener(AbilityUseStart);
+        propAbilityUserAI.OnAIAbilityUseStop.AddListener(AbilityUseStop);
     }
 
     protected override void TerminateComponents()
@@ -105,6 +103,16 @@ public class Enemy : UnitBase
         isChasing = true;
         var aiProp = (PropMovementAI)propMovement;
         aiProp.StartChasing(player);
+
+        var userRangeAI = (PropWeaponUserRangeAI)propWeaponUserRange;
+        var userMeleeAI = (PropWeaponUserMeleeAI)propWeaponUserMelee;
+        var userAbilityAI = (PropAbilityUserAI)propAbilityUser;
+
+        userRangeAI.HandleOnSeen(player);
+        userMeleeAI.HandleOnSeen(player);
+        userAbilityAI.HandleOnSeen(player);
+
+        userRangeAI.Enable();
     }
 
     void HandleOnMissPlayer()
@@ -112,6 +120,16 @@ public class Enemy : UnitBase
         isChasing = false;
         var aiProp = (PropMovementAI)propMovement;
         aiProp.StopChasing();
+
+        var userRangeAI = (PropWeaponUserRangeAI)propWeaponUserRange;
+        var userMeleeAI = (PropWeaponUserMeleeAI)propWeaponUserMelee;
+        var userAbilityAI = (PropAbilityUserAI)propAbilityUser;
+
+        userRangeAI.HandleOnMiss();
+        userMeleeAI.HandleOnMiss();
+        userAbilityAI.HandleOnMiss();
+
+        userRangeAI.Disable();
     }
 
     protected override void Die(DamageInfo info)
@@ -122,38 +140,45 @@ public class Enemy : UnitBase
 
     protected void RangeAttackStart()
     {
-        propWeaponUsers[0].Enable();
-        propWeaponUsers[1].Disable();
+        isRangeAttacking = true;
+        propWeaponUserRange.Enable();
+        propWeaponUserMelee.Disable();
     }
 
     protected void RangeAttackStop()
     {
-        propWeaponUsers[0].Disable();
-        propWeaponUsers[1].Enable();
-    }
+        isRangeAttacking = false;
+        propWeaponUserRange.Disable();
+        propWeaponUserMelee.Enable();
 
-    /*protected void MeleeAttackStart()
-    {
-        propWeaponUsers[0].Disable();
-    }*/
+    }
 
     protected void MeleeAttackStop()
     {
-        propWeaponUsers[0].Enable();
-        propWeaponUsers[1].Disable();
+        isRangeAttacking = true;
+        propWeaponUserRange.Enable();
+        propWeaponUserMelee.Disable();
     }
 
-    /*protected void AbilityUseStart()
+    protected void AbilityUseStart()
     {
-        propWeaponUsers[0].Disable();
-        propWeaponUsers[1].Disable();
+        propWeaponUserRange.Disable();
+        propWeaponUserMelee.Disable();
     }
 
     protected void AbilityUseStop()
     {
-        propWeaponUsers[0].Enable();
-        propWeaponUsers[1].Enable();
-    }*/
+        if (isRangeAttacking)
+        {
+            propWeaponUserRange.Enable();
+            propWeaponUserMelee.Disable();
+        }
+        else
+        {
+            propWeaponUserRange.Disable();
+            propWeaponUserMelee.Enable();
+        }
+    }
 
     #endregion
 

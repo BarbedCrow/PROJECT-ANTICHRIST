@@ -545,7 +545,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1884374494990710}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.14, y: 0.08333334, z: -4.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -770,6 +770,16 @@ MonoBehaviour:
   abilities: []
   ignoredTags: []
   pivot: {fileID: 4242617884287102}
+  OnPlayerAbilityUseStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnPlayerAbilityUseStop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   abilitySlot1InputType: 6
   abilitySlot2InputType: 7
 --- !u!114 &114626555875024430
@@ -905,9 +915,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propAnimMovementController: {fileID: 114719425325313980}
   propMovement: {fileID: 114630037853740370}
-  propWeaponUsers:
-  - {fileID: 114393065202592800}
-  - {fileID: 114460124671963870}
+  propWeaponUserMelee: {fileID: 114460124671963870}
+  propWeaponUserRange: {fileID: 114393065202592800}
   propAbilityUser: {fileID: 114499289190698528}
   propAnimBodyController: {fileID: 114209062268873618}
 --- !u!114 &114988453194089290
@@ -982,7 +991,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cef9d352d1116a94d829b06097c42cc2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b5eccc1c02af34c4681b55dc9b362b3e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

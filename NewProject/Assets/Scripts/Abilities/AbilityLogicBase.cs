@@ -41,14 +41,6 @@ public class AbilityLogicBase : MonoBehaviour
         StartUse();
     }
 
-    public virtual void StartUse()
-    {
-        timerToReload.StartWork();
-        canUse = false;
-        timerToReload.OnTimersFinished.AddListener(StopReloadAbility);
-        OnAbilityStartUse.Invoke();
-    }
-
     public virtual void StopUse()
     {
 
@@ -73,6 +65,14 @@ public class AbilityLogicBase : MonoBehaviour
 
     Timer timerToReload;
     bool canUse;
+
+    protected virtual void StartUse()
+    {
+        timerToReload.StartWork();
+        canUse = false;
+        timerToReload.OnTimersFinished.AddListener(StopReloadAbility);
+        OnAbilityStartUse.Invoke();
+    }
 
     void StopReloadAbility()
     {

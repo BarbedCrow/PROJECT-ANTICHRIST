@@ -5,11 +5,6 @@ using UnityEngine.Events;
 
 public class AbilityIceSecond : AbilityAttackBase
 {    
-    public override void StartUse()
-    {
-        base.StartUse();
-        Debug.Log("Ice2");
-    }
 
     public override void StopUse()
     {
@@ -17,6 +12,12 @@ public class AbilityIceSecond : AbilityAttackBase
     }
 
     #region private
+
+    protected override void StartUse()
+    {
+        base.StartUse();
+        Debug.Log("Ice2");
+    }
 
     #endregion
 
