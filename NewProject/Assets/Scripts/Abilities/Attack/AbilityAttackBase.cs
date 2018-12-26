@@ -35,16 +35,6 @@ public class AbilityAttackBase : AbilityLogicBase
         this.pivot = pivot;
     }
 
-    public override void StartUse()
-    {
-        base.StartUse();
-    }
-
-    public override void StopUse()
-    {
-        base.StopUse();
-    }
-
     #region private
 
     protected PropDamager damager;

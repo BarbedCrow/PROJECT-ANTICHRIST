@@ -9,18 +9,19 @@ public class UnitBase : MonoBehaviour
 
     [SerializeField] protected PropAnimMovementController propAnimMovementController;
     [SerializeField] protected PropMovement propMovement;
-    [SerializeField] protected List<PropWeaponUserBase> propWeaponUsers;
+    [SerializeField] protected PropWeaponUserMelee propWeaponUserMelee;
+    [SerializeField] protected PropWeaponUserRange propWeaponUserRange;
     [SerializeField] protected PropAbilityUser propAbilityUser;
     [SerializeField] protected PropAnimPlayerBodyController propAnimBodyController;
 
     public PropWeaponUserRange GetWeaponUserRange()
     {
-        return (PropWeaponUserRange)propWeaponUsers[0];
+        return propWeaponUserRange;
     }
 
     public PropWeaponUserMelee GetWeaponUserMelee()
     {
-        return (PropWeaponUserMelee)propWeaponUsers[1];
+        return propWeaponUserMelee;
     }
 
     public PropAbilityUser GetAbilityUser()
@@ -47,11 +48,8 @@ public class UnitBase : MonoBehaviour
 
     public virtual void Enable()
     {
-        foreach (var user in propWeaponUsers)
-        {
-            user.Enable();
-        }
-
+        propWeaponUserMelee.Enable();
+        propWeaponUserRange.Enable();
         propAbilityUser.Enable();
 
         propMovement.Enable();
@@ -59,7 +57,11 @@ public class UnitBase : MonoBehaviour
 
     public virtual void Disable()
     {
+        propWeaponUserMelee.Disable();
+        propWeaponUserRange.Disable();
+        propAbilityUser.Disable();
 
+        propMovement.Disable();
     }
 
     public PropDamagable GetDamagable()
@@ -81,11 +83,8 @@ public class UnitBase : MonoBehaviour
     {
         damager = gameObject.AddComponent<PropDamager>();
 
-        foreach (PropWeaponUserBase user in propWeaponUsers)
-        {
-            user.Setup(damager);
-        }
-        
+        propWeaponUserMelee.Setup(damager);
+        propWeaponUserRange.Setup(damager);
         propAbilityUser.Setup(damager);
     }
 
@@ -96,11 +95,9 @@ public class UnitBase : MonoBehaviour
         damagable.Init(transform);
 
         propMovement.Init(transform);
-        foreach(PropWeaponUserBase user in propWeaponUsers)
-        {
-            user.Init(transform);
-        }
 
+        propWeaponUserMelee.Init(transform);
+        propWeaponUserRange.Init(transform);
         propAbilityUser.Init(transform);
 
         propAnimMovementController?.Init(transform);
@@ -111,11 +108,9 @@ public class UnitBase : MonoBehaviour
     {
         damagable.OnDie.RemoveListener(Die);
         propAbilityUser.Terminate();
-        foreach (PropWeaponUserBase user in propWeaponUsers)
-        {
-            user.Terminate();
-        }
 
+        propWeaponUserMelee.Terminate();
+        propWeaponUserRange.Terminate();
         propMovement.Terminate();
 
         propAnimMovementController?.Terminate();

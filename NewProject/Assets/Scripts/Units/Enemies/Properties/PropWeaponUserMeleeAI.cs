@@ -11,61 +11,22 @@ public class PropWeaponUserMeleeAI : PropWeaponUserMelee
     [SerializeField] float maxRangeForAttack;
     [SerializeField] float coolDownTime;
 
-    public float GetMaxRange()
+    public void HandleOnSeen(Transform playerPosition)
     {
-        return maxRangeForAttack;
-    }
-
-    public override void Setup(params MonoBehaviour[] args)
-    {
-        foreach (var arg in args)
-        {
-            if (playerDetector == null && arg is AiPlayerDetector)
-            {
-                playerDetector = (AiPlayerDetector)arg;
-            }
-        }
-
-        cdTimer = gameObject.AddComponent<Timer>();
-
-        base.Setup(args);
-    }
-
-    public override void Init(Transform owner)
-    {
-        base.Init(owner);
-
-        cdTimer.Init(coolDownTime);
-        playerDetector.OnSeen.AddListener(HandleOnSeen);
-        playerDetector.OnMiss.AddListener(HandleOnMiss);
-    }
-
-    public bool GetCanMeleeAttack()
-    {
-        return canMeleeAttack;
-    }
-
-    #region private
-
-    Timer cdTimer;
-    bool detectPlayer = false;
-    AiPlayerDetector playerDetector;
-    Transform playerPosition;
-    bool canMeleeAttack = false;
-
-    void HandleOnSeen(Transform playerPosition)
-    {
-        detectPlayer = true;
         canMeleeAttack = true;
         this.playerPosition = playerPosition;
     }
 
-    void HandleOnMiss()
+    public void HandleOnMiss()
     {
-        detectPlayer = false;
         canMeleeAttack = false;
         playerPosition = null;
     }
+
+    #region private
+
+    Transform playerPosition;
+    bool canMeleeAttack = false;
 
     void TryAttack()
     {
@@ -77,21 +38,18 @@ public class PropWeaponUserMeleeAI : PropWeaponUserMelee
         }
 
         RequestStartAttackInternal();
-        cdTimer.StartWork();
         canMeleeAttack = false;
-        cdTimer.OnTimersFinished.AddListener(SetCanAttack);
-        RequestStartAttackInternal();
+        Invoke("SetCanAttack", coolDownTime);
     }
 
     void SetCanAttack()
     {
-        cdTimer.OnTimersFinished.RemoveListener(SetCanAttack);
         canMeleeAttack = true;
     }
 
     void Update()
     {
-        if (detectPlayer && canMeleeAttack)
+        if (canMeleeAttack)
             TryAttack();
     }
     

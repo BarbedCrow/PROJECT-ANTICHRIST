@@ -36,10 +36,9 @@ public class Player : UnitBase
     protected override void SetupComponents()
     {
         propAbilityUser.Setup(inputsLibrary, abilitiesLibrary);
-        foreach(PropWeaponUserBase user in propWeaponUsers)
-        {
-            user.Setup(inputsLibrary, projectilesPool);
-        }
+
+        propWeaponUserMelee.Setup(inputsLibrary, projectilesPool);
+        propWeaponUserRange.Setup(inputsLibrary, projectilesPool);
 
         base.SetupComponents();
     }
@@ -48,8 +47,8 @@ public class Player : UnitBase
     {
         base.InitComponents();
 
-        var propWeaponUserRangePlayer = (PropWeaponUserRangePlayer)propWeaponUsers[0];
-        var propWeaponUserMeleePlayer = (PropWeaponUserMeleePlayer)propWeaponUsers[1];
+        var propWeaponUserRangePlayer = (PropWeaponUserRangePlayer)propWeaponUserRange;
+        var propWeaponUserMeleePlayer = (PropWeaponUserMeleePlayer)propWeaponUserMelee;
         var propAbilityUserPlayer = (PropAbilityUserPlayer)propAbilityUser;
 
         propWeaponUserRangePlayer.OnPlayerRangeAttackStart.AddListener(RangeAttackStart);
@@ -70,37 +69,37 @@ public class Player : UnitBase
     protected void RangeAttackStart()
     {
         propAbilityUser.Disable();
-        propWeaponUsers[1].Disable();
+        propWeaponUserMelee.Disable();
     }
 
     protected void RangeAttackStop()
     {
         propAbilityUser.Enable();
-        propWeaponUsers[1].Enable();
+        propWeaponUserMelee.Enable();
     }
 
     protected void MeleeAttackStart()
     {
         propAbilityUser.Disable();
-        propWeaponUsers[0].Disable();
+        propWeaponUserRange.Disable();
     }
 
     protected void MeleeAttackStop()
     {
         propAbilityUser.Enable();
-        propWeaponUsers[0].Enable();
+        propWeaponUserRange.Enable();
     }
 
     protected void AbilityUseStart()
     {
-        propWeaponUsers[0].Disable();
-        propWeaponUsers[1].Disable();
+        propWeaponUserRange.Disable();
+        propWeaponUserMelee.Disable();
     }
 
     protected void AbilityUseStop()
     {
-        propWeaponUsers[0].Enable();
-        propWeaponUsers[1].Enable();
+        propWeaponUserRange.Enable();
+        propWeaponUserMelee.Enable();
     }
 
     #endregion

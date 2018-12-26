@@ -12,50 +12,23 @@ public class PropWeaponUserRangeAI : PropWeaponUserRange
     [SerializeField] float maxRangeForAttack;
     [SerializeField] float coolDownTime;
 
-    public override void Setup(params MonoBehaviour[] args)
+    public void HandleOnSeen(Transform playerPosition)
     {
-        foreach (var arg in args)
-        {
-            if (playerDetector == null && arg is AiPlayerDetector)
-            {
-                playerDetector = (AiPlayerDetector)arg;
-            }
-        }        
-
-        cdTimer = gameObject.AddComponent<Timer>();
-
-        base.Setup(args);
-    }
-
-    public override void Init(Transform owner)
-    {
-        base.Init(owner);
-        cdTimer.Init(coolDownTime);
-        playerDetector.OnSeen.AddListener(HandleOnSeen);
-        playerDetector.OnMiss.AddListener(HandleOnMiss);
-    }
-
-    #region private
-    
-    Timer cdTimer;
-    bool detectPlayer = false;
-    AiPlayerDetector playerDetector;
-    Transform playerPosition;
-    bool canRangeAttack = false;
-
-    void HandleOnSeen(Transform playerPosition)
-    {
-        detectPlayer = true;
         this.playerPosition = playerPosition;
         canRangeAttack = true;
     }
 
-    void HandleOnMiss()
+    public void HandleOnMiss()
     {
-        detectPlayer = false;
         playerPosition = null;
         canRangeAttack = false;
     }
+
+    #region private
+
+    Timer cdTimer;
+    Transform playerPosition;
+    bool canRangeAttack = false;
 
     void TryAttack()
     {
@@ -68,21 +41,18 @@ public class PropWeaponUserRangeAI : PropWeaponUserRange
 
         OnAIRangeAttackStart.Invoke();
         RequestStartAttackInternal();
-        cdTimer.StartWork();
         canRangeAttack = false;
-        cdTimer.OnTimersFinished.AddListener(SetCanAttack);
-        RequestStartAttackInternal();
+        Invoke("SetCanAttack", coolDownTime);
     }
 
     void SetCanAttack()
     {
-        cdTimer.OnTimersFinished.RemoveListener(SetCanAttack);
         canRangeAttack = true;
     }
 
     void Update()
     {
-        if (!(detectPlayer && canRangeAttack))
+        if (!canRangeAttack)
         {
             RequestStopAttackInternal();
             return;
