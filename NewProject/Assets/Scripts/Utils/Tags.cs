@@ -10,4 +10,5 @@ public class Tags : MonoBehaviour
     public const string GAME_CAMERA = "GameCamera";
     public const string USER = "User";
     public const string DIFFICULTY = "Difficulty";
+    public const string FIREBALL = "Fireball";
 }

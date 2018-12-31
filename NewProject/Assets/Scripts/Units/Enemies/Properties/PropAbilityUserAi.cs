@@ -12,6 +12,17 @@ public class PropAbilityUserAI : PropAbilityUser
     [SerializeField] float coolDownTime;
     [SerializeField] float timeForUse;
 
+    public override void Setup(params MonoBehaviour[] args)
+    {
+        foreach (var arg in args)
+            if (abilitiesPool == null && arg is AbilitiesPool)
+            {
+                abilitiesPool = (AbilitiesPool)arg;
+            }
+
+        base.Setup(args);
+    }
+
     public void HandleOnSeen(Transform playerPosition)
     {
         canAbilityUse = true;

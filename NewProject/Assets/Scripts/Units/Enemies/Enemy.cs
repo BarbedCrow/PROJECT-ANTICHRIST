@@ -20,6 +20,11 @@ public class Enemy : UnitBase
             {
                 projectilesPool = (ProjectilesPool)arg;
             }
+
+            if (abilitiesPool == null && arg is AbilitiesPool)
+            {
+                abilitiesPool = (AbilitiesPool)arg;
+            }
         }
 
         base.Setup(args);
@@ -57,6 +62,7 @@ public class Enemy : UnitBase
     EnemiesPool enemiesPool;
     ProjectilesPool projectilesPool;
     Transform playerPosition;
+    AbilitiesPool abilitiesPool;
 
     bool isChasing = false;
     bool isRangeAttacking = false;
@@ -67,7 +73,7 @@ public class Enemy : UnitBase
 
         propWeaponUserMelee.Setup(damager, playerDetector, projectilesPool);
         propWeaponUserRange.Setup(damager, playerDetector, projectilesPool);
-        propAbilityUser.Setup(damager, playerDetector);
+        propAbilityUser.Setup(damager, playerDetector, abilitiesPool);
     }
 
     protected override void InitComponents()

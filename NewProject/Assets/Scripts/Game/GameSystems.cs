@@ -8,6 +8,7 @@ public class GameSystems : MonoBehaviour
     [SerializeField] InputsLibrary inputsLibrary;
     [SerializeField] ProjectilesPool projectilesPool;
     [SerializeField] EnemiesPool enemiesPool;
+    [SerializeField] AbilitiesPool abilitiesPool;
     [SerializeField] HUDManager hudManager;
     [SerializeField] AbilitiesLibrary abilitiesLibrary;
     [SerializeField] RewardRulesLibrary rewardRulesLibrary;
@@ -38,6 +39,11 @@ public class GameSystems : MonoBehaviour
         return abilitiesLibrary;
     }
 
+    public AbilitiesPool GetAbilitiesPool()
+    {
+        return abilitiesPool;
+    }
+
     public EnemiesPool GetEnemiesPool()
     {
         return enemiesPool;
@@ -47,8 +53,9 @@ public class GameSystems : MonoBehaviour
 
     void InitComponents()
     {
+        abilitiesPool.Init();
         projectilesPool.Init();
-        enemiesPool.Init(projectilesPool);
+        enemiesPool.Init(projectilesPool, abilitiesPool);
         inputsLibrary.Init();
         hudManager.Init();
         rewardRulesLibrary.Init();
@@ -59,6 +66,7 @@ public class GameSystems : MonoBehaviour
         inputsLibrary.Terminate();
         projectilesPool.Terminate();
         enemiesPool.Terminate();
+        abilitiesPool.Terminate();
     }
 
     #endregion

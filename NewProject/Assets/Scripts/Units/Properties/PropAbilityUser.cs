@@ -19,6 +19,7 @@ public class PropAbilityUser : PropBase
             {
                 propDamager = (PropDamager)arg;
             }
+
         }
 
         CreateAbilities();
@@ -27,7 +28,7 @@ public class PropAbilityUser : PropBase
         {
             if (ability is AbilityAttackBase)
             {
-                ability.Setup(propDamager);
+                ability.Setup(propDamager, abilitiesPool);
                 var attackAbility = (AbilityAttackBase)ability;
                 attackAbility.SetupPivot(pivot);
             }
@@ -81,6 +82,7 @@ public class PropAbilityUser : PropBase
     #region private
 
     protected PropDamager propDamager;
+    protected AbilitiesPool abilitiesPool;
 
     protected virtual void CreateAbilities() {}
 

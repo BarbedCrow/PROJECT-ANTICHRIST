@@ -12,6 +12,9 @@ public class EnemiesPool : PoolBase
         {
             if (projectilesPool == null && arg is ProjectilesPool)
                 projectilesPool = (ProjectilesPool)arg;
+
+            if (abilitiesPool == null && arg is AbilitiesPool)
+                abilitiesPool = (AbilitiesPool)arg;
         }
 
         foreach (var objs in availableObjects)
@@ -19,7 +22,7 @@ public class EnemiesPool : PoolBase
             foreach (var obj in objs.Value)
             {
                 var enemy = obj.GetComponent<Enemy>();
-                enemy.Setup(this, projectilesPool);
+                enemy.Setup(this, projectilesPool, abilitiesPool);
                 enemy.Init();
             }
         }
@@ -42,6 +45,7 @@ public class EnemiesPool : PoolBase
     #region private
 
     ProjectilesPool projectilesPool;
+    AbilitiesPool abilitiesPool;
 
     #endregion
 }

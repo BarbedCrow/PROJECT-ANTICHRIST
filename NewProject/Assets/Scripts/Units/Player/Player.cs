@@ -13,9 +13,14 @@ public class Player : UnitBase
                 inputsLibrary = (InputsLibrary)arg;
             }
 
-            if (projectilesPool == null && arg is PoolBase)
+            if (projectilesPool == null && arg is ProjectilesPool)
             {
-                projectilesPool = (PoolBase)arg;
+                projectilesPool = (ProjectilesPool)arg;
+            }
+
+            if (abilitiesPool == null && arg is AbilitiesPool)
+            {
+                abilitiesPool = (AbilitiesPool)arg;
             }
 
             if (abilitiesLibrary == null && arg is AbilitiesLibrary)
@@ -32,10 +37,11 @@ public class Player : UnitBase
     InputsLibrary inputsLibrary;
     AbilitiesLibrary abilitiesLibrary;
     PoolBase projectilesPool;
+    AbilitiesPool abilitiesPool;
 
     protected override void SetupComponents()
     {
-        propAbilityUser.Setup(inputsLibrary, abilitiesLibrary);
+        propAbilityUser.Setup(inputsLibrary, abilitiesLibrary, abilitiesPool);
 
         propWeaponUserMelee.Setup(inputsLibrary, projectilesPool);
         propWeaponUserRange.Setup(inputsLibrary, projectilesPool);

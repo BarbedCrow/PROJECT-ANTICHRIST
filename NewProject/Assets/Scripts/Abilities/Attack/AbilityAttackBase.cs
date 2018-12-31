@@ -7,22 +7,19 @@ public class AbilityAttackBase : AbilityLogicBase
 {
     [SerializeField] protected float damage;
     [SerializeField] protected float speed;
-    [SerializeField] protected SpriteAbilityAttack sprite;
-    [SerializeField] List<string> ignoredTags;
-
-    public override void Init()
-    {
-        base.Init();
-        if (sprite != null)
-            sprite.Init(ignoredTags);
-    }
+    [SerializeField] protected List<string> ignoredTags;
 
     public override void Setup(params MonoBehaviour[] args)
     {
         base.Setup(args);
 
-        foreach(var arg in args)
+        foreach (MonoBehaviour arg in args)
         {
+            if (pool == null && arg is AbilitiesPool)
+            {
+                pool = (AbilitiesPool)arg;
+            }
+
             if (damager == null && arg is PropDamager)
             {
                 damager = (PropDamager)arg;
@@ -39,6 +36,7 @@ public class AbilityAttackBase : AbilityLogicBase
 
     protected PropDamager damager;
     protected Transform pivot;
+    protected AbilitiesPool pool;
 
     #endregion
 

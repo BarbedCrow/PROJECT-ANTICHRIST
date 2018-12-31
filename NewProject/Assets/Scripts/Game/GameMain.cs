@@ -23,7 +23,7 @@ public class GameMain : MonoBehaviour
 
         player = Instantiate(playerSpawnInfo.player, playerSpawnInfo.spawnTransform.position, playerSpawnInfo.spawnTransform.rotation);
         GameObject.FindGameObjectWithTag(Tags.GAME_CAMERA).GetComponent<GameCamera>().SetPlayer(player.transform);
-        player.Setup(gameSystems.GetInputsLibrary(), gameSystems.GetProjectilesPool(), gameSystems.GetAbilitiesLibrary());
+        player.Setup(gameSystems.GetInputsLibrary(), gameSystems.GetProjectilesPool(), gameSystems.GetAbilitiesPool(), gameSystems.GetAbilitiesLibrary());
         player.Init();
 
         player.Enable();

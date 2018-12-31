@@ -15,7 +15,10 @@ public class AbilityFireFirst : AbilityAttackBase
     protected override void StartUse()
     {
         base.StartUse();
-        sprite.Enable(pivot, damage, speed, damager);
+
+        var fireball = pool.Take(Tags.FIREBALL);
+        var fireballLogic = fireball.GetComponent<SpriteAbilityAttackBase>();
+        fireballLogic.Enable(pivot, damage, speed, damager, ignoredTags);
     }
 
     #endregion

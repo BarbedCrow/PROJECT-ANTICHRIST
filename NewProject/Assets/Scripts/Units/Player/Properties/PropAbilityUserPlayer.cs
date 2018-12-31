@@ -25,6 +25,11 @@ public class PropAbilityUserPlayer : PropAbilityUser
                 abilitiesLibrary = (AbilitiesLibrary)arg;
             }
 
+            if (abilitiesPool == null && arg is AbilitiesPool)
+            {
+                abilitiesPool = (AbilitiesPool)arg;
+            }
+
             if (propDamager == null && arg is PropDamager)
             {
                 base.Setup(args);

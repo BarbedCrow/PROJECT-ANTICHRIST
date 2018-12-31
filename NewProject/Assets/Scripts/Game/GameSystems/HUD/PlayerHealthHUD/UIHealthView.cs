@@ -19,7 +19,10 @@ public class UIHealthView : UIBaseView
         var hpData = (UIHealthViewData)viewData;
         var scaleX = hpData.currentHealthPoints/hpData.maxHealthPoints;
         if (scaleX < 0)
-            return;
+        {
+            var nullScale = new Vector3(0, 1, 1);
+            viewElements[0].transform.localScale = nullScale;
+        }
         var newScale = new Vector3(scaleX, 1, 1);
         viewElements[0].transform.localScale = newScale;
     }

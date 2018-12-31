@@ -10,6 +10,7 @@ TagManager:
   - User
   - Map
   - Difficulty
+  - Fireball
   layers:
   - Default
   - TransparentFX

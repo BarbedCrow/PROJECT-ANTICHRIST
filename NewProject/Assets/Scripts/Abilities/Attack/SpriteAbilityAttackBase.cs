@@ -4,15 +4,14 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(CapsuleCollider))]
-public class SpriteAbilityAttack : MonoBehaviour
+
+public class SpriteAbilityAttackBase : MonoBehaviour
 {
     [SerializeField] float lifetime;
 
-    public void Init(List<string> ignoredTags)
+    public void Init(AbilitiesPool pool)
     {
-        this.ignoredTags = ignoredTags;
-        timer = gameObject.AddComponent<Timer>();
-        timer.Init(lifetime);
+        this.pool = pool;
 
         var tryGetAnim = GetComponent<Animator>();
         if (tryGetAnim)
@@ -21,8 +20,9 @@ public class SpriteAbilityAttack : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Enable(Transform initTransfrom, float damage, float speed, PropDamager damager)
+    public void Enable(Transform initTransfrom, float damage, float speed, PropDamager damager, List<string> ignoredTags)
     {
+        this.ignoredTags = ignoredTags;
         var newRot = Quaternion.Euler(initTransfrom.rotation.eulerAngles.x, initTransfrom.rotation.eulerAngles.y + 90, initTransfrom.rotation.eulerAngles.z);
 
         transform.SetPositionAndRotation(initTransfrom.position, newRot);
@@ -33,8 +33,7 @@ public class SpriteAbilityAttack : MonoBehaviour
         this.speed = speed;
         this.damager = damager;
 
-        timer.OnTimersFinished.AddListener(Disable);
-        timer.StartWork();
+        Invoke("Disable", lifetime);
         StartCoroutine(COROUTINE_MOVE);
     }
 
@@ -43,8 +42,18 @@ public class SpriteAbilityAttack : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void Disable()
+    {
+        speed = 0;
+        damage = 0;
+
+        StopCoroutine(COROUTINE_MOVE);
+        pool.Release(gameObject);
+    }
+
     #region private
 
+    AbilitiesPool pool;
     protected PropDamager damager;
     protected float damage;
     float speed;
@@ -54,19 +63,6 @@ public class SpriteAbilityAttack : MonoBehaviour
     Animator animator;
 
     const string COROUTINE_MOVE = "Move";
-
-    public void Disable()
-    {
-        speed = 0;
-        damage = 0;
-
-        timer.OnTimersFinished.RemoveListener(Disable);
-        timer.StopWork();
-
-        StopCoroutine(COROUTINE_MOVE);
-
-        gameObject.SetActive(false);
-    }
 
     IEnumerator Move()
     {
